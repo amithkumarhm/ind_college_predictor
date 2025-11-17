@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow fade-in">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="mb-0 text-center"><i class="fas fa-envelope me-2"></i>Verify Your Email</h4>
+            </div>
+            <div class="card-body p-4">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="text-center mb-4">
+                    <i class="fas fa-envelope-circle-check text-primary mb-3" style="font-size: 3rem;"></i>
+                    <h5>Email Verification Required</h5>
+                    <p class="text-muted">We've sent a 6-digit verification code to your email address. Please enter it below to complete your registration.</p>
+                </div>
+
+                <form method="POST" id="verifyForm">
+                    <div class="mb-4">
+                        <label for="otp" class="form-label">Verification Code</label>
+                        <input type="text" class="form-control text-center" id="otp" name="otp" required
+                               placeholder="Enter 6-digit code" maxlength="6" pattern="[0-9]{6}"
+                               style="font-size: 1.2rem; letter-spacing: 0.5rem; font-weight: bold;">
+                        <div class="form-text">Enter the 6-digit code sent to your email.</div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-check-circle me-2"></i>Verify Email
+                        </button>
+
+                        <a href="{{ url_for('resend_otp') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-redo me-2"></i>Resend Code
+                        </a>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="text-muted small">
+                        <i class="fas fa-clock me-1"></i>
+                        The verification code will expire in 10 minutes.
+                    </p>
+                    <p class="mb-0">
+                        <a href="{{ url_for('register') }}" class="text-decoration-none">
+                            <i class="fas fa-arrow-left me-1"></i>Back to Registration
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const otpInput = document.getElementById('otp');
+    const form = document.getElementById('verifyForm');
+
+    // Auto-format OTP input
+    otpInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    form.addEventListener('submit', function(e) {
+        const otp = otpInput.value.trim();
+
+        if (otp.length !== 6) {
+            e.preventDefault();
+            alert('Please enter a valid 6-digit verification code');
+            return;
+        }
+
+        if (!/^\d{6}$/.test(otp)) {
+            e.preventDefault();
+            alert('Please enter only numbers in the verification code');
+            return;
+        }
+    });
+
+    // Focus on OTP input
+    otpInput.focus();
+});
+</script>
+{% endblock %}

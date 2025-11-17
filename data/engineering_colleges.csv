@@ -1,0 +1,321 @@
+college_id,name,state,exam_type,category,cutoff_rank,marks_cutoff,website,type
+1,Indian Institute of Technology Bombay,Maharashtra,JEE Main,General,100,85,https://www.iitb.ac.in,Engineering
+1,Indian Institute of Technology Bombay,Maharashtra,JEE Main,OBC,500,80,https://www.iitb.ac.in,Engineering
+1,Indian Institute of Technology Bombay,Maharashtra,JEE Main,SC,1500,75,https://www.iitb.ac.in,Engineering
+1,Indian Institute of Technology Bombay,Maharashtra,JEE Main,ST,2000,72,https://www.iitb.ac.in,Engineering
+2,Indian Institute of Technology Delhi,Delhi,JEE Main,General,500,80,https://www.iitd.ac.in,Engineering
+2,Indian Institute of Technology Delhi,Delhi,JEE Main,OBC,1500,75,https://www.iitd.ac.in,Engineering
+2,Indian Institute of Technology Delhi,Delhi,JEE Main,SC,3000,70,https://www.iitd.ac.in,Engineering
+2,Indian Institute of Technology Delhi,Delhi,JEE Main,ST,4000,68,https://www.iitd.ac.in,Engineering
+3,Indian Institute of Technology Madras,Tamil Nadu,JEE Main,General,300,82,https://www.iitm.ac.in,Engineering
+3,Indian Institute of Technology Madras,Tamil Nadu,JEE Main,OBC,800,77,https://www.iitm.ac.in,Engineering
+3,Indian Institute of Technology Madras,Tamil Nadu,JEE Main,SC,2000,72,https://www.iitm.ac.in,Engineering
+3,Indian Institute of Technology Madras,Tamil Nadu,JEE Main,ST,2500,70,https://www.iitm.ac.in,Engineering
+4,Indian Institute of Technology Kanpur,Uttar Pradesh,JEE Main,General,400,81,https://www.iitk.ac.in,Engineering
+4,Indian Institute of Technology Kanpur,Uttar Pradesh,JEE Main,OBC,1000,76,https://www.iitk.ac.in,Engineering
+4,Indian Institute of Technology Kanpur,Uttar Pradesh,JEE Main,SC,2500,71,https://www.iitk.ac.in,Engineering
+4,Indian Institute of Technology Kanpur,Uttar Pradesh,JEE Main,ST,3000,69,https://www.iitk.ac.in,Engineering
+5,Indian Institute of Technology Kharagpur,West Bengal,JEE Main,General,600,79,https://www.iitkgp.ac.in,Engineering
+5,Indian Institute of Technology Kharagpur,West Bengal,JEE Main,OBC,1200,74,https://www.iitkgp.ac.in,Engineering
+5,Indian Institute of Technology Kharagpur,West Bengal,JEE Main,SC,2800,69,https://www.iitkgp.ac.in,Engineering
+5,Indian Institute of Technology Kharagpur,West Bengal,JEE Main,ST,3500,67,https://www.iitkgp.ac.in,Engineering
+6,Indian Institute of Technology Roorkee,Uttarakhand,JEE Main,General,700,78,https://www.iitr.ac.in,Engineering
+6,Indian Institute of Technology Roorkee,Uttarakhand,JEE Main,OBC,1400,73,https://www.iitr.ac.in,Engineering
+6,Indian Institute of Technology Roorkee,Uttarakhand,JEE Main,SC,3000,68,https://www.iitr.ac.in,Engineering
+6,Indian Institute of Technology Roorkee,Uttarakhand,JEE Main,ST,3700,66,https://www.iitr.ac.in,Engineering
+7,Indian Institute of Technology Guwahati,Assam,JEE Main,General,800,77,https://www.iitg.ac.in,Engineering
+7,Indian Institute of Technology Guwahati,Assam,JEE Main,OBC,1600,72,https://www.iitg.ac.in,Engineering
+7,Indian Institute of Technology Guwahati,Assam,JEE Main,SC,3200,67,https://www.iitg.ac.in,Engineering
+7,Indian Institute of Technology Guwahati,Assam,JEE Main,ST,3900,65,https://www.iitg.ac.in,Engineering
+8,Indian Institute of Technology Hyderabad,Telangana,JEE Main,General,900,76,https://www.iith.ac.in,Engineering
+8,Indian Institute of Technology Hyderabad,Telangana,JEE Main,OBC,1800,71,https://www.iith.ac.in,Engineering
+8,Indian Institute of Technology Hyderabad,Telangana,JEE Main,SC,3500,66,https://www.iith.ac.in,Engineering
+8,Indian Institute of Technology Hyderabad,Telangana,JEE Main,ST,4200,64,https://www.iith.ac.in,Engineering
+9,National Institute of Technology Tiruchirappalli,Tamil Nadu,JEE Main,General,5000,75,https://www.nitt.edu,Engineering
+9,National Institute of Technology Tiruchirappalli,Tamil Nadu,JEE Main,OBC,8000,70,https://www.nitt.edu,Engineering
+9,National Institute of Technology Tiruchirappalli,Tamil Nadu,JEE Main,SC,15000,65,https://www.nitt.edu,Engineering
+9,National Institute of Technology Tiruchirappalli,Tamil Nadu,JEE Main,ST,18000,63,https://www.nitt.edu,Engineering
+10,National Institute of Technology Karnataka,Karnataka,JEE Main,General,5500,74,https://www.nitk.ac.in,Engineering
+10,National Institute of Technology Karnataka,Karnataka,JEE Main,OBC,8500,69,https://www.nitk.ac.in,Engineering
+10,National Institute of Technology Karnataka,Karnataka,JEE Main,SC,16000,64,https://www.nitk.ac.in,Engineering
+10,National Institute of Technology Karnataka,Karnataka,JEE Main,ST,19000,62,https://www.nitk.ac.in,Engineering
+11,National Institute of Technology Rourkela,Odisha,JEE Main,General,6000,73,https://www.nitrkl.ac.in,Engineering
+11,National Institute of Technology Rourkela,Odisha,JEE Main,OBC,9000,68,https://www.nitrkl.ac.in,Engineering
+11,National Institute of Technology Rourkela,Odisha,JEE Main,SC,17000,63,https://www.nitrkl.ac.in,Engineering
+11,National Institute of Technology Rourkela,Odisha,JEE Main,ST,20000,61,https://www.nitrkl.ac.in,Engineering
+12,National Institute of Technology Warangal,Telangana,JEE Main,General,4500,76,https://www.nitw.ac.in,Engineering
+12,National Institute of Technology Warangal,Telangana,JEE Main,OBC,7500,71,https://www.nitw.ac.in,Engineering
+12,National Institute of Technology Warangal,Telangana,JEE Main,SC,14000,66,https://www.nitw.ac.in,Engineering
+12,National Institute of Technology Warangal,Telangana,JEE Main,ST,17000,64,https://www.nitw.ac.in,Engineering
+13,Vellore Institute of Technology,Tamil Nadu,VITEEE,General,15000,65,https://www.vit.ac.in,Engineering
+13,Vellore Institute of Technology,Tamil Nadu,VITEEE,OBC,20000,60,https://www.vit.ac.in,Engineering
+13,Vellore Institute of Technology,Tamil Nadu,VITEEE,SC,30000,55,https://www.vit.ac.in,Engineering
+13,Vellore Institute of Technology,Tamil Nadu,VITEEE,ST,35000,52,https://www.vit.ac.in,Engineering
+14,SRM Institute of Science and Technology,Tamil Nadu,SRMJEEE,General,20000,60,https://www.srmist.edu.in,Engineering
+14,SRM Institute of Science and Technology,Tamil Nadu,SRMJEEE,OBC,25000,56,https://www.srmist.edu.in,Engineering
+14,SRM Institute of Science and Technology,Tamil Nadu,SRMJEEE,SC,35000,51,https://www.srmist.edu.in,Engineering
+14,SRM Institute of Science and Technology,Tamil Nadu,SRMJEEE,ST,40000,48,https://www.srmist.edu.in,Engineering
+15,Amrita Vishwa Vidyapeetham,Tamil Nadu,AEEE,General,25000,58,https://www.amrita.edu,Engineering
+15,Amrita Vishwa Vidyapeetham,Tamil Nadu,AEEE,OBC,30000,54,https://www.amrita.edu,Engineering
+15,Amrita Vishwa Vidyapeetham,Tamil Nadu,AEEE,SC,40000,50,https://www.amrita.edu,Engineering
+15,Amrita Vishwa Vidyapeetham,Tamil Nadu,AEEE,ST,45000,48,https://www.amrita.edu,Engineering
+16,Manipal Institute of Technology,Karnataka,MET,General,18000,62,https://www.manipal.edu,Engineering
+16,Manipal Institute of Technology,Karnataka,MET,OBC,23000,58,https://www.manipal.edu,Engineering
+16,Manipal Institute of Technology,Karnataka,MET,SC,33000,54,https://www.manipal.edu,Engineering
+16,Manipal Institute of Technology,Karnataka,MET,ST,38000,52,https://www.manipal.edu,Engineering
+17,Thapar Institute of Engineering and Technology,Punjab,Thapar Entrance Test,General,12000,68,https://www.thapar.edu,Engineering
+17,Thapar Institute of Engineering and Technology,Punjab,Thapar Entrance Test,OBC,17000,64,https://www.thapar.edu,Engineering
+17,Thapar Institute of Engineering and Technology,Punjab,Thapar Entrance Test,SC,27000,60,https://www.thapar.edu,Engineering
+17,Thapar Institute of Engineering and Technology,Punjab,Thapar Entrance Test,ST,32000,58,https://www.thapar.edu,Engineering
+18,Birla Institute of Technology and Science Pilani,Rajasthan,BITSAT,General,3000,72,https://www.bits-pilani.ac.in,Engineering
+18,Birla Institute of Technology and Science Pilani,Rajasthan,BITSAT,OBC,6000,67,https://www.bits-pilani.ac.in,Engineering
+18,Birla Institute of Technology and Science Pilani,Rajasthan,BITSAT,SC,10000,62,https://www.bits-pilani.ac.in,Engineering
+18,Birla Institute of Technology and Science Pilani,Rajasthan,BITSAT,ST,12000,60,https://www.bits-pilani.ac.in,Engineering
+19,Delhi Technological University,Delhi,JEE Main,General,8000,70,https://www.dtu.ac.in,Engineering
+19,Delhi Technological University,Delhi,JEE Main,OBC,12000,65,https://www.dtu.ac.in,Engineering
+19,Delhi Technological University,Delhi,JEE Main,SC,20000,60,https://www.dtu.ac.in,Engineering
+19,Delhi Technological University,Delhi,JEE Main,ST,25000,57,https://www.dtu.ac.in,Engineering
+20,Indian Institute of Information Technology Hyderabad,Telangana,JEE Main,General,2000,78,https://www.iiit.ac.in,Engineering
+20,Indian Institute of Information Technology Hyderabad,Telangana,JEE Main,OBC,4000,73,https://www.iiit.ac.in,Engineering
+20,Indian Institute of Information Technology Hyderabad,Telangana,JEE Main,SC,8000,68,https://www.iiit.ac.in,Engineering
+20,Indian Institute of Information Technology Hyderabad,Telangana,JEE Main,ST,10000,65,https://www.iiit.ac.in,Engineering
+21,Jadavpur University,West Bengal,WBJEE,General,4000,74,https://www.jaduniv.edu.in,Engineering
+21,Jadavpur University,West Bengal,WBJEE,OBC,7000,69,https://www.jaduniv.edu.in,Engineering
+21,Jadavpur University,West Bengal,WBJEE,SC,12000,64,https://www.jaduniv.edu.in,Engineering
+21,Jadavpur University,West Bengal,WBJEE,ST,15000,61,https://www.jaduniv.edu.in,Engineering
+22,College of Engineering Pune,Maharashtra,MHT CET,General,10000,66,https://www.coep.org.in,Engineering
+22,College of Engineering Pune,Maharashtra,MHT CET,OBC,15000,61,https://www.coep.org.in,Engineering
+22,College of Engineering Pune,Maharashtra,MHT CET,SC,22000,56,https://www.coep.org.in,Engineering
+22,College of Engineering Pune,Maharashtra,MHT CET,ST,26000,53,https://www.coep.org.in,Engineering
+23,BMS College of Engineering,Karnataka,KCET,General,15000,64,https://www.bmsce.in,Engineering
+23,BMS College of Engineering,Karnataka,KCET,OBC,20000,59,https://www.bmsce.in,Engineering
+23,BMS College of Engineering,Karnataka,KCET,SC,28000,54,https://www.bmsce.in,Engineering
+23,BMS College of Engineering,Karnataka,KCET,ST,32000,51,https://www.bmsce.in,Engineering
+24,RV College of Engineering,Karnataka,COMEDK,General,12000,68,https://www.rvce.edu.in,Engineering
+24,RV College of Engineering,Karnataka,COMEDK,OBC,18000,63,https://www.rvce.edu.in,Engineering
+24,RV College of Engineering,Karnataka,COMEDK,SC,25000,58,https://www.rvce.edu.in,Engineering
+24,RV College of Engineering,Karnataka,COMEDK,ST,30000,55,https://www.rvce.edu.in,Engineering
+25,PES University,Karnataka,KCET,General,14000,65,https://www.pes.edu,Engineering
+25,PES University,Karnataka,KCET,OBC,19000,60,https://www.pes.edu,Engineering
+25,PES University,Karnataka,KCET,SC,27000,55,https://www.pes.edu,Engineering
+25,PES University,Karnataka,KCET,ST,31000,52,https://www.pes.edu,Engineering
+26,MS Ramaiah Institute of Technology,Karnataka,COMEDK,General,16000,63,https://www.msrit.edu,Engineering
+26,MS Ramaiah Institute of Technology,Karnataka,COMEDK,OBC,21000,58,https://www.msrit.edu,Engineering
+26,MS Ramaiah Institute of Technology,Karnataka,COMEDK,SC,29000,53,https://www.msrit.edu,Engineering
+26,MS Ramaiah Institute of Technology,Karnataka,COMEDK,ST,33000,50,https://www.msrit.edu,Engineering
+27,Siddaganga Institute of Technology,Karnataka,COMEDK,General,20000,60,https://www.sit.ac.in,Engineering
+27,Siddaganga Institute of Technology,Karnataka,COMEDK,OBC,25000,56,https://www.sit.ac.in,Engineering
+27,Siddaganga Institute of Technology,Karnataka,COMEDK,SC,35000,52,https://www.sit.ac.in,Engineering
+27,Siddaganga Institute of Technology,Karnataka,COMEDK,ST,40000,50,https://www.sit.ac.in,Engineering
+28,Dayananda Sagar College of Engineering,Karnataka,COMEDK,General,22000,58,https://www.dsce.edu.in,Engineering
+28,Dayananda Sagar College of Engineering,Karnataka,COMEDK,OBC,27000,54,https://www.dsce.edu.in,Engineering
+28,Dayananda Sagar College of Engineering,Karnataka,COMEDK,SC,37000,50,https://www.dsce.edu.in,Engineering
+28,Dayananda Sagar College of Engineering,Karnataka,COMEDK,ST,42000,48,https://www.dsce.edu.in,Engineering
+29,CMR Institute of Technology,Karnataka,KCET,General,25000,56,https://www.cmrit.ac.in,Engineering
+29,CMR Institute of Technology,Karnataka,KCET,OBC,30000,52,https://www.cmrit.ac.in,Engineering
+29,CMR Institute of Technology,Karnataka,KCET,SC,40000,48,https://www.cmrit.ac.in,Engineering
+29,CMR Institute of Technology,Karnataka,KCET,ST,45000,46,https://www.cmrit.ac.in,Engineering
+30,Don Bosco Institute of Technology,Karnataka,KCET,General,28000,54,https://www.dbit.co.in,Engineering
+30,Don Bosco Institute of Technology,Karnataka,KCET,OBC,33000,50,https://www.dbit.co.in,Engineering
+30,Don Bosco Institute of Technology,Karnataka,KCET,SC,43000,46,https://www.dbit.co.in,Engineering
+30,Don Bosco Institute of Technology,Karnataka,KCET,ST,48000,44,https://www.dbit.co.in,Engineering
+31,Mahatma Gandhi Institute of Technology,Telangana,TS EAMCET,General,18000,62,https://www.mgit.ac.in,Engineering
+31,Mahatma Gandhi Institute of Technology,Telangana,TS EAMCET,OBC,23000,58,https://www.mgit.ac.in,Engineering
+31,Mahatma Gandhi Institute of Technology,Telangana,TS EAMCET,SC,33000,54,https://www.mgit.ac.in,Engineering
+31,Mahatma Gandhi Institute of Technology,Telangana,TS EAMCET,ST,38000,52,https://www.mgit.ac.in,Engineering
+32,Vasavi College of Engineering,Telangana,TS EAMCET,General,20000,60,https://www.vce.ac.in,Engineering
+32,Vasavi College of Engineering,Telangana,TS EAMCET,OBC,25000,56,https://www.vce.ac.in,Engineering
+32,Vasavi College of Engineering,Telangana,TS EAMCET,SC,35000,52,https://www.vce.ac.in,Engineering
+32,Vasavi College of Engineering,Telangana,TS EAMCET,ST,40000,50,https://www.vce.ac.in,Engineering
+33,Gokaraju Rangaraju Institute of Engineering and Technology,Telangana,TS EAMCET,General,22000,58,https://www.griet.ac.in,Engineering
+33,Gokaraju Rangaraju Institute of Engineering and Technology,Telangana,TS EAMCET,OBC,27000,54,https://www.griet.ac.in,Engineering
+33,Gokaraju Rangaraju Institute of Engineering and Technology,Telangana,TS EAMCET,SC,37000,50,https://www.griet.ac.in,Engineering
+33,Gokaraju Rangaraju Institute of Engineering and Technology,Telangana,TS EAMCET,ST,42000,48,https://www.griet.ac.in,Engineering
+34,Muffakham Jah College of Engineering and Technology,Telangana,TS EAMCET,General,24000,56,https://www.mjcollege.ac.in,Engineering
+34,Muffakham Jah College of Engineering and Technology,Telangana,TS EAMCET,OBC,29000,52,https://www.mjcollege.ac.in,Engineering
+34,Muffakham Jah College of Engineering and Technology,Telangana,TS EAMCET,SC,39000,48,https://www.mjcollege.ac.in,Engineering
+34,Muffakham Jah College of Engineering and Technology,Telangana,TS EAMCET,ST,44000,46,https://www.mjcollege.ac.in,Engineering
+35,Anna University,Tamil Nadu,TNEA,General,6000,72,https://www.annauniv.edu,Engineering
+35,Anna University,Tamil Nadu,TNEA,OBC,10000,67,https://www.annauniv.edu,Engineering
+35,Anna University,Tamil Nadu,TNEA,SC,16000,62,https://www.annauniv.edu,Engineering
+35,Anna University,Tamil Nadu,TNEA,ST,19000,59,https://www.annauniv.edu,Engineering
+36,PSG College of Technology,Tamil Nadu,TNEA,General,8000,70,https://www.psgtech.edu,Engineering
+36,PSG College of Technology,Tamil Nadu,TNEA,OBC,12000,65,https://www.psgtech.edu,Engineering
+36,PSG College of Technology,Tamil Nadu,TNEA,SC,18000,60,https://www.psgtech.edu,Engineering
+36,PSG College of Technology,Tamil Nadu,TNEA,ST,21000,57,https://www.psgtech.edu,Engineering
+37,Coimbatore Institute of Technology,Tamil Nadu,TNEA,General,10000,68,https://www.cit.edu.in,Engineering
+37,Coimbatore Institute of Technology,Tamil Nadu,TNEA,OBC,14000,63,https://www.cit.edu.in,Engineering
+37,Coimbatore Institute of Technology,Tamil Nadu,TNEA,SC,20000,58,https://www.cit.edu.in,Engineering
+37,Coimbatore Institute of Technology,Tamil Nadu,TNEA,ST,23000,55,https://www.cit.edu.in,Engineering
+38,Sri Sivasubramaniya Nadar College of Engineering,Tamil Nadu,SNUSAT,General,7000,71,https://www.ssn.edu.in,Engineering
+38,Sri Sivasubramaniya Nadar College of Engineering,Tamil Nadu,SNUSAT,OBC,11000,66,https://www.ssn.edu.in,Engineering
+38,Sri Sivasubramaniya Nadar College of Engineering,Tamil Nadu,SNUSAT,SC,17000,61,https://www.ssn.edu.in,Engineering
+38,Sri Sivasubramaniya Nadar College of Engineering,Tamil Nadu,SNUSAT,ST,20000,58,https://www.ssn.edu.in,Engineering
+39,Amity University,Uttar Pradesh,Amity JEE,General,30000,52,https://www.amity.edu,Engineering
+39,Amity University,Uttar Pradesh,Amity JEE,OBC,35000,48,https://www.amity.edu,Engineering
+39,Amity University,Uttar Pradesh,Amity JEE,SC,45000,44,https://www.amity.edu,Engineering
+39,Amity University,Uttar Pradesh,Amity JEE,ST,50000,42,https://www.amity.edu,Engineering
+40,Lovely Professional University,Punjab,LPUNEST,General,35000,50,https://www.lpu.in,Engineering
+40,Lovely Professional University,Punjab,LPUNEST,OBC,40000,46,https://www.lpu.in,Engineering
+40,Lovely Professional University,Punjab,LPUNEST,SC,50000,42,https://www.lpu.in,Engineering
+40,Lovely Professional University,Punjab,LPUNEST,ST,55000,40,https://www.lpu.in,Engineering
+41,Graphic Era University,Uttarakhand,GEU Entrance Test,General,32000,53,https://www.geu.ac.in,Engineering
+41,Graphic Era University,Uttarakhand,GEU Entrance Test,OBC,37000,49,https://www.geu.ac.in,Engineering
+41,Graphic Era University,Uttarakhand,GEU Entrance Test,SC,47000,45,https://www.geu.ac.in,Engineering
+41,Graphic Era University,Uttarakhand,GEU Entrance Test,ST,52000,43,https://www.geu.ac.in,Engineering
+42,KIIT University,Odisha,KIITEE,General,28000,55,https://www.kiit.ac.in,Engineering
+42,KIIT University,Odisha,KIITEE,OBC,33000,51,https://www.kiit.ac.in,Engineering
+42,KIIT University,Odisha,KIITEE,SC,43000,47,https://www.kiit.ac.in,Engineering
+42,KIIT University,Odisha,KIITEE,ST,48000,45,https://www.kiit.ac.in,Engineering
+43,Siksha 'O' Anusandhan,Odisha,SAAT,General,26000,57,https://www.soa.ac.in,Engineering
+43,Siksha 'O' Anusandhan,Odisha,SAAT,OBC,31000,53,https://www.soa.ac.in,Engineering
+43,Siksha 'O' Anusandhan,Odisha,SAAT,SC,41000,49,https://www.soa.ac.in,Engineering
+43,Siksha 'O' Anusandhan,Odisha,SAAT,ST,46000,47,https://www.soa.ac.in,Engineering
+44,Jaypee Institute of Information Technology,Uttar Pradesh,JEE Main,General,15000,64,https://www.jiit.ac.in,Engineering
+44,Jaypee Institute of Information Technology,Uttar Pradesh,JEE Main,OBC,20000,59,https://www.jiit.ac.in,Engineering
+44,Jaypee Institute of Information Technology,Uttar Pradesh,JEE Main,SC,28000,54,https://www.jiit.ac.in,Engineering
+44,Jaypee Institute of Information Technology,Uttar Pradesh,JEE Main,ST,32000,51,https://www.jiit.ac.in,Engineering
+45,Galgotias University,Uttar Pradesh,Galgotia Entrance Exam,General,30000,52,https://www.galgotiasuniversity.edu.in,Engineering
+45,Galgotias University,Uttar Pradesh,Galgotia Entrance Exam,OBC,35000,48,https://www.galgotiasuniversity.edu.in,Engineering
+45,Galgotias University,Uttar Pradesh,Galgotia Entrance Exam,SC,45000,44,https://www.galgotiasuniversity.edu.in,Engineering
+45,Galgotias University,Uttar Pradesh,Galgotia Entrance Exam,ST,50000,42,https://www.galgotiasuniversity.edu.in,Engineering
+46,SRM University Andhra Pradesh,Andhra Pradesh,SRMJEEE,General,35000,50,https://www.srmap.edu.in,Engineering
+46,SRM University Andhra Pradesh,Andhra Pradesh,SRMJEEE,OBC,40000,46,https://www.srmap.edu.in,Engineering
+46,SRM University Andhra Pradesh,Andhra Pradesh,SRMJEEE,SC,50000,42,https://www.srmap.edu.in,Engineering
+46,SRM University Andhra Pradesh,Andhra Pradesh,SRMJEEE,ST,55000,40,https://www.srmap.edu.in,Engineering
+47,K L University,Andhra Pradesh,KLUEEE,General,25000,56,https://www.kluniversity.in,Engineering
+47,K L University,Andhra Pradesh,KLUEEE,OBC,30000,52,https://www.kluniversity.in,Engineering
+47,K L University,Andhra Pradesh,KLUEEE,SC,40000,48,https://www.kluniversity.in,Engineering
+47,K L University,Andhra Pradesh,KLUEEE,ST,45000,46,https://www.kluniversity.in,Engineering
+48,Vignan's Foundation for Science Technology and Research,Andhra Pradesh,Vignan SAT,General,28000,54,https://www.vignan.ac.in,Engineering
+48,Vignan's Foundation for Science Technology and Research,Andhra Pradesh,Vignan SAT,OBC,33000,50,https://www.vignan.ac.in,Engineering
+48,Vignan's Foundation for Science Technology and Research,Andhra Pradesh,Vignan SAT,SC,43000,46,https://www.vignan.ac.in,Engineering
+48,Vignan's Foundation for Science Technology and Research,Andhra Pradesh,Vignan SAT,ST,48000,44,https://www.vignan.ac.in,Engineering
+49,Gandhi Institute of Technology and Management,Andhra Pradesh,GITAM GAT,General,20000,60,https://www.gitam.edu,Engineering
+49,Gandhi Institute of Technology and Management,Andhra Pradesh,GITAM GAT,OBC,25000,56,https://www.gitam.edu,Engineering
+49,Gandhi Institute of Technology and Management,Andhra Pradesh,GITAM GAT,SC,35000,52,https://www.gitam.edu,Engineering
+49,Gandhi Institute of Technology and Management,Andhra Pradesh,GITAM GAT,ST,40000,50,https://www.gitam.edu,Engineering
+50,International Institute of Information Technology Bangalore,Karnataka,IIITB Entrance Test,General,4000,74,https://www.iiitb.ac.in,Engineering
+50,International Institute of Information Technology Bangalore,Karnataka,IIITB Entrance Test,OBC,7000,69,https://www.iiitb.ac.in,Engineering
+50,International Institute of Information Technology Bangalore,Karnataka,IIITB Entrance Test,SC,12000,64,https://www.iiitb.ac.in,Engineering
+50,International Institute of Information Technology Bangalore,Karnataka,IIITB Entrance Test,ST,15000,61,https://www.iiitb.ac.in,Engineering
+51,Indian Institute of Engineering Science and Technology Shibpur,West Bengal,WBJEE,General,5000,73,https://www.iiests.ac.in,Engineering
+51,Indian Institute of Engineering Science and Technology Shibpur,West Bengal,WBJEE,OBC,8000,68,https://www.iiests.ac.in,Engineering
+51,Indian Institute of Engineering Science and Technology Shibpur,West Bengal,WBJEE,SC,13000,63,https://www.iiests.ac.in,Engineering
+51,Indian Institute of Engineering Science and Technology Shibpur,West Bengal,WBJEE,ST,16000,60,https://www.iiests.ac.in,Engineering
+52,Heritage Institute of Technology,West Bengal,WBJEE,General,12000,67,https://www.heritageit.edu,Engineering
+52,Heritage Institute of Technology,West Bengal,WBJEE,OBC,17000,62,https://www.heritageit.edu,Engineering
+52,Heritage Institute of Technology,West Bengal,WBJEE,SC,22000,57,https://www.heritageit.edu,Engineering
+52,Heritage Institute of Technology,West Bengal,WBJEE,ST,25000,54,https://www.heritageit.edu,Engineering
+53,Institute of Engineering and Management Kolkata,West Bengal,WBJEE,General,15000,65,https://www.iem.edu.in,Engineering
+53,Institute of Engineering and Management Kolkata,West Bengal,WBJEE,OBC,20000,60,https://www.iem.edu.in,Engineering
+53,Institute of Engineering and Management Kolkata,West Bengal,WBJEE,SC,27000,55,https://www.iem.edu.in,Engineering
+53,Institute of Engineering and Management Kolkata,West Bengal,WBJEE,ST,30000,52,https://www.iem.edu.in,Engineering
+54,Jalpaiguri Government Engineering College,West Bengal,WBJEE,General,18000,63,https://www.jgec.ac.in,Engineering
+54,Jalpaiguri Government Engineering College,West Bengal,WBJEE,OBC,23000,58,https://www.jgec.ac.in,Engineering
+54,Jalpaiguri Government Engineering College,West Bengal,WBJEE,SC,30000,53,https://www.jgec.ac.in,Engineering
+54,Jalpaiguri Government Engineering College,West Bengal,WBJEE,ST,33000,50,https://www.jgec.ac.in,Engineering
+55,Kalinga Institute of Industrial Technology,Odisha,KIITEE,General,22000,58,https://www.kiit.ac.in,Engineering
+55,Kalinga Institute of Industrial Technology,Odisha,KIITEE,OBC,27000,54,https://www.kiit.ac.in,Engineering
+55,Kalinga Institute of Industrial Technology,Odisha,KIITEE,SC,37000,50,https://www.kiit.ac.in,Engineering
+55,Kalinga Institute of Industrial Technology,Odisha,KIITEE,ST,42000,48,https://www.kiit.ac.in,Engineering
+56,Siksha 'O' Anusandhan,Odisha,SAAT,General,24000,56,https://www.soa.ac.in,Engineering
+56,Siksha 'O' Anusandhan,Odisha,SAAT,OBC,29000,52,https://www.soa.ac.in,Engineering
+56,Siksha 'O' Anusandhan,Odisha,SAAT,SC,39000,48,https://www.soa.ac.in,Engineering
+56,Siksha 'O' Anusandhan,Odisha,SAAT,ST,44000,46,https://www.soa.ac.in,Engineering
+57,University College of Engineering Osmania University,Telangana,TS EAMCET,General,9000,69,https://www.uceou.edu,Engineering
+57,University College of Engineering Osmania University,Telangana,TS EAMCET,OBC,13000,64,https://www.uceou.edu,Engineering
+57,University College of Engineering Osmania University,Telangana,TS EAMCET,SC,19000,59,https://www.uceou.edu,Engineering
+57,University College of Engineering Osmania University,Telangana,TS EAMCET,ST,22000,56,https://www.uceou.edu,Engineering
+58,Chaitanya Bharathi Institute of Technology,Telangana,TS EAMCET,General,11000,67,https://www.cbit.ac.in,Engineering
+58,Chaitanya Bharathi Institute of Technology,Telangana,TS EAMCET,OBC,15000,62,https://www.cbit.ac.in,Engineering
+58,Chaitanya Bharathi Institute of Technology,Telangana,TS EAMCET,SC,21000,57,https://www.cbit.ac.in,Engineering
+58,Chaitanya Bharathi Institute of Technology,Telangana,TS EAMCET,ST,24000,54,https://www.cbit.ac.in,Engineering
+59,Guru Nanak Dev Engineering College,Punjab,Punjab CET,General,20000,60,https://www.gndec.ac.in,Engineering
+59,Guru Nanak Dev Engineering College,Punjab,Punjab CET,OBC,25000,56,https://www.gndec.ac.in,Engineering
+59,Guru Nanak Dev Engineering College,Punjab,Punjab CET,SC,35000,52,https://www.gndec.ac.in,Engineering
+59,Guru Nanak Dev Engineering College,Punjab,Punjab CET,ST,40000,50,https://www.gndec.ac.in,Engineering
+60,Punjab Engineering College,Punjab,JEE Main,General,7000,71,https://www.pec.ac.in,Engineering
+60,Punjab Engineering College,Punjab,JEE Main,OBC,11000,66,https://www.pec.ac.in,Engineering
+60,Punjab Engineering College,Punjab,JEE Main,SC,17000,61,https://www.pec.ac.in,Engineering
+60,Punjab Engineering College,Punjab,JEE Main,ST,20000,58,https://www.pec.ac.in,Engineering
+61,Dr. B. R. Ambedkar National Institute of Technology Jalandhar,Punjab,JEE Main,General,6500,72,https://www.nitj.ac.in,Engineering
+61,Dr. B. R. Ambedkar National Institute of Technology Jalandhar,Punjab,JEE Main,OBC,10000,67,https://www.nitj.ac.in,Engineering
+61,Dr. B. R. Ambedkar National Institute of Technology Jalandhar,Punjab,JEE Main,SC,16000,62,https://www.nitj.ac.in,Engineering
+61,Dr. B. R. Ambedkar National Institute of Technology Jalandhar,Punjab,JEE Main,ST,19000,59,https://www.nitj.ac.in,Engineering
+62,National Institute of Technology Calicut,Kerala,JEE Main,General,5500,73,https://www.nitc.ac.in,Engineering
+62,National Institute of Technology Calicut,Kerala,JEE Main,OBC,8500,68,https://www.nitc.ac.in,Engineering
+62,National Institute of Technology Calicut,Kerala,JEE Main,SC,14000,63,https://www.nitc.ac.in,Engineering
+62,National Institute of Technology Calicut,Kerala,JEE Main,ST,17000,60,https://www.nitc.ac.in,Engineering
+63,College of Engineering Trivandrum,Kerala,KEAM,General,8000,70,https://www.cet.ac.in,Engineering
+63,College of Engineering Trivandrum,Kerala,KEAM,OBC,12000,65,https://www.cet.ac.in,Engineering
+63,College of Engineering Trivandrum,Kerala,KEAM,SC,18000,60,https://www.cet.ac.in,Engineering
+63,College of Engineering Trivandrum,Kerala,KEAM,ST,21000,57,https://www.cet.ac.in,Engineering
+64,Government Engineering College Thrissur,Kerala,KEAM,General,12000,66,https://www.gectcr.ac.in,Engineering
+64,Government Engineering College Thrissur,Kerala,KEAM,OBC,16000,61,https://www.gectcr.ac.in,Engineering
+64,Government Engineering College Thrissur,Kerala,KEAM,SC,22000,56,https://www.gectcr.ac.in,Engineering
+64,Government Engineering College Thrissur,Kerala,KEAM,ST,25000,53,https://www.gectcr.ac.in,Engineering
+65,Model Engineering College Kochi,Kerala,KEAM,General,10000,68,https://www.mec.ac.in,Engineering
+65,Model Engineering College Kochi,Kerala,KEAM,OBC,14000,63,https://www.mec.ac.in,Engineering
+65,Model Engineering College Kochi,Kerala,KEAM,SC,20000,58,https://www.mec.ac.in,Engineering
+65,Model Engineering College Kochi,Kerala,KEAM,ST,23000,55,https://www.mec.ac.in,Engineering
+66,TKM College of Engineering,Kerala,KEAM,General,9000,69,https://www.tkmce.ac.in,Engineering
+66,TKM College of Engineering,Kerala,KEAM,OBC,13000,64,https://www.tkmce.ac.in,Engineering
+66,TKM College of Engineering,Kerala,KEAM,SC,19000,59,https://www.tkmce.ac.in,Engineering
+66,TKM College of Engineering,Kerala,KEAM,ST,22000,56,https://www.tkmce.ac.in,Engineering
+67,Mar Athanasius College of Engineering,Kerala,KEAM,General,15000,64,https://www.mace.ac.in,Engineering
+67,Mar Athanasius College of Engineering,Kerala,KEAM,OBC,19000,59,https://www.mace.ac.in,Engineering
+67,Mar Athanasius College of Engineering,Kerala,KEAM,SC,25000,54,https://www.mace.ac.in,Engineering
+67,Mar Athanasius College of Engineering,Kerala,KEAM,ST,28000,51,https://www.mace.ac.in,Engineering
+68,Rajagiri School of Engineering and Technology,Kerala,KEAM,General,18000,62,https://www.rajagiritech.ac.in,Engineering
+68,Rajagiri School of Engineering and Technology,Kerala,KEAM,OBC,22000,57,https://www.rajagiritech.ac.in,Engineering
+68,Rajagiri School of Engineering and Technology,Kerala,KEAM,SC,28000,52,https://www.rajagiritech.ac.in,Engineering
+68,Rajagiri School of Engineering and Technology,Kerala,KEAM,ST,31000,49,https://www.rajagiritech.ac.in,Engineering
+69,Saintgits College of Engineering,Kerala,KEAM,General,20000,60,https://www.saintgits.org,Engineering
+69,Saintgits College of Engineering,Kerala,KEAM,OBC,24000,56,https://www.saintgits.org,Engineering
+69,Saintgits College of Engineering,Kerala,KEAM,SC,30000,52,https://www.saintgits.org,Engineering
+69,Saintgits College of Engineering,Kerala,KEAM,ST,33000,50,https://www.saintgits.org,Engineering
+70,Viswajyothi College of Engineering and Technology,Kerala,KEAM,General,22000,58,https://www.viswajyothi.ac.in,Engineering
+70,Viswajyothi College of Engineering and Technology,Kerala,KEAM,OBC,26000,54,https://www.viswajyothi.ac.in,Engineering
+70,Viswajyothi College of Engineering and Technology,Kerala,KEAM,SC,32000,50,https://www.viswajyothi.ac.in,Engineering
+70,Viswajyothi College of Engineering and Technology,Kerala,KEAM,ST,35000,48,https://www.viswajyothi.ac.in,Engineering
+71,Indian Institute of Information Technology Allahabad,Uttar Pradesh,JEE Main,General,3000,76,https://www.iiita.ac.in,Engineering
+71,Indian Institute of Information Technology Allahabad,Uttar Pradesh,JEE Main,OBC,5000,71,https://www.iiita.ac.in,Engineering
+71,Indian Institute of Information Technology Allahabad,Uttar Pradesh,JEE Main,SC,9000,66,https://www.iiita.ac.in,Engineering
+71,Indian Institute of Information Technology Allahabad,Uttar Pradesh,JEE Main,ST,11000,63,https://www.iiita.ac.in,Engineering
+72,Motilal Nehru National Institute of Technology Allahabad,Uttar Pradesh,JEE Main,General,6000,72,https://www.mnnit.ac.in,Engineering
+72,Motilal Nehru National Institute of Technology Allahabad,Uttar Pradesh,JEE Main,OBC,9000,67,https://www.mnnit.ac.in,Engineering
+72,Motilal Nehru National Institute of Technology Allahabad,Uttar Pradesh,JEE Main,SC,13000,62,https://www.mnnit.ac.in,Engineering
+72,Motilal Nehru National Institute of Technology Allahabad,Uttar Pradesh,JEE Main,ST,15000,59,https://www.mnnit.ac.in,Engineering
+73,Harcourt Butler Technical University,Uttar Pradesh,UPSEE,General,14000,65,https://www.hbtu.ac.in,Engineering
+73,Harcourt Butler Technical University,Uttar Pradesh,UPSEE,OBC,18000,60,https://www.hbtu.ac.in,Engineering
+73,Harcourt Butler Technical University,Uttar Pradesh,UPSEE,SC,24000,55,https://www.hbtu.ac.in,Engineering
+73,Harcourt Butler Technical University,Uttar Pradesh,UPSEE,ST,27000,52,https://www.hbtu.ac.in,Engineering
+74,Integral University,Uttar Pradesh,Integral University Entrance Test,General,32000,52,https://www.iul.ac.in,Engineering
+74,Integral University,Uttar Pradesh,Integral University Entrance Test,OBC,37000,48,https://www.iul.ac.in,Engineering
+74,Integral University,Uttar Pradesh,Integral University Entrance Test,SC,47000,44,https://www.iul.ac.in,Engineering
+74,Integral University,Uttar Pradesh,Integral University Entrance Test,ST,52000,42,https://www.iul.ac.in,Engineering
+75,Shiv Nadar University,Uttar Pradesh,SNUSAT,General,10000,68,https://www.snu.edu.in,Engineering
+75,Shiv Nadar University,Uttar Pradesh,SNUSAT,OBC,14000,63,https://www.snu.edu.in,Engineering
+75,Shiv Nadar University,Uttar Pradesh,SNUSAT,SC,20000,58,https://www.snu.edu.in,Engineering
+75,Shiv Nadar University,Uttar Pradesh,SNUSAT,ST,23000,55,https://www.snu.edu.in,Engineering
+76,Amrita School of Engineering,Karnataka,AEEE,General,16000,63,https://www.amrita.edu,Engineering
+76,Amrita School of Engineering,Karnataka,AEEE,OBC,21000,58,https://www.amrita.edu,Engineering
+76,Amrita School of Engineering,Karnataka,AEEE,SC,29000,53,https://www.amrita.edu,Engineering
+76,Amrita School of Engineering,Karnataka,AEEE,ST,33000,50,https://www.amrita.edu,Engineering
+77,Christ University Faculty of Engineering,Karnataka,Christ University Entrance Test,General,24000,56,https://www.christuniversity.in,Engineering
+77,Christ University Faculty of Engineering,Karnataka,Christ University Entrance Test,OBC,29000,52,https://www.christuniversity.in,Engineering
+77,Christ University Faculty of Engineering,Karnataka,Christ University Entrance Test,SC,39000,48,https://www.christuniversity.in,Engineering
+77,Christ University Faculty of Engineering,Karnataka,Christ University Entrance Test,ST,44000,46,https://www.christuniversity.in,Engineering
+78,ACS College of Engineering,Karnataka,KCET,General,30000,52,https://www.acsce.edu.in,Engineering
+78,ACS College of Engineering,Karnataka,KCET,OBC,35000,48,https://www.acsce.edu.in,Engineering
+78,ACS College of Engineering,Karnataka,KCET,SC,45000,44,https://www.acsce.edu.in,Engineering
+78,ACS College of Engineering,Karnataka,KCET,ST,50000,42,https://www.acsce.edu.in,Engineering
+79,Alvas Institute of Engineering and Technology,Karnataka,KCET,General,28000,54,https://www.alvas.org,Engineering
+79,Alvas Institute of Engineering and Technology,Karnataka,KCET,OBC,33000,50,https://www.alvas.org,Engineering
+79,Alvas Institute of Engineering and Technology,Karnataka,KCET,SC,43000,46,https://www.alvas.org,Engineering
+79,Alvas Institute of Engineering and Technology,Karnataka,KCET,ST,48000,44,https://www.alvas.org,Engineering
+80,Acharya Institute of Technology,Karnataka,COMEDK,General,26000,55,https://www.acharya.ac.in,Engineering
+80,Acharya Institute of Technology,Karnataka,COMEDK,OBC,31000,51,https://www.acharya.ac.in,Engineering
+80,Acharya Institute of Technology,Karnataka,COMEDK,SC,41000,47,https://www.acharya.ac.in,Engineering
+80,Acharya Institute of Technology,Karnataka,COMEDK,ST,46000,45,https://www.acharya.ac.in,Engineering

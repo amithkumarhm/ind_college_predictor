@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+                <i class="fas fa-graduation-cap me-2"></i>College Predictor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if session.user_id %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('dashboard') }}">
+                                <i class="fas fa-home me-1"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('engineering') }}">
+                                <i class="fas fa-cogs me-1"></i>Engineering
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('medical') }}">
+                                <i class="fas fa-stethoscope me-1"></i>Medical
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">
+                                <i class="fas fa-sign-out-alt me-1"></i>Logout
+                            </a>
+                        </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="{{ url_for('chatbot_page') }}">-->
+<!--                                <i class="fas fa-robot me-1"></i>AI Assistant-->
+<!--                            </a>-->
+<!--                        </li>-->
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register') }}">
+                                <i class="fas fa-user-plus me-1"></i>Register
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-4">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+<!-- Floating Chatbot Widget -->
+{% if session.user_id %}
+<div class="chatbot-widget">
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle btn btn-primary rounded-pill shadow">
+        <i class="fas fa-robot me-2"></i>AI Assistant
+    </button>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container shadow">
+        <div class="chatbot-header bg-primary text-white">
+            <h6 class="mb-0"><i class="fas fa-robot me-2"></i>Admission Assistant</h6>
+            <div>
+                <button class="btn btn-sm btn-outline-light me-2" onclick="resetChatHistory()" title="Reset Chat">
+                    <i class="fas fa-redo"></i>
+                </button>
+                <button class="btn-close btn-close-white" onclick="closeChatbot()"></button>
+            </div>
+        </div>
+
+        <div class="chatbot-messages" id="chatbotMessages">
+            <!-- Messages will be loaded from localStorage -->
+        </div>
+
+        <div class="chatbot-input">
+            <div class="input-group">
+                <input type="text" id="chatbotInput" class="form-control" placeholder="Type your question...">
+                <button class="btn btn-primary" onclick="sendChatbotMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="quick-options mt-2" id="quickOptions">
+                <button class="btn btn-sm btn-outline-primary me-1 mb-1" onclick="quickOption('engineering prediction')">Engineering</button>
+                <button class="btn btn-sm btn-outline-success me-1 mb-1" onclick="quickOption('medical prediction')">Medical</button>
+                <button class="btn btn-sm btn-outline-info me-1 mb-1" onclick="quickOption('JEE Main cutoffs')">JEE Info</button>
+                <button class="btn btn-sm btn-outline-warning me-1 mb-1" onclick="quickOption('NEET cutoffs')">NEET Info</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>&copy; 2024 College Admission Predictor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

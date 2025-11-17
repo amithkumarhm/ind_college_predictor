@@ -1,0 +1,281 @@
+college_id,name,state,exam_type,category,cutoff_rank,marks_cutoff,website,type
+101,All India Institute of Medical Sciences Delhi,Delhi,NEET,General,100,85,https://www.aiims.edu,Medical
+101,All India Institute of Medical Sciences Delhi,Delhi,NEET,OBC,500,80,https://www.aiims.edu,Medical
+101,All India Institute of Medical Sciences Delhi,Delhi,NEET,SC,1500,75,https://www.aiims.edu,Medical
+101,All India Institute of Medical Sciences Delhi,Delhi,NEET,ST,2000,72,https://www.aiims.edu,Medical
+102,Christian Medical College Vellore,Tamil Nadu,NEET,General,500,80,https://www.cmch-vellore.edu,Medical
+102,Christian Medical College Vellore,Tamil Nadu,NEET,OBC,1200,75,https://www.cmch-vellore.edu,Medical
+102,Christian Medical College Vellore,Tamil Nadu,NEET,SC,2500,70,https://www.cmch-vellore.edu,Medical
+102,Christian Medical College Vellore,Tamil Nadu,NEET,ST,3200,67,https://www.cmch-vellore.edu,Medical
+103,Armed Forces Medical College Pune,Maharashtra,NEET,General,1000,78,https://www.afmcdg1d.gov.in,Medical
+103,Armed Forces Medical College Pune,Maharashtra,NEET,OBC,2000,73,https://www.afmcdg1d.gov.in,Medical
+103,Armed Forces Medical College Pune,Maharashtra,NEET,SC,4000,68,https://www.afmcdg1d.gov.in,Medical
+103,Armed Forces Medical College Pune,Maharashtra,NEET,ST,5000,65,https://www.afmcdg1d.gov.in,Medical
+104,Maulana Azad Medical College Delhi,Delhi,NEET,General,800,79,https://www.mamc.ac.in,Medical
+104,Maulana Azad Medical College Delhi,Delhi,NEET,OBC,1500,74,https://www.mamc.ac.in,Medical
+104,Maulana Azad Medical College Delhi,Delhi,NEET,SC,3000,69,https://www.mamc.ac.in,Medical
+104,Maulana Azad Medical College Delhi,Delhi,NEET,ST,3800,66,https://www.mamc.ac.in,Medical
+105,Lady Hardinge Medical College Delhi,Delhi,NEET,General,1200,77,https://www.lhmc-hosp.gov.in,Medical
+105,Lady Hardinge Medical College Delhi,Delhi,NEET,OBC,1800,72,https://www.lhmc-hosp.gov.in,Medical
+105,Lady Hardinge Medical College Delhi,Delhi,NEET,SC,3500,67,https://www.lhmc-hosp.gov.in,Medical
+105,Lady Hardinge Medical College Delhi,Delhi,NEET,ST,4200,64,https://www.lhmc-hosp.gov.in,Medical
+106,Grant Medical College Mumbai,Maharashtra,NEET,General,1500,76,https://www.gmc.gov.in,Medical
+106,Grant Medical College Mumbai,Maharashtra,NEET,OBC,2200,71,https://www.gmc.gov.in,Medical
+106,Grant Medical College Mumbai,Maharashtra,NEET,SC,4000,66,https://www.gmc.gov.in,Medical
+106,Grant Medical College Mumbai,Maharashtra,NEET,ST,4800,63,https://www.gmc.gov.in,Medical
+107,Seth GS Medical College Mumbai,Maharashtra,NEET,General,1800,75,https://www.kem.edu,Medical
+107,Seth GS Medical College Mumbai,Maharashtra,NEET,OBC,2500,70,https://www.kem.edu,Medical
+107,Seth GS Medical College Mumbai,Maharashtra,NEET,SC,4500,65,https://www.kem.edu,Medical
+107,Seth GS Medical College Mumbai,Maharashtra,NEET,ST,5200,62,https://www.kem.edu,Medical
+108,King George's Medical University Lucknow,Uttar Pradesh,NEET,General,2000,74,https://www.kgmu.org,Medical
+108,King George's Medical University Lucknow,Uttar Pradesh,NEET,OBC,2800,69,https://www.kgmu.org,Medical
+108,King George's Medical University Lucknow,Uttar Pradesh,NEET,SC,4800,64,https://www.kgmu.org,Medical
+108,King George's Medical University Lucknow,Uttar Pradesh,NEET,ST,5500,61,https://www.kgmu.org,Medical
+109,Institute of Medical Sciences BHU Varanasi,Uttar Pradesh,NEET,General,2500,73,https://www.bhu.ac.in,Medical
+109,Institute of Medical Sciences BHU Varanasi,Uttar Pradesh,NEET,OBC,3200,68,https://www.bhu.ac.in,Medical
+109,Institute of Medical Sciences BHU Varanasi,Uttar Pradesh,NEET,SC,5200,63,https://www.bhu.ac.in,Medical
+109,Institute of Medical Sciences BHU Varanasi,Uttar Pradesh,NEET,ST,6000,60,https://www.bhu.ac.in,Medical
+110,JIPMER Puducherry,Puducherry,NEET,General,600,80,https://www.jipmer.edu.in,Medical
+110,JIPMER Puducherry,Puducherry,NEET,OBC,1000,75,https://www.jipmer.edu.in,Medical
+110,JIPMER Puducherry,Puducherry,NEET,SC,2000,70,https://www.jipmer.edu.in,Medical
+110,JIPMER Puducherry,Puducherry,NEET,ST,2500,67,https://www.jipmer.edu.in,Medical
+111,Madras Medical College Chennai,Tamil Nadu,NEET,General,3000,72,https://www.mmc.ac.in,Medical
+111,Madras Medical College Chennai,Tamil Nadu,NEET,OBC,5000,67,https://www.mmc.ac.in,Medical
+111,Madras Medical College Chennai,Tamil Nadu,NEET,SC,8000,62,https://www.mmc.ac.in,Medical
+111,Madras Medical College Chennai,Tamil Nadu,NEET,ST,9000,59,https://www.mmc.ac.in,Medical
+112,Stanley Medical College Chennai,Tamil Nadu,NEET,General,3500,71,https://www.stanleymedicalcollege.com,Medical
+112,Stanley Medical College Chennai,Tamil Nadu,NEET,OBC,5500,66,https://www.stanleymedicalcollege.com,Medical
+112,Stanley Medical College Chennai,Tamil Nadu,NEET,SC,8500,61,https://www.stanleymedicalcollege.com,Medical
+112,Stanley Medical College Chennai,Tamil Nadu,NEET,ST,9500,58,https://www.stanleymedicalcollege.com,Medical
+113,Kilpauk Medical College Chennai,Tamil Nadu,NEET,General,4000,70,https://www.kmc-chennai.com,Medical
+113,Kilpauk Medical College Chennai,Tamil Nadu,NEET,OBC,6000,65,https://www.kmc-chennai.com,Medical
+113,Kilpauk Medical College Chennai,Tamil Nadu,NEET,SC,9000,60,https://www.kmc-chennai.com,Medical
+113,Kilpauk Medical College Chennai,Tamil Nadu,NEET,ST,10000,57,https://www.kmc-chennai.com,Medical
+114,Christian Medical College Ludhiana,Punjab,NEET,General,2800,73,https://www.cmcludhiana.in,Medical
+114,Christian Medical College Ludhiana,Punjab,NEET,OBC,4000,68,https://www.cmcludhiana.in,Medical
+114,Christian Medical College Ludhiana,Punjab,NEET,SC,7000,63,https://www.cmcludhiana.in,Medical
+114,Christian Medical College Ludhiana,Punjab,NEET,ST,8000,60,https://www.cmcludhiana.in,Medical
+115,Government Medical College Chandigarh,Chandigarh,NEET,General,2200,74,https://www.gmch.gov.in,Medical
+115,Government Medical College Chandigarh,Chandigarh,NEET,OBC,3500,69,https://www.gmch.gov.in,Medical
+115,Government Medical College Chandigarh,Chandigarh,NEET,SC,6000,64,https://www.gmch.gov.in,Medical
+115,Government Medical College Chandigarh,Chandigarh,NEET,ST,7000,61,https://www.gmch.gov.in,Medical
+116,Dayanand Medical College Ludhiana,Punjab,NEET,General,3200,71,https://www.dmcludhiana.org,Medical
+116,Dayanand Medical College Ludhiana,Punjab,NEET,OBC,4800,66,https://www.dmcludhiana.org,Medical
+116,Dayanand Medical College Ludhiana,Punjab,NEET,SC,7500,61,https://www.dmcludhiana.org,Medical
+116,Dayanand Medical College Ludhiana,Punjab,NEET,ST,8500,58,https://www.dmcludhiana.org,Medical
+117,Dr. D. Y. Patil Medical College Pune,Maharashtra,NEET,General,5000,69,https://www.dypvp.edu.in,Medical
+117,Dr. D. Y. Patil Medical College Pune,Maharashtra,NEET,OBC,7000,64,https://www.dypvp.edu.in,Medical
+117,Dr. D. Y. Patil Medical College Pune,Maharashtra,NEET,SC,10000,59,https://www.dypvp.edu.in,Medical
+117,Dr. D. Y. Patil Medical College Pune,Maharashtra,NEET,ST,11000,56,https://www.dypvp.edu.in,Medical
+118,Bharati Vidyapeeth Medical College Pune,Maharashtra,NEET,General,5500,68,https://www.bvuniversity.edu.in,Medical
+118,Bharati Vidyapeeth Medical College Pune,Maharashtra,NEET,OBC,7500,63,https://www.bvuniversity.edu.in,Medical
+118,Bharati Vidyapeeth Medical College Pune,Maharashtra,NEET,SC,10500,58,https://www.bvuniversity.edu.in,Medical
+118,Bharati Vidyapeeth Medical College Pune,Maharashtra,NEET,ST,11500,55,https://www.bvuniversity.edu.in,Medical
+119,Kasturba Medical College Manipal,Karnataka,NEET,General,4000,70,https://manipal.edu/kmc-manipal,Medical
+119,Kasturba Medical College Manipal,Karnataka,NEET,OBC,6000,65,https://manipal.edu/kmc-manipal,Medical
+119,Kasturba Medical College Manipal,Karnataka,NEET,SC,9000,60,https://manipal.edu/kmc-manipal,Medical
+119,Kasturba Medical College Manipal,Karnataka,NEET,ST,10000,57,https://manipal.edu/kmc-manipal,Medical
+120,Kasturba Medical College Mangalore,Karnataka,NEET,General,4500,69,https://manipal.edu/kmc-mangalore,Medical
+120,Kasturba Medical College Mangalore,Karnataka,NEET,OBC,6500,64,https://manipal.edu/kmc-mangalore,Medical
+120,Kasturba Medical College Mangalore,Karnataka,NEET,SC,9500,59,https://manipal.edu/kmc-mangalore,Medical
+120,Kasturba Medical College Mangalore,Karnataka,NEET,ST,10500,56,https://manipal.edu/kmc-mangalore,Medical
+121,St. John's Medical College Bangalore,Karnataka,NEET,General,2000,74,https://www.stjohns.in,Medical
+121,St. John's Medical College Bangalore,Karnataka,NEET,OBC,3000,69,https://www.stjohns.in,Medical
+121,St. John's Medical College Bangalore,Karnataka,NEET,SC,6000,64,https://www.stjohns.in,Medical
+121,St. John's Medical College Bangalore,Karnataka,NEET,ST,7000,61,https://www.stjohns.in,Medical
+122,Bangalore Medical College and Research Institute,Karnataka,NEET,General,3500,71,https://www.bmcri.org,Medical
+122,Bangalore Medical College and Research Institute,Karnataka,NEET,OBC,5000,66,https://www.bmcri.org,Medical
+122,Bangalore Medical College and Research Institute,Karnataka,NEET,SC,8000,61,https://www.bmcri.org,Medical
+122,Bangalore Medical College and Research Institute,Karnataka,NEET,ST,9000,58,https://www.bmcri.org,Medical
+123,M.S. Ramaiah Medical College Bangalore,Karnataka,NEET,General,6000,67,https://www.msrmc.ac.in,Medical
+123,M.S. Ramaiah Medical College Bangalore,Karnataka,NEET,OBC,8000,62,https://www.msrmc.ac.in,Medical
+123,M.S. Ramaiah Medical College Bangalore,Karnataka,NEET,SC,12000,57,https://www.msrmc.ac.in,Medical
+123,M.S. Ramaiah Medical College Bangalore,Karnataka,NEET,ST,14000,54,https://www.msrmc.ac.in,Medical
+124,Vydehi Institute of Medical Sciences and Research Centre,Karnataka,NEET,General,8000,65,https://www.vims.ac.in,Medical
+124,Vydehi Institute of Medical Sciences and Research Centre,Karnataka,NEET,OBC,10000,60,https://www.vims.ac.in,Medical
+124,Vydehi Institute of Medical Sciences and Research Centre,Karnataka,NEET,SC,15000,55,https://www.vims.ac.in,Medical
+124,Vydehi Institute of Medical Sciences and Research Centre,Karnataka,NEET,ST,17000,52,https://www.vims.ac.in,Medical
+125,Kempegowda Institute of Medical Sciences Bangalore,Karnataka,NEET,General,7000,66,https://www.kimsbangalore.edu.in,Medical
+125,Kempegowda Institute of Medical Sciences Bangalore,Karnataka,NEET,OBC,9000,61,https://www.kimsbangalore.edu.in,Medical
+125,Kempegowda Institute of Medical Sciences Bangalore,Karnataka,NEET,SC,13000,56,https://www.kimsbangalore.edu.in,Medical
+125,Kempegowda Institute of Medical Sciences Bangalore,Karnataka,NEET,ST,15000,53,https://www.kimsbangalore.edu.in,Medical
+126,Rajarajeswari Medical College and Hospital,Karnataka,NEET,General,9000,64,https://www.rrmch.org,Medical
+126,Rajarajeswari Medical College and Hospital,Karnataka,NEET,OBC,11000,59,https://www.rrmch.org,Medical
+126,Rajarajeswari Medical College and Hospital,Karnataka,NEET,SC,16000,54,https://www.rrmch.org,Medical
+126,Rajarajeswari Medical College and Hospital,Karnataka,NEET,ST,18000,51,https://www.rrmch.org,Medical
+127,JSS Medical College Mysore,Karnataka,NEET,General,5500,68,https://www.jssuni.edu.in,Medical
+127,JSS Medical College Mysore,Karnataka,NEET,OBC,7500,63,https://www.jssuni.edu.in,Medical
+127,JSS Medical College Mysore,Karnataka,NEET,SC,10500,58,https://www.jssuni.edu.in,Medical
+127,JSS Medical College Mysore,Karnataka,NEET,ST,11500,55,https://www.jssuni.edu.in,Medical
+128,SDM College of Medical Sciences and Hospital,Karnataka,NEET,General,6500,67,https://www.sdmmedicalcollege.org,Medical
+128,SDM College of Medical Sciences and Hospital,Karnataka,NEET,OBC,8500,62,https://www.sdmmedicalcollege.org,Medical
+128,SDM College of Medical Sciences and Hospital,Karnataka,NEET,SC,12000,57,https://www.sdmmedicalcollege.org,Medical
+128,SDM College of Medical Sciences and Hospital,Karnataka,NEET,ST,13000,54,https://www.sdmmedicalcollege.org,Medical
+129,Yenepoya Medical College Mangalore,Karnataka,NEET,General,7500,66,https://www.yenepoya.edu.in,Medical
+129,Yenepoya Medical College Mangalore,Karnataka,NEET,OBC,9500,61,https://www.yenepoya.edu.in,Medical
+129,Yenepoya Medical College Mangalore,Karnataka,NEET,SC,13500,56,https://www.yenepoya.edu.in,Medical
+129,Yenepoya Medical College Mangalore,Karnataka,NEET,ST,14500,53,https://www.yenepoya.edu.in,Medical
+130,KS Hegde Medical Academy Mangalore,Karnataka,NEET,General,8500,65,https://www.kshegde.edu.in,Medical
+130,KS Hegde Medical Academy Mangalore,Karnataka,NEET,OBC,10500,60,https://www.kshegde.edu.in,Medical
+130,KS Hegde Medical Academy Mangalore,Karnataka,NEET,SC,14500,55,https://www.kshegde.edu.in,Medical
+130,KS Hegde Medical Academy Mangalore,Karnataka,NEET,ST,15500,52,https://www.kshegde.edu.in,Medical
+131,Apollo Institute of Medical Sciences and Research,Hyderabad,NEET,General,10000,63,https://www.apolloimsr.edu.in,Medical
+131,Apollo Institute of Medical Sciences and Research,Hyderabad,NEET,OBC,12000,58,https://www.apolloimsr.edu.in,Medical
+131,Apollo Institute of Medical Sciences and Research,Hyderabad,NEET,SC,16000,53,https://www.apolloimsr.edu.in,Medical
+131,Apollo Institute of Medical Sciences and Research,Hyderabad,NEET,ST,17000,50,https://www.apolloimsr.edu.in,Medical
+132,Gandhi Medical College Hyderabad,Telangana,NEET,General,4200,70,https://www.gmchyd.org,Medical
+132,Gandhi Medical College Hyderabad,Telangana,NEET,OBC,6200,65,https://www.gmchyd.org,Medical
+132,Gandhi Medical College Hyderabad,Telangana,NEET,SC,9200,60,https://www.gmchyd.org,Medical
+132,Gandhi Medical College Hyderabad,Telangana,NEET,ST,10200,57,https://www.gmchyd.org,Medical
+133,Osmania Medical College Hyderabad,Telangana,NEET,General,3800,71,https://www.osmaniamedicalcollege.org,Medical
+133,Osmania Medical College Hyderabad,Telangana,NEET,OBC,5800,66,https://www.osmaniamedicalcollege.org,Medical
+133,Osmania Medical College Hyderabad,Telangana,NEET,SC,8800,61,https://www.osmaniamedicalcollege.org,Medical
+133,Osmania Medical College Hyderabad,Telangana,NEET,ST,9800,58,https://www.osmaniamedicalcollege.org,Medical
+134,Kakatiya Medical College Warangal,Telangana,NEET,General,5800,68,https://www.kmcwarangal.org,Medical
+134,Kakatiya Medical College Warangal,Telangana,NEET,OBC,7800,63,https://www.kmcwarangal.org,Medical
+134,Kakatiya Medical College Warangal,Telangana,NEET,SC,10800,58,https://www.kmcwarangal.org,Medical
+134,Kakatiya Medical College Warangal,Telangana,NEET,ST,11800,55,https://www.kmcwarangal.org,Medical
+135,Mamata Medical College Khammam,Telangana,NEET,General,7800,66,https://www.mamatamedicalcollege.com,Medical
+135,Mamata Medical College Khammam,Telangana,NEET,OBC,9800,61,https://www.mamatamedicalcollege.com,Medical
+135,Mamata Medical College Khammam,Telangana,NEET,SC,12800,56,https://www.mamatamedicalcollege.com,Medical
+135,Mamata Medical College Khammam,Telangana,NEET,ST,13800,53,https://www.mamatamedicalcollege.com,Medical
+136,Prathima Institute of Medical Sciences Karimnagar,Telangana,NEET,General,12000,62,https://www.prathimamedical.com,Medical
+136,Prathima Institute of Medical Sciences Karimnagar,Telangana,NEET,OBC,14000,57,https://www.prathimamedical.com,Medical
+136,Prathima Institute of Medical Sciences Karimnagar,Telangana,NEET,SC,17000,52,https://www.prathimamedical.com,Medical
+136,Prathima Institute of Medical Sciences Karimnagar,Telangana,NEET,ST,18000,49,https://www.prathimamedical.com,Medical
+137,Shadan Institute of Medical Sciences Hyderabad,Telangana,NEET,General,15000,60,https://www.simshyd.org,Medical
+137,Shadan Institute of Medical Sciences Hyderabad,Telangana,NEET,OBC,17000,55,https://www.simshyd.org,Medical
+137,Shadan Institute of Medical Sciences Hyderabad,Telangana,NEET,SC,20000,50,https://www.simshyd.org,Medical
+137,Shadan Institute of Medical Sciences Hyderabad,Telangana,NEET,ST,21000,47,https://www.simshyd.org,Medical
+138,Deccan College of Medical Sciences Hyderabad,Telangana,NEET,General,11000,63,https://www.deccancollegeofmedicalsciences.org,Medical
+138,Deccan College of Medical Sciences Hyderabad,Telangana,NEET,OBC,13000,58,https://www.deccancollegeofmedicalsciences.org,Medical
+138,Deccan College of Medical Sciences Hyderabad,Telangana,NEET,SC,16000,53,https://www.deccancollegeofmedicalsciences.org,Medical
+138,Deccan College of Medical Sciences Hyderabad,Telangana,NEET,ST,17000,50,https://www.deccancollegeofmedicalsciences.org,Medical
+139,MNR Medical College Sangareddy,Telangana,NEET,General,13000,61,https://www.mnrmedicalcollege.com,Medical
+139,MNR Medical College Sangareddy,Telangana,NEET,OBC,15000,56,https://www.mnrmedicalcollege.com,Medical
+139,MNR Medical College Sangareddy,Telangana,NEET,SC,18000,51,https://www.mnrmedicalcollege.com,Medical
+139,MNR Medical College Sangareddy,Telangana,NEET,ST,19000,48,https://www.mnrmedicalcollege.com,Medical
+140,Kamineni Institute of Medical Sciences Narketpally,Telangana,NEET,General,14000,60,https://www.kaminenihospitals.com,Medical
+140,Kamineni Institute of Medical Sciences Narketpally,Telangana,NEET,OBC,16000,55,https://www.kaminenihospitals.com,Medical
+140,Kamineni Institute of Medical Sciences Narketpally,Telangana,NEET,SC,19000,50,https://www.kaminenihospitals.com,Medical
+140,Kamineni Institute of Medical Sciences Narketpally,Telangana,NEET,ST,20000,47,https://www.kaminenihospitals.com,Medical
+141,Government Medical College Kozhikode,Kerala,NEET,General,3200,71,https://www.gmckozhikode.com,Medical
+141,Government Medical College Kozhikode,Kerala,NEET,OBC,5200,66,https://www.gmckozhikode.com,Medical
+141,Government Medical College Kozhikode,Kerala,NEET,SC,8200,61,https://www.gmckozhikode.com,Medical
+141,Government Medical College Kozhikode,Kerala,NEET,ST,9200,58,https://www.gmckozhikode.com,Medical
+142,Government Medical College Thiruvananthapuram,Kerala,NEET,General,2800,72,https://www.gmctvr.org,Medical
+142,Government Medical College Thiruvananthapuram,Kerala,NEET,OBC,4800,67,https://www.gmctvr.org,Medical
+142,Government Medical College Thiruvananthapuram,Kerala,NEET,SC,7800,62,https://www.gmctvr.org,Medical
+142,Government Medical College Thiruvananthapuram,Kerala,NEET,ST,8800,59,https://www.gmctvr.org,Medical
+143,Government Medical College Kottayam,Kerala,NEET,General,3500,70,https://www.gmcktm.org,Medical
+143,Government Medical College Kottayam,Kerala,NEET,OBC,5500,65,https://www.gmcktm.org,Medical
+143,Government Medical College Kottayam,Kerala,NEET,SC,8500,60,https://www.gmcktm.org,Medical
+143,Government Medical College Kottayam,Kerala,NEET,ST,9500,57,https://www.gmcktm.org,Medical
+144,Government Medical College Thrissur,Kerala,NEET,General,4000,69,https://www.gmctcr.org,Medical
+144,Government Medical College Thrissur,Kerala,NEET,OBC,6000,64,https://www.gmctcr.org,Medical
+144,Government Medical College Thrissur,Kerala,NEET,SC,9000,59,https://www.gmctcr.org,Medical
+144,Government Medical College Thrissur,Kerala,NEET,ST,10000,56,https://www.gmctcr.org,Medical
+145,Amrita School of Medicine Kochi,Kerala,NEET,General,4500,68,https://www.amrita.edu,Medical
+145,Amrita School of Medicine Kochi,Kerala,NEET,OBC,6500,63,https://www.amrita.edu,Medical
+145,Amrita School of Medicine Kochi,Kerala,NEET,SC,9500,58,https://www.amrita.edu,Medical
+145,Amrita School of Medicine Kochi,Kerala,NEET,ST,10500,55,https://www.amrita.edu,Medical
+146,Pushpagiri Institute of Medical Sciences Thiruvalla,Kerala,NEET,General,6000,67,https://www.pushpagirimedicalcollege.com,Medical
+146,Pushpagiri Institute of Medical Sciences Thiruvalla,Kerala,NEET,OBC,8000,62,https://www.pushpagirimedicalcollege.com,Medical
+146,Pushpagiri Institute of Medical Sciences Thiruvalla,Kerala,NEET,SC,11000,57,https://www.pushpagirimedicalcollege.com,Medical
+146,Pushpagiri Institute of Medical Sciences Thiruvalla,Kerala,NEET,ST,12000,54,https://www.pushpagirimedicalcollege.com,Medical
+147,MES Medical College Perinthalmanna,Kerala,NEET,General,7000,66,https://www.mesmedicalcollege.com,Medical
+147,MES Medical College Perinthalmanna,Kerala,NEET,OBC,9000,61,https://www.mesmedicalcollege.com,Medical
+147,MES Medical College Perinthalmanna,Kerala,NEET,SC,12000,56,https://www.mesmedicalcollege.com,Medical
+147,MES Medical College Perinthalmanna,Kerala,NEET,ST,13000,53,https://www.mesmedicalcollege.com,Medical
+148,Malankara Orthodox Syrian Church Medical College Kolenchery,Kerala,NEET,General,8000,65,https://www.moscmm.org,Medical
+148,Malankara Orthodox Syrian Church Medical College Kolenchery,Kerala,NEET,OBC,10000,60,https://www.moscmm.org,Medical
+148,Malankara Orthodox Syrian Church Medical College Kolenchery,Kerala,NEET,SC,13000,55,https://www.moscmm.org,Medical
+148,Malankara Orthodox Syrian Church Medical College Kolenchery,Kerala,NEET,ST,14000,52,https://www.moscmm.org,Medical
+149,Sree Gokulam Medical College Thiruvananthapuram,Kerala,NEET,General,9000,64,https://www.sreegokulam.org,Medical
+149,Sree Gokulam Medical College Thiruvananthapuram,Kerala,NEET,OBC,11000,59,https://www.sreegokulam.org,Medical
+149,Sree Gokulam Medical College Thiruvananthapuram,Kerala,NEET,SC,14000,54,https://www.sreegokulam.org,Medical
+149,Sree Gokulam Medical College Thiruvananthapuram,Kerala,NEET,ST,15000,51,https://www.sreegokulam.org,Medical
+150,Azeezia Institute of Medical Sciences Kollam,Kerala,NEET,General,10000,63,https://www.azeezia.com,Medical
+150,Azeezia Institute of Medical Sciences Kollam,Kerala,NEET,OBC,12000,58,https://www.azeezia.com,Medical
+150,Azeezia Institute of Medical Sciences Kollam,Kerala,NEET,SC,15000,53,https://www.azeezia.com,Medical
+150,Azeezia Institute of Medical Sciences Kollam,Kerala,NEET,ST,16000,50,https://www.azeezia.com,Medical
+151,Sri Ramachandra Medical College Chennai,Tamil Nadu,NEET,General,5000,69,https://www.sriramachandra.edu.in,Medical
+151,Sri Ramachandra Medical College Chennai,Tamil Nadu,NEET,OBC,7000,64,https://www.sriramachandra.edu.in,Medical
+151,Sri Ramachandra Medical College Chennai,Tamil Nadu,NEET,SC,10000,59,https://www.sriramachandra.edu.in,Medical
+151,Sri Ramachandra Medical College Chennai,Tamil Nadu,NEET,ST,11000,56,https://www.sriramachandra.edu.in,Medical
+152,Chettinad Hospital and Research Institute Kanchipuram,Tamil Nadu,NEET,General,6500,67,https://www.chettinadhealthcity.com,Medical
+152,Chettinad Hospital and Research Institute Kanchipuram,Tamil Nadu,NEET,OBC,8500,62,https://www.chettinadhealthcity.com,Medical
+152,Chettinad Hospital and Research Institute Kanchipuram,Tamil Nadu,NEET,SC,11500,57,https://www.chettinadhealthcity.com,Medical
+152,Chettinad Hospital and Research Institute Kanchipuram,Tamil Nadu,NEET,ST,12500,54,https://www.chettinadhealthcity.com,Medical
+153,Saveetha Medical College Chennai,Tamil Nadu,NEET,General,7500,66,https://www.saveetha.com,Medical
+153,Saveetha Medical College Chennai,Tamil Nadu,NEET,OBC,9500,61,https://www.saveetha.com,Medical
+153,Saveetha Medical College Chennai,Tamil Nadu,NEET,SC,12500,56,https://www.saveetha.com,Medical
+153,Saveetha Medical College Chennai,Tamil Nadu,NEET,ST,13500,53,https://www.saveetha.com,Medical
+154,SRM Medical College Hospital and Research Centre Chengalpattu,Tamil Nadu,NEET,General,8500,65,https://www.srmist.edu.in,Medical
+154,SRM Medical College Hospital and Research Centre Chengalpattu,Tamil Nadu,NEET,OBC,10500,60,https://www.srmist.edu.in,Medical
+154,SRM Medical College Hospital and Research Centre Chengalpattu,Tamil Nadu,NEET,SC,13500,55,https://www.srmist.edu.in,Medical
+154,SRM Medical College Hospital and Research Centre Chengalpattu,Tamil Nadu,NEET,ST,14500,52,https://www.srmist.edu.in,Medical
+155,Velammal Medical College Hospital and Research Institute Madurai,Tamil Nadu,NEET,General,9500,64,https://www.velammalmedicalcollege.com,Medical
+155,Velammal Medical College Hospital and Research Institute Madurai,Tamil Nadu,NEET,OBC,11500,59,https://www.velammalmedicalcollege.com,Medical
+155,Velammal Medical College Hospital and Research Institute Madurai,Tamil Nadu,NEET,SC,14500,54,https://www.velammalmedicalcollege.com,Medical
+155,Velammal Medical College Hospital and Research Institute Madurai,Tamil Nadu,NEET,ST,15500,51,https://www.velammalmedicalcollege.com,Medical
+156,Karpagam Faculty of Medical Sciences and Research Coimbatore,Tamil Nadu,NEET,General,11000,63,https://www.karpagam.com,Medical
+156,Karpagam Faculty of Medical Sciences and Research Coimbatore,Tamil Nadu,NEET,OBC,13000,58,https://www.karpagam.com,Medical
+156,Karpagam Faculty of Medical Sciences and Research Coimbatore,Tamil Nadu,NEET,SC,16000,53,https://www.karpagam.com,Medical
+156,Karpagam Faculty of Medical Sciences and Research Coimbatore,Tamil Nadu,NEET,ST,17000,50,https://www.karpagam.com,Medical
+157,PSG Institute of Medical Sciences and Research Coimbatore,Tamil Nadu,NEET,General,4200,70,https://www.psgimsr.co.in,Medical
+157,PSG Institute of Medical Sciences and Research Coimbatore,Tamil Nadu,NEET,OBC,6200,65,https://www.psgimsr.co.in,Medical
+157,PSG Institute of Medical Sciences and Research Coimbatore,Tamil Nadu,NEET,SC,9200,60,https://www.psgimsr.co.in,Medical
+157,PSG Institute of Medical Sciences and Research Coimbatore,Tamil Nadu,NEET,ST,10200,57,https://www.psgimsr.co.in,Medical
+158,Coimbatore Medical College Coimbatore,Tamil Nadu,NEET,General,4800,69,https://www.cmccbe.org,Medical
+158,Coimbatore Medical College Coimbatore,Tamil Nadu,NEET,OBC,6800,64,https://www.cmccbe.org,Medical
+158,Coimbatore Medical College Coimbatore,Tamil Nadu,NEET,SC,9800,59,https://www.cmccbe.org,Medical
+158,Coimbatore Medical College Coimbatore,Tamil Nadu,NEET,ST,10800,56,https://www.cmccbe.org,Medical
+159,Madurai Medical College Madurai,Tamil Nadu,NEET,General,5200,68,https://www.maduraimedicalcollege.com,Medical
+159,Madurai Medical College Madurai,Tamil Nadu,NEET,OBC,7200,63,https://www.maduraimedicalcollege.com,Medical
+159,Madurai Medical College Madurai,Tamil Nadu,NEET,SC,10200,58,https://www.maduraimedicalcollege.com,Medical
+159,Madurai Medical College Madurai,Tamil Nadu,NEET,ST,11200,55,https://www.maduraimedicalcollege.com,Medical
+160,Thanjavur Medical College Thanjavur,Tamil Nadu,NEET,General,5800,67,https://www.tmctanjore.org,Medical
+160,Thanjavur Medical College Thanjavur,Tamil Nadu,NEET,OBC,7800,62,https://www.tmctanjore.org,Medical
+160,Thanjavur Medical College Thanjavur,Tamil Nadu,NEET,SC,10800,57,https://www.tmctanjore.org,Medical
+160,Thanjavur Medical College Thanjavur,Tamil Nadu,NEET,ST,11800,54,https://www.tmctanjore.org,Medical
+161,Government Medical College Nagpur,Maharashtra,NEET,General,3000,72,https://www.gmcnagpur.in,Medical
+161,Government Medical College Nagpur,Maharashtra,NEET,OBC,5000,67,https://www.gmcnagpur.in,Medical
+161,Government Medical College Nagpur,Maharashtra,NEET,SC,8000,62,https://www.gmcnagpur.in,Medical
+161,Government Medical College Nagpur,Maharashtra,NEET,ST,9000,59,https://www.gmcnagpur.in,Medical
+162,Government Medical College Aurangabad,Maharashtra,NEET,General,3800,71,https://www.gmcaurangabad.org,Medical
+162,Government Medical College Aurangabad,Maharashtra,NEET,OBC,5800,66,https://www.gmcaurangabad.org,Medical
+162,Government Medical College Aurangabad,Maharashtra,NEET,SC,8800,61,https://www.gmcaurangabad.org,Medical
+162,Government Medical College Aurangabad,Maharashtra,NEET,ST,9800,58,https://www.gmcaurangabad.org,Medical
+163,Government Medical College Akola,Maharashtra,NEET,General,4500,69,https://www.gmcakola.in,Medical
+163,Government Medical College Akola,Maharashtra,NEET,OBC,6500,64,https://www.gmcakola.in,Medical
+163,Government Medical College Akola,Maharashtra,NEET,SC,9500,59,https://www.gmcakola.in,Medical
+163,Government Medical College Akola,Maharashtra,NEET,ST,10500,56,https://www.gmcakola.in,Medical
+164,Topiwala National Medical College Mumbai,Maharashtra,NEET,General,2200,74,https://www.tnmc.edu.in,Medical
+164,Topiwala National Medical College Mumbai,Maharashtra,NEET,OBC,3500,69,https://www.tnmc.edu.in,Medical
+164,Topiwala National Medical College Mumbai,Maharashtra,NEET,SC,6000,64,https://www.tnmc.edu.in,Medical
+164,Topiwala National Medical College Mumbai,Maharashtra,NEET,ST,7000,61,https://www.tnmc.edu.in,Medical
+165,Lokmanya Tilak Municipal Medical College Mumbai,Maharashtra,NEET,General,2600,73,https://www.ltmmedicalcollege.edu.in,Medical
+165,Lokmanya Tilak Municipal Medical College Mumbai,Maharashtra,NEET,OBC,3900,68,https://www.ltmmedicalcollege.edu.in,Medical
+165,Lokmanya Tilak Municipal Medical College Mumbai,Maharashtra,NEET,SC,6400,63,https://www.ltmmedicalcollege.edu.in,Medical
+165,Lokmanya Tilak Municipal Medical College Mumbai,Maharashtra,NEET,ST,7400,60,https://www.ltmmedicalcollege.edu.in,Medical
+166,Rural Medical College Loni,Maharashtra,NEET,General,6000,67,https://www.pravara.com,Medical
+166,Rural Medical College Loni,Maharashtra,NEET,OBC,8000,62,https://www.pravara.com,Medical
+166,Rural Medical College Loni,Maharashtra,NEET,SC,11000,57,https://www.pravara.com,Medical
+166,Rural Medical College Loni,Maharashtra,NEET,ST,12000,54,https://www.pravara.com,Medical
+167,Krishna Institute of Medical Sciences Karad,Maharashtra,NEET,General,5200,68,https://www.kimsKarad.edu.in,Medical
+167,Krishna Institute of Medical Sciences Karad,Maharashtra,NEET,OBC,7200,63,https://www.kimsKarad.edu.in,Medical
+167,Krishna Institute of Medical Sciences Karad,Maharashtra,NEET,SC,10200,58,https://www.kimsKarad.edu.in,Medical
+167,Krishna Institute of Medical Sciences Karad,Maharashtra,NEET,ST,11200,55,https://www.kimsKarad.edu.in,Medical
+168,Dr. Vasantrao Pawar Medical College Nashik,Maharashtra,NEET,General,6800,66,https://www.dvpmmedicalcollege.com,Medical
+168,Dr. Vasantrao Pawar Medical College Nashik,Maharashtra,NEET,OBC,8800,61,https://www.dvpmmedicalcollege.com,Medical
+168,Dr. Vasantrao Pawar Medical College Nashik,Maharashtra,NEET,SC,11800,56,https://www.dvpmmedicalcollege.com,Medical
+168,Dr. Vasantrao Pawar Medical College Nashik,Maharashtra,NEET,ST,12800,53,https://www.dvpmmedicalcollege.com,Medical
+169,Ashwini Rural Medical College Solapur,Maharashtra,NEET,General,7800,65,https://www.ashwinihospital.com,Medical
+169,Ashwini Rural Medical College Solapur,Maharashtra,NEET,OBC,9800,60,https://www.ashwinihospital.com,Medical
+169,Ashwini Rural Medical College Solapur,Maharashtra,NEET,SC,12800,55,https://www.ashwinihospital.com,Medical
+169,Ashwini Rural Medical College Solapur,Maharashtra,NEET,ST,13800,52,https://www.ashwinihospital.com,Medical
+170,Dr. Ulhas Patil Medical College Jalgaon,Maharashtra,NEET,General,8800,64,https://www.drulpmedicalcollege.org,Medical
+170,Dr. Ulhas Patil Medical College Jalgaon,Maharashtra,NEET,OBC,10800,59,https://www.drulpmedicalcollege.org,Medical
+170,Dr. Ulhas Patil Medical College Jalgaon,Maharashtra,NEET,SC,13800,54,https://www.drulpmedicalcollege.org,Medical
+170,Dr. Ulhas Patil Medical College Jalgaon,Maharashtra,NEET,ST,14800,51,https://www.drulpmedicalcollege.org,Medical
