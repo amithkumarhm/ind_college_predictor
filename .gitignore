@@ -24,7 +24,7 @@ venv.bak/
 *.sqlite3
 
 # Models (don't push large model files)
-models/saved/
+# models/saved/
 
 # Logs
 *.log

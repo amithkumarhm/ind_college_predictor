@@ -32,14 +32,28 @@ db = client.college_predictor
 
 # Load trained model and encoders
 def load_model():
-    """Load trained model and encoders"""
+    """Load trained model and encoders, train if not exists"""
     try:
-        model = pickle.load(open('models/saved/model.pkl', 'rb'))
+        # Create models/saved directory if it doesn't exist
+        os.makedirs('models/saved', exist_ok=True)
+
+        model_path = 'models/saved/model.pkl'
+
+        # If model doesn't exist, train it
+        if not os.path.exists(model_path):
+            print("🔄 No trained model found. Training model...")
+            from models.train_models import train_enhanced_model
+            train_enhanced_model()
+            print("✅ Model training completed!")
+
+        # Load the model
+        model = pickle.load(open(model_path, 'rb'))
         le_state = pickle.load(open('models/saved/le_state.pkl', 'rb'))
         le_exam = pickle.load(open('models/saved/le_exam.pkl', 'rb'))
         le_category = pickle.load(open('models/saved/le_category.pkl', 'rb'))
         le_type = pickle.load(open('models/saved/le_type.pkl', 'rb'))
         return model, le_state, le_exam, le_category, le_type
+
     except Exception as e:
         print(f"❌ Error loading model: {e}")
         return None, None, None, None, None
