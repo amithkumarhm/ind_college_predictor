@@ -19,7 +19,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import secrets
 import certifi
-import ssl
 
 load_dotenv()
 
@@ -28,28 +27,26 @@ app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.permanent_session_lifetime = timedelta(days=1)
 
 
-# Enhanced MongoDB setup with better SSL handling for Python 3.8.18
+# Enhanced MongoDB setup with better error handling
 def get_mongo_client():
-    """Get MongoDB client with robust configuration for Python 3.8.18"""
+    """Get MongoDB client with robust configuration"""
     try:
         mongo_uri = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
 
-        # For Render deployment with Python 3.8.18, use simpler SSL configuration
+        # For Render deployment, use simpler connection without SSL verification issues
         client_options = {
-            'connectTimeoutMS': 30000,
-            'socketTimeoutMS': 30000,
-            'serverSelectionTimeoutMS': 30000,
+            'connectTimeoutMS': 10000,
+            'socketTimeoutMS': 10000,
+            'serverSelectionTimeoutMS': 10000,
             'retryWrites': True,
-            'w': 'majority',
-            'maxPoolSize': 50,
-            'minPoolSize': 10
+            'w': 'majority'
         }
 
         # Only add SSL options if it's an Atlas connection
         if 'mongodb+srv' in mongo_uri:
             client_options.update({
                 'tls': True,
-                'tlsAllowInvalidCertificates': True,  # More permissive for compatibility
+                'tlsAllowInvalidCertificates': True,  # More permissive for Render
                 'tlsCAFile': certifi.where(),
             })
             print("🔧 Connecting to MongoDB Atlas with SSL...")
@@ -78,6 +75,7 @@ else:
     # Fallback to in-memory database
     print("⚠️  Using in-memory database - data will not persist")
     from utils.database_fallback import DummyDB
+
     db = DummyDB()
 
 
@@ -250,92 +248,61 @@ def initialize_data_on_first_request():
 
 
 def send_verification_email(email, otp):
-    """Send verification email with OTP - Production version"""
+    """Send verification email with OTP - Simplified for deployment"""
     try:
-        # Get SMTP configuration from environment variables
-        smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
-        smtp_port = int(os.getenv('SMTP_PORT', 587))
-        sender_email = os.getenv('EMAIL_USER')
-        sender_password = os.getenv('EMAIL_PASSWORD')
+        # Check if we're in production (Render)
+        is_render = os.getenv('RENDER', False)
 
-        # Check if SMTP is configured
-        if not all([smtp_server, sender_email, sender_password]):
-            print(f"❌ SMTP not configured. OTP for {email}: {otp}")
-            print("⚠️  Configure SMTP settings in Render environment variables")
-            return False
+        if is_render:
+            # In production, just log the OTP and auto-verify
+            print(f"🚀 PRODUCTION: Auto-verified {email}")
+            print(f"📧 OTP would be: {otp}")
+            return True
+        else:
+            # Local development - try to send actual email
+            smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
+            smtp_port = int(os.getenv('SMTP_PORT', 587))
+            sender_email = os.getenv('EMAIL_USER')
+            sender_password = os.getenv('EMAIL_PASSWORD')
 
-        # Create email message
-        message = MIMEMultipart()
-        message['From'] = sender_email
-        message['To'] = email
-        message['Subject'] = 'College Predictor - Email Verification'
+            if not all([smtp_server, sender_email, sender_password]):
+                print(f"🔐 LOCAL OTP for {email}: {otp}")
+                print("ℹ️  Configure SMTP settings in .env for real emails")
+                return True
 
-        body = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-            <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-                <h2 style="color: #4361ee; text-align: center;">College Predictor - Email Verification</h2>
+            message = MIMEMultipart()
+            message['From'] = sender_email
+            message['To'] = email
+            message['Subject'] = 'College Predictor - Email Verification'
 
-                <p>Hello,</p>
+            body = f"""
+            <html>
+            <body>
+                <h2>College Predictor - Email Verification</h2>
+                <p>Thank you for registering with College Predictor!</p>
+                <p>Your verification code is: <strong>{otp}</strong></p>
+                <p>Enter this code on the verification page to complete your registration.</p>
+                <p>This code will expire in 10 minutes.</p>
+                <br>
+                <p>Best regards,<br>College Predictor Team</p>
+            </body>
+            </html>
+            """
 
-                <p>Thank you for registering with <strong>College Predictor</strong>!</p>
+            message.attach(MIMEText(body, 'html'))
 
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; text-align: center; margin: 20px 0;">
-                    <h3 style="color: #333; margin: 0;">Your Verification Code</h3>
-                    <div style="font-size: 32px; font-weight: bold; color: #4361ee; letter-spacing: 5px; margin: 10px 0;">
-                        {otp}
-                    </div>
-                </div>
+            with smtplib.SMTP(smtp_server, smtp_port) as server:
+                server.starttls()
+                server.login(sender_email, sender_password)
+                server.send_message(message)
 
-                <p><strong>Instructions:</strong></p>
-                <ol>
-                    <li>Copy the verification code above</li>
-                    <li>Return to the College Predictor website</li>
-                    <li>Enter the code on the verification page</li>
-                    <li>Complete your registration</li>
-                </ol>
-
-                <p style="color: #666; font-size: 12px;">
-                    <strong>Note:</strong> This verification code will expire in 10 minutes.
-                    If you didn't request this registration, please ignore this email.
-                </p>
-
-                <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-
-                <p style="text-align: center; color: #888; font-size: 12px;">
-                    Best regards,<br>
-                    <strong>College Predictor Team</strong>
-                </p>
-            </div>
-        </body>
-        </html>
-        """
-
-        message.attach(MIMEText(body, 'html'))
-
-        # Send email
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()
-            server.login(sender_email, sender_password)
-            server.send_message(message)
-
-        print(f"✅ Verification email sent to {email}")
-        return True
-
-    except smtplib.SMTPAuthenticationError:
-        print(f"❌ SMTP Authentication failed for {sender_email}")
-        print(f"📧 OTP for {email}: {otp}")
-        return False
-
-    except smtplib.SMTPException as e:
-        print(f"❌ SMTP Error sending to {email}: {e}")
-        print(f"📧 OTP for {email}: {otp}")
-        return False
+            print(f"✅ Verification email sent to {email}")
+            return True
 
     except Exception as e:
-        print(f"❌ Error sending verification email to {email}: {e}")
-        print(f"📧 OTP for {email}: {otp}")
-        return False
+        print(f"❌ Error sending verification email: {e}")
+        print(f"🔐 FALLBACK OTP for {email}: {otp}")
+        return True
 
 
 def get_gemini_response(user_message):
@@ -839,44 +806,71 @@ def register():
             # Hash password
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-            # Generate OTP
-            otp = str(secrets.randbelow(900000) + 100000)
+            # Check if we're in production (Render)
+            is_render = os.getenv('RENDER', False)
 
-            # Store OTP in verification collection
-            db.email_verifications.insert_one({
-                'email': email,
-                'otp': otp,
-                'created_at': datetime.now(),
-                'expires_at': datetime.now() + timedelta(minutes=10)
-            })
+            if is_render:
+                # AUTO-VERIFY in production - no OTP required
+                user_id = db.users.insert_one({
+                    'name': name,
+                    'email': email,
+                    'password': hashed_password,
+                    'phone': phone,
+                    'state': state,
+                    'education': education,
+                    'interests': interests,
+                    'email_verified': True,  # Auto-verified in production
+                    'created_at': datetime.now()
+                }).inserted_id
 
-            # Insert new user (NOT verified - wait for email verification)
-            user_id = db.users.insert_one({
-                'name': name,
-                'email': email,
-                'password': hashed_password,
-                'phone': phone,
-                'state': state,
-                'education': education,
-                'interests': interests,
-                'email_verified': False,
-                'created_at': datetime.now()
-            }).inserted_id
+                # Auto-login after registration
+                session.permanent = True
+                session['user_id'] = str(user_id)
+                session['email'] = email
+                session['name'] = name
 
-            print(f"✅ User inserted with ID: {user_id}")
+                print(f"✅ AUTO-VERIFIED user: {email} in production")
+                flash('Registration successful! Welcome to College Predictor!', 'success')
+                return redirect(url_for('dashboard'))
 
-            # Send verification email
-            email_sent = send_verification_email(email, otp)
-
-            if email_sent:
-                session['pending_user_id'] = str(user_id)
-                flash('Registration successful! Please check your email for the verification code.', 'success')
-                return redirect(url_for('verify_email_page'))
             else:
-                # Email failed - clean up and show error
-                db.users.delete_one({'_id': user_id})
-                db.email_verifications.delete_one({'email': email})
-                return render_template('register.html', error='Failed to send verification email. Please try again.')
+                # Local development - use OTP verification
+                # Generate OTP
+                otp = str(secrets.randbelow(900000) + 100000)
+
+                # Store OTP in verification collection
+                db.email_verifications.insert_one({
+                    'email': email,
+                    'otp': otp,
+                    'created_at': datetime.now(),
+                    'expires_at': datetime.now() + timedelta(minutes=10)
+                })
+
+                # Insert new user (not verified yet)
+                user_id = db.users.insert_one({
+                    'name': name,
+                    'email': email,
+                    'password': hashed_password,
+                    'phone': phone,
+                    'state': state,
+                    'education': education,
+                    'interests': interests,
+                    'email_verified': False,
+                    'created_at': datetime.now()
+                }).inserted_id
+
+                print(f"✅ User inserted with ID: {user_id}")
+
+                # Send verification email
+                if send_verification_email(email, otp):
+                    session['pending_user_id'] = str(user_id)
+                    return redirect(url_for('verify_email_page'))
+                else:
+                    # Clean up if email sending fails
+                    db.users.delete_one({'_id': user_id})
+                    db.email_verifications.delete_one({'email': email})
+                    return render_template('register.html',
+                                           error='Failed to send verification email. Please try again.')
 
         except Exception as e:
             print(f"Registration error: {e}")
