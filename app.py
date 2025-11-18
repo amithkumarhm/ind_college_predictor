@@ -248,18 +248,15 @@ def initialize_data_on_first_request():
 
 
 def send_verification_email(email, otp):
-    """Send verification email with OTP - Enhanced for deployment"""
+    """Send verification email with OTP - Simplified for deployment"""
     try:
         # Check if we're in production (Render)
         is_render = os.getenv('RENDER', False)
 
         if is_render:
-            # On Render, we'll use a simple approach that works
-            print(f"🔐 VERIFICATION OTP for {email}: {otp}")
-            print("📝 Please check the Render logs for the OTP or configure SMTP settings")
-
-            # For now, we'll auto-verify in deployment to make it easier
-            # Remove this in production when you set up real email
+            # In production, just log the OTP and auto-verify
+            print(f"🚀 PRODUCTION: Auto-verified {email}")
+            print(f"📧 OTP would be: {otp}")
             return True
         else:
             # Local development - try to send actual email
@@ -305,7 +302,6 @@ def send_verification_email(email, otp):
     except Exception as e:
         print(f"❌ Error sending verification email: {e}")
         print(f"🔐 FALLBACK OTP for {email}: {otp}")
-        # Return True anyway so registration can continue
         return True
 
 
@@ -810,41 +806,71 @@ def register():
             # Hash password
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-            # Generate OTP
-            otp = str(secrets.randbelow(900000) + 100000)
+            # Check if we're in production (Render)
+            is_render = os.getenv('RENDER', False)
 
-            # Store OTP in verification collection
-            db.email_verifications.insert_one({
-                'email': email,
-                'otp': otp,
-                'created_at': datetime.now(),
-                'expires_at': datetime.now() + timedelta(minutes=10)
-            })
+            if is_render:
+                # AUTO-VERIFY in production - no OTP required
+                user_id = db.users.insert_one({
+                    'name': name,
+                    'email': email,
+                    'password': hashed_password,
+                    'phone': phone,
+                    'state': state,
+                    'education': education,
+                    'interests': interests,
+                    'email_verified': True,  # Auto-verified in production
+                    'created_at': datetime.now()
+                }).inserted_id
 
-            # Insert new user (not verified yet)
-            user_id = db.users.insert_one({
-                'name': name,
-                'email': email,
-                'password': hashed_password,
-                'phone': phone,
-                'state': state,
-                'education': education,
-                'interests': interests,
-                'email_verified': False,
-                'created_at': datetime.now()
-            }).inserted_id
+                # Auto-login after registration
+                session.permanent = True
+                session['user_id'] = str(user_id)
+                session['email'] = email
+                session['name'] = name
 
-            print(f"✅ User inserted with ID: {user_id}")
+                print(f"✅ AUTO-VERIFIED user: {email} in production")
+                flash('Registration successful! Welcome to College Predictor!', 'success')
+                return redirect(url_for('dashboard'))
 
-            # Send verification email
-            if send_verification_email(email, otp):
-                session['pending_user_id'] = str(user_id)
-                return redirect(url_for('verify_email_page'))
             else:
-                # Clean up if email sending fails
-                db.users.delete_one({'_id': user_id})
-                db.email_verifications.delete_one({'email': email})
-                return render_template('register.html', error='Failed to send verification email. Please try again.')
+                # Local development - use OTP verification
+                # Generate OTP
+                otp = str(secrets.randbelow(900000) + 100000)
+
+                # Store OTP in verification collection
+                db.email_verifications.insert_one({
+                    'email': email,
+                    'otp': otp,
+                    'created_at': datetime.now(),
+                    'expires_at': datetime.now() + timedelta(minutes=10)
+                })
+
+                # Insert new user (not verified yet)
+                user_id = db.users.insert_one({
+                    'name': name,
+                    'email': email,
+                    'password': hashed_password,
+                    'phone': phone,
+                    'state': state,
+                    'education': education,
+                    'interests': interests,
+                    'email_verified': False,
+                    'created_at': datetime.now()
+                }).inserted_id
+
+                print(f"✅ User inserted with ID: {user_id}")
+
+                # Send verification email
+                if send_verification_email(email, otp):
+                    session['pending_user_id'] = str(user_id)
+                    return redirect(url_for('verify_email_page'))
+                else:
+                    # Clean up if email sending fails
+                    db.users.delete_one({'_id': user_id})
+                    db.email_verifications.delete_one({'email': email})
+                    return render_template('register.html',
+                                           error='Failed to send verification email. Please try again.')
 
         except Exception as e:
             print(f"Registration error: {e}")
