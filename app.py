@@ -19,7 +19,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import secrets
 import certifi
-import ssl
 
 load_dotenv()
 
@@ -72,26 +71,6 @@ def get_mongo_client():
 
     except Exception as e:
         print(f"❌ MongoDB connection failed: {e}")
-
-        # Try alternative connection method for Atlas
-        if 'mongodb+srv' in mongo_uri:
-            try:
-                print("🔄 Trying alternative connection method...")
-                # Remove SSL requirements for testing
-                client = MongoClient(
-                    mongo_uri,
-                    connectTimeoutMS=30000,
-                    socketTimeoutMS=30000,
-                    serverSelectionTimeoutMS=30000,
-                    retryWrites=True,
-                    w='majority'
-                )
-                client.admin.command('ping')
-                print("✅ Alternative MongoDB connection successful!")
-                return client
-            except Exception as alt_e:
-                print(f"❌ Alternative connection also failed: {alt_e}")
-
         return None
 
 
@@ -141,15 +120,16 @@ else:
 
         def insert_one(self, document, **kwargs):
             doc_id = self._id_counter
-            document['_id'] = doc_id
+            document['_id'] = ObjectId(str(doc_id).zfill(24))
             self.data.append(document)
             self._id_counter += 1
-            return DummyResult(doc_id)
+            return DummyResult(document['_id'])
 
         def insert_many(self, documents, **kwargs):
             results = []
             for doc in documents:
-                results.append(self.insert_one(doc))
+                result = self.insert_one(doc)
+                results.append(result)
             return DummyResult([r.inserted_id for r in results])
 
         def update_one(self, query, update, **kwargs):
@@ -168,6 +148,16 @@ else:
                 if match:
                     del self.data[i]
                     break
+            return None
+
+        def delete_many(self, query=None, **kwargs):
+            if not query:
+                self.data.clear()
+                return None
+
+            self.data = [item for item in self.data if not all(
+                item.get(key) == value for key, value in query.items()
+            )]
             return None
 
         def count_documents(self, query=None, **kwargs):
@@ -239,25 +229,21 @@ model, le_state, le_exam, le_category, le_type = load_model()
 def init_db():
     """Initialize database with comprehensive data from CSV files"""
     try:
-        # Test database connection first
-        if hasattr(db, 'list_collection_names'):
-            # Create collections if they don't exist
-            if 'users' not in db.list_collection_names():
-                db.create_collection('users')
-                print("✅ Users collection created")
+        # Create collections if they don't exist
+        if 'users' not in db.list_collection_names():
+            db.create_collection('users')
+            print("✅ Users collection created")
 
-            if 'colleges' not in db.list_collection_names():
-                db.create_collection('colleges')
-                print("✅ Colleges collection created")
-                load_college_data_from_csv()
+        if 'colleges' not in db.list_collection_names():
+            db.create_collection('colleges')
+            print("✅ Colleges collection created")
+            load_college_data_from_csv()
 
-            if 'email_verifications' not in db.list_collection_names():
-                db.create_collection('email_verifications')
-                print("✅ Email verifications collection created")
+        if 'email_verifications' not in db.list_collection_names():
+            db.create_collection('email_verifications')
+            print("✅ Email verifications collection created")
 
-            print("✅ Database initialized successfully")
-        else:
-            print("⚠️  Using in-memory database - no persistence")
+        print("✅ Database initialized successfully")
 
     except Exception as e:
         print(f"❌ Database initialization error: {e}")
@@ -312,13 +298,13 @@ def load_college_data_from_csv():
 
         # Insert all data
         all_colleges = eng_data + med_data
-        if all_colleges and hasattr(db.colleges, 'insert_many'):
+        if all_colleges:
             # Clear existing data first
             db.colleges.delete_many({})
             db.colleges.insert_many(all_colleges)
             print(f"✅ Inserted {len(all_colleges)} colleges from CSV files")
         else:
-            print("⚠️  No college data found or database not available")
+            print("⚠️  No college data found in CSV files")
 
     except Exception as e:
         print(f"❌ Error loading CSV data: {e}")
@@ -951,7 +937,6 @@ def register():
             # Send verification email
             if send_verification_email(email, otp):
                 session['pending_user_id'] = str(user_id)
-                # CHANGED: Don't show success message yet, just redirect to verification
                 return redirect(url_for('verify_email_page'))
             else:
                 # Clean up if email sending fails
