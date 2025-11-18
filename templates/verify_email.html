@@ -11,8 +11,11 @@
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         {% for category, message in messages %}
-                            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show">
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'warning' if category == 'warning' else 'success' }} alert-dismissible fade show">
                                 {{ message }}
+                                {% if session.get('last_otp') and category == 'warning' %}
+                                    <br><strong>OTP: {{ session.get('last_otp') }}</strong>
+                                {% endif %}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
                         {% endfor %}
@@ -23,6 +26,12 @@
                     <i class="fas fa-envelope-circle-check text-primary mb-3" style="font-size: 3rem;"></i>
                     <h5>Email Verification Required</h5>
                     <p class="text-muted">We've sent a 6-digit verification code to your email address. Please enter it below to complete your registration.</p>
+
+                    {% if session.get('last_otp') %}
+                    <div class="alert alert-info">
+                        <strong>Manual OTP:</strong> {{ session.get('last_otp') }}
+                    </div>
+                    {% endif %}
                 </div>
 
                 <form method="POST" id="verifyForm">
