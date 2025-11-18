@@ -18,6 +18,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import secrets
+import certifi
+import ssl
 
 load_dotenv()
 
@@ -25,9 +27,180 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.permanent_session_lifetime = timedelta(days=1)
 
-# MongoDB setup
-client = MongoClient(os.getenv('MONGO_URI', 'mongodb://localhost:27017/'))
-db = client.college_predictor
+
+# Enhanced MongoDB setup with better SSL handling
+def get_mongo_client():
+    """Get MongoDB client with robust SSL configuration"""
+    try:
+        mongo_uri = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
+
+        # Check if we're using MongoDB Atlas (mongodb+srv://)
+        is_atlas = 'mongodb+srv' in mongo_uri
+
+        if is_atlas:
+            # MongoDB Atlas configuration with enhanced SSL settings
+            client = MongoClient(
+                mongo_uri,
+                tls=True,
+                tlsAllowInvalidCertificates=False,
+                tlsCAFile=certifi.where(),
+                connectTimeoutMS=30000,
+                socketTimeoutMS=30000,
+                serverSelectionTimeoutMS=30000,
+                retryWrites=True,
+                w='majority',
+                maxPoolSize=50,
+                minPoolSize=10,
+                maxIdleTimeMS=30000,
+                heartbeatFrequencyMS=10000
+            )
+            print("🔧 Attempting MongoDB Atlas connection with SSL...")
+        else:
+            # Local MongoDB without SSL
+            client = MongoClient(
+                mongo_uri,
+                connectTimeoutMS=10000,
+                socketTimeoutMS=10000,
+                serverSelectionTimeoutMS=10000
+            )
+            print("🔧 Attempting local MongoDB connection...")
+
+        # Test connection with a simple command
+        client.admin.command('ping')
+        print("✅ MongoDB connection successful!")
+        return client
+
+    except Exception as e:
+        print(f"❌ MongoDB connection failed: {e}")
+
+        # Try alternative connection method for Atlas
+        if 'mongodb+srv' in mongo_uri:
+            try:
+                print("🔄 Trying alternative connection method...")
+                # Remove SSL requirements for testing
+                client = MongoClient(
+                    mongo_uri,
+                    connectTimeoutMS=30000,
+                    socketTimeoutMS=30000,
+                    serverSelectionTimeoutMS=30000,
+                    retryWrites=True,
+                    w='majority'
+                )
+                client.admin.command('ping')
+                print("✅ Alternative MongoDB connection successful!")
+                return client
+            except Exception as alt_e:
+                print(f"❌ Alternative connection also failed: {alt_e}")
+
+        return None
+
+
+# Initialize MongoDB client
+client = get_mongo_client()
+if client:
+    db = client.college_predictor
+    print("✅ Database connection established")
+else:
+    # Create a comprehensive dummy database for fallback operation
+    print("⚠️  Using in-memory database - data will not persist")
+
+
+    class DummyCollection:
+        def __init__(self, name):
+            self.name = name
+            self.data = []
+            self._id_counter = 1
+
+        def find_one(self, query=None, **kwargs):
+            if not query:
+                return None
+            for item in self.data:
+                match = True
+                for key, value in query.items():
+                    if item.get(key) != value:
+                        match = False
+                        break
+                if match:
+                    return item
+            return None
+
+        def find(self, query=None, **kwargs):
+            results = []
+            if not query:
+                return self.data.copy()
+
+            for item in self.data:
+                match = True
+                for key, value in query.items():
+                    if item.get(key) != value:
+                        match = False
+                        break
+                if match:
+                    results.append(item)
+            return results
+
+        def insert_one(self, document, **kwargs):
+            doc_id = self._id_counter
+            document['_id'] = doc_id
+            self.data.append(document)
+            self._id_counter += 1
+            return DummyResult(doc_id)
+
+        def insert_many(self, documents, **kwargs):
+            results = []
+            for doc in documents:
+                results.append(self.insert_one(doc))
+            return DummyResult([r.inserted_id for r in results])
+
+        def update_one(self, query, update, **kwargs):
+            item = self.find_one(query)
+            if item and '$set' in update:
+                item.update(update['$set'])
+            return None
+
+        def delete_one(self, query, **kwargs):
+            for i, item in enumerate(self.data):
+                match = True
+                for key, value in query.items():
+                    if item.get(key) != value:
+                        match = False
+                        break
+                if match:
+                    del self.data[i]
+                    break
+            return None
+
+        def count_documents(self, query=None, **kwargs):
+            return len(self.find(query))
+
+        def create_index(self, field, **kwargs):
+            return None
+
+
+    class DummyResult:
+        def __init__(self, inserted_id):
+            self.inserted_id = inserted_id
+
+
+    class DummyDB:
+        def __init__(self):
+            self.collections = {}
+
+        def __getattr__(self, name):
+            if name not in self.collections:
+                self.collections[name] = DummyCollection(name)
+            return self.collections[name]
+
+        def list_collection_names(self):
+            return list(self.collections.keys())
+
+        def create_collection(self, name, **kwargs):
+            if name not in self.collections:
+                self.collections[name] = DummyCollection(name)
+            return self.collections[name]
+
+
+    db = DummyDB()
 
 
 # Load trained model and encoders
@@ -66,21 +239,25 @@ model, le_state, le_exam, le_category, le_type = load_model()
 def init_db():
     """Initialize database with comprehensive data from CSV files"""
     try:
-        # Create collections if they don't exist
-        if 'users' not in db.list_collection_names():
-            db.create_collection('users')
-            print("✅ Users collection created")
+        # Test database connection first
+        if hasattr(db, 'list_collection_names'):
+            # Create collections if they don't exist
+            if 'users' not in db.list_collection_names():
+                db.create_collection('users')
+                print("✅ Users collection created")
 
-        if 'colleges' not in db.list_collection_names():
-            db.create_collection('colleges')
-            print("✅ Colleges collection created")
-            load_college_data_from_csv()
+            if 'colleges' not in db.list_collection_names():
+                db.create_collection('colleges')
+                print("✅ Colleges collection created")
+                load_college_data_from_csv()
 
-        if 'email_verifications' not in db.list_collection_names():
-            db.create_collection('email_verifications')
-            print("✅ Email verifications collection created")
+            if 'email_verifications' not in db.list_collection_names():
+                db.create_collection('email_verifications')
+                print("✅ Email verifications collection created")
 
-        print("✅ Database initialized successfully")
+            print("✅ Database initialized successfully")
+        else:
+            print("⚠️  Using in-memory database - no persistence")
 
     except Exception as e:
         print(f"❌ Database initialization error: {e}")
@@ -91,49 +268,57 @@ def load_college_data_from_csv():
     try:
         # Load engineering colleges data
         eng_data = []
-        with open('data/engineering_colleges.csv', 'r') as f:
-            lines = f.readlines()
-            for line in lines[1:]:  # Skip header
-                parts = line.strip().split(',')
-                if len(parts) >= 8:
-                    eng_data.append({
-                        'college_id': int(parts[0]),
-                        'name': parts[1],
-                        'state': parts[2],
-                        'exam_type': parts[3],
-                        'category': parts[4],
-                        'cutoff_rank': int(parts[5]),
-                        'marks_cutoff': int(parts[6]),
-                        'website': parts[7],
-                        'type': 'Engineering'
-                    })
+        eng_file_path = 'data/engineering_colleges.csv'
+
+        if os.path.exists(eng_file_path):
+            with open(eng_file_path, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+                for line in lines[1:]:  # Skip header
+                    parts = line.strip().split(',')
+                    if len(parts) >= 8:
+                        eng_data.append({
+                            'college_id': int(parts[0]),
+                            'name': parts[1],
+                            'state': parts[2],
+                            'exam_type': parts[3],
+                            'category': parts[4],
+                            'cutoff_rank': int(parts[5]),
+                            'marks_cutoff': int(parts[6]),
+                            'website': parts[7],
+                            'type': 'Engineering'
+                        })
 
         # Load medical colleges data
         med_data = []
-        with open('data/medical_colleges.csv', 'r') as f:
-            lines = f.readlines()
-            for line in lines[1:]:  # Skip header
-                parts = line.strip().split(',')
-                if len(parts) >= 8:
-                    med_data.append({
-                        'college_id': int(parts[0]),
-                        'name': parts[1],
-                        'state': parts[2],
-                        'exam_type': parts[3],
-                        'category': parts[4],
-                        'cutoff_rank': int(parts[5]),
-                        'marks_cutoff': int(parts[6]),
-                        'website': parts[7],
-                        'type': 'Medical'
-                    })
+        med_file_path = 'data/medical_colleges.csv'
+
+        if os.path.exists(med_file_path):
+            with open(med_file_path, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+                for line in lines[1:]:  # Skip header
+                    parts = line.strip().split(',')
+                    if len(parts) >= 8:
+                        med_data.append({
+                            'college_id': int(parts[0]),
+                            'name': parts[1],
+                            'state': parts[2],
+                            'exam_type': parts[3],
+                            'category': parts[4],
+                            'cutoff_rank': int(parts[5]),
+                            'marks_cutoff': int(parts[6]),
+                            'website': parts[7],
+                            'type': 'Medical'
+                        })
 
         # Insert all data
         all_colleges = eng_data + med_data
-        if all_colleges:
+        if all_colleges and hasattr(db.colleges, 'insert_many'):
+            # Clear existing data first
+            db.colleges.delete_many({})
             db.colleges.insert_many(all_colleges)
             print(f"✅ Inserted {len(all_colleges)} colleges from CSV files")
         else:
-            print("❌ No college data found in CSV files")
+            print("⚠️  No college data found or database not available")
 
     except Exception as e:
         print(f"❌ Error loading CSV data: {e}")
@@ -762,7 +947,6 @@ def register():
             }).inserted_id
 
             print(f"✅ User inserted with ID: {user_id}")
-            print(f"✅ User data: {db.users.find_one({'_id': user_id})}")
 
             # Send verification email
             if send_verification_email(email, otp):
@@ -988,6 +1172,26 @@ def logout():
     return redirect(url_for('index'))
 
 
+# Health check endpoint for Render
+@app.route('/health')
+def health_check():
+    return jsonify({'status': 'healthy', 'message': 'College Predictor API is running'})
+
+
+# Database status endpoint
+@app.route('/db-status')
+def db_status():
+    try:
+        if hasattr(db, 'command'):
+            db.command('ping')
+            return jsonify({'status': 'connected', 'message': 'MongoDB is connected'})
+        else:
+            return jsonify({'status': 'fallback', 'message': 'Using in-memory database'})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(host='0.0.0.0', port=port, debug=debug_mode)
