@@ -9,3 +9,20 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.8.18
+      - key: MONGO_URI
+        value: mongodb+srv://amithkumarhm10_db_user:EWqh9dNCp4ta9zm4@college-predictor.e0zrdgj.mongodb.net/college_predictor?retryWrites=true&w=majority
+      - key: SECRET_KEY
+        value: aba2efc627151a0ba40d2b8a685bd69fd142bd44412d26ab6254d47d30dd2342
+      - key: FLASK_DEBUG
+        value: false
+      - key: SMTP_SERVER
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      # Replace these with your actual values:
+      - key: EMAIL_USER
+        value: testing.email.a.1001@gmail.com
+      - key: EMAIL_PASSWORD
+        value: izye doxo kjnc ozgg
+      - key: GEMINI_API_KEY
+        value: AIzaSyDd0FHvfM5dE0sci7CfT4pR1x_QEdH9kiY
