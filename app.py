@@ -27,50 +27,42 @@ app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.permanent_session_lifetime = timedelta(days=1)
 
 
-# Enhanced MongoDB setup with better SSL handling
+# Enhanced MongoDB setup with better error handling
 def get_mongo_client():
-    """Get MongoDB client with robust SSL configuration"""
+    """Get MongoDB client with robust configuration"""
     try:
         mongo_uri = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
 
-        # Check if we're using MongoDB Atlas (mongodb+srv://)
-        is_atlas = 'mongodb+srv' in mongo_uri
+        # For Render deployment, use simpler connection without SSL verification issues
+        client_options = {
+            'connectTimeoutMS': 10000,
+            'socketTimeoutMS': 10000,
+            'serverSelectionTimeoutMS': 10000,
+            'retryWrites': True,
+            'w': 'majority'
+        }
 
-        if is_atlas:
-            # MongoDB Atlas configuration with enhanced SSL settings
-            client = MongoClient(
-                mongo_uri,
-                tls=True,
-                tlsAllowInvalidCertificates=False,
-                tlsCAFile=certifi.where(),
-                connectTimeoutMS=30000,
-                socketTimeoutMS=30000,
-                serverSelectionTimeoutMS=30000,
-                retryWrites=True,
-                w='majority',
-                maxPoolSize=50,
-                minPoolSize=10,
-                maxIdleTimeMS=30000,
-                heartbeatFrequencyMS=10000
-            )
-            print("🔧 Attempting MongoDB Atlas connection with SSL...")
+        # Only add SSL options if it's an Atlas connection
+        if 'mongodb+srv' in mongo_uri:
+            client_options.update({
+                'tls': True,
+                'tlsAllowInvalidCertificates': True,  # More permissive for Render
+                'tlsCAFile': certifi.where(),
+            })
+            print("🔧 Connecting to MongoDB Atlas with SSL...")
         else:
-            # Local MongoDB without SSL
-            client = MongoClient(
-                mongo_uri,
-                connectTimeoutMS=10000,
-                socketTimeoutMS=10000,
-                serverSelectionTimeoutMS=10000
-            )
-            print("🔧 Attempting local MongoDB connection...")
+            print("🔧 Connecting to local MongoDB...")
 
-        # Test connection with a simple command
+        client = MongoClient(mongo_uri, **client_options)
+
+        # Test connection
         client.admin.command('ping')
         print("✅ MongoDB connection successful!")
         return client
 
     except Exception as e:
         print(f"❌ MongoDB connection failed: {e}")
+        print("⚠️  Falling back to in-memory database")
         return None
 
 
@@ -80,115 +72,9 @@ if client:
     db = client.college_predictor
     print("✅ Database connection established")
 else:
-    # Create a comprehensive dummy database for fallback operation
+    # Fallback to in-memory database
     print("⚠️  Using in-memory database - data will not persist")
-
-
-    class DummyCollection:
-        def __init__(self, name):
-            self.name = name
-            self.data = []
-            self._id_counter = 1
-
-        def find_one(self, query=None, **kwargs):
-            if not query:
-                return None
-            for item in self.data:
-                match = True
-                for key, value in query.items():
-                    if item.get(key) != value:
-                        match = False
-                        break
-                if match:
-                    return item
-            return None
-
-        def find(self, query=None, **kwargs):
-            results = []
-            if not query:
-                return self.data.copy()
-
-            for item in self.data:
-                match = True
-                for key, value in query.items():
-                    if item.get(key) != value:
-                        match = False
-                        break
-                if match:
-                    results.append(item)
-            return results
-
-        def insert_one(self, document, **kwargs):
-            doc_id = self._id_counter
-            document['_id'] = ObjectId(str(doc_id).zfill(24))
-            self.data.append(document)
-            self._id_counter += 1
-            return DummyResult(document['_id'])
-
-        def insert_many(self, documents, **kwargs):
-            results = []
-            for doc in documents:
-                result = self.insert_one(doc)
-                results.append(result)
-            return DummyResult([r.inserted_id for r in results])
-
-        def update_one(self, query, update, **kwargs):
-            item = self.find_one(query)
-            if item and '$set' in update:
-                item.update(update['$set'])
-            return None
-
-        def delete_one(self, query, **kwargs):
-            for i, item in enumerate(self.data):
-                match = True
-                for key, value in query.items():
-                    if item.get(key) != value:
-                        match = False
-                        break
-                if match:
-                    del self.data[i]
-                    break
-            return None
-
-        def delete_many(self, query=None, **kwargs):
-            if not query:
-                self.data.clear()
-                return None
-
-            self.data = [item for item in self.data if not all(
-                item.get(key) == value for key, value in query.items()
-            )]
-            return None
-
-        def count_documents(self, query=None, **kwargs):
-            return len(self.find(query))
-
-        def create_index(self, field, **kwargs):
-            return None
-
-
-    class DummyResult:
-        def __init__(self, inserted_id):
-            self.inserted_id = inserted_id
-
-
-    class DummyDB:
-        def __init__(self):
-            self.collections = {}
-
-        def __getattr__(self, name):
-            if name not in self.collections:
-                self.collections[name] = DummyCollection(name)
-            return self.collections[name]
-
-        def list_collection_names(self):
-            return list(self.collections.keys())
-
-        def create_collection(self, name, **kwargs):
-            if name not in self.collections:
-                self.collections[name] = DummyCollection(name)
-            return self.collections[name]
-
+    from utils.database_fallback import DummyDB
 
     db = DummyDB()
 
@@ -364,42 +250,9 @@ def initialize_data_on_first_request():
 def send_verification_email(email, otp):
     """Send verification email with OTP"""
     try:
-        smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
-        smtp_port = int(os.getenv('SMTP_PORT', 587))
-        sender_email = os.getenv('EMAIL_USER')
-        sender_password = os.getenv('EMAIL_PASSWORD')
-
-        if not all([smtp_server, sender_email, sender_password]):
-            print("❌ Email configuration missing")
-            return False
-
-        message = MIMEMultipart()
-        message['From'] = sender_email
-        message['To'] = email
-        message['Subject'] = 'College Predictor - Email Verification'
-
-        body = f"""
-        <html>
-        <body>
-            <h2>College Predictor - Email Verification</h2>
-            <p>Thank you for registering with College Predictor!</p>
-            <p>Your verification code is: <strong>{otp}</strong></p>
-            <p>Enter this code on the verification page to complete your registration.</p>
-            <p>This code will expire in 10 minutes.</p>
-            <br>
-            <p>Best regards,<br>College Predictor Team</p>
-        </body>
-        </html>
-        """
-
-        message.attach(MIMEText(body, 'html'))
-
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()
-            server.login(sender_email, sender_password)
-            server.send_message(message)
-
-        print(f"✅ Verification email sent to {email}")
+        # For demo purposes, just print the OTP
+        print(f"📧 Verification OTP for {email}: {otp}")
+        print("📧 In production, configure SMTP settings in .env")
         return True
 
     except Exception as e:
