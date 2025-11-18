@@ -173,7 +173,7 @@ function sendChatbotMessage() {
         if (data.options && data.options.length > 0) {
             responseHTML += `<br><div class="mt-2 quick-options">`;
             data.options.forEach(option => {
-                responseHTML += `<button class="btn btn-sm btn-outline-primary me-1 mb-1" onclick="quickOption('${option}')">${option}</button>`;
+                responseHTML += `<button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('${option}')">${option}</button>`;
             });
             responseHTML += `</div>`;
         }

@@ -10,7 +10,7 @@
 </head>
 <body class="bg-light">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
                 <i class="fas fa-graduation-cap me-2"></i>College Predictor
@@ -22,17 +22,17 @@
                 <ul class="navbar-nav ms-auto">
                     {% if session.user_id %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('dashboard') }}">
+                            <a class="nav-link {{ 'active' if request.endpoint == 'dashboard' }}" href="{{ url_for('dashboard') }}">
                                 <i class="fas fa-home me-1"></i>Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('engineering') }}">
+                            <a class="nav-link {{ 'active' if request.endpoint == 'engineering' }}" href="{{ url_for('engineering') }}">
                                 <i class="fas fa-cogs me-1"></i>Engineering
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('medical') }}">
+                            <a class="nav-link {{ 'active' if request.endpoint == 'medical' }}" href="{{ url_for('medical') }}">
                                 <i class="fas fa-stethoscope me-1"></i>Medical
                             </a>
                         </li>
@@ -41,19 +41,14 @@
                                 <i class="fas fa-sign-out-alt me-1"></i>Logout
                             </a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="{{ url_for('chatbot_page') }}">-->
-<!--                                <i class="fas fa-robot me-1"></i>AI Assistant-->
-<!--                            </a>-->
-<!--                        </li>-->
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('login') }}">
+                            <a class="nav-link {{ 'active' if request.endpoint == 'login' }}" href="{{ url_for('login') }}">
                                 <i class="fas fa-sign-in-alt me-1"></i>Login
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('register') }}">
+                            <a class="nav-link {{ 'active' if request.endpoint == 'register' }}" href="{{ url_for('register') }}">
                                 <i class="fas fa-user-plus me-1"></i>Register
                             </a>
                         </li>
@@ -64,12 +59,13 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="container my-4">
+    <main class="container my-4 page-transition">
         <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
                     <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                        <i class="fas fa-{{ 'exclamation-triangle' if category == 'error' else 'check-circle' }} me-2"></i>
                         {{ message }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
@@ -80,57 +76,119 @@
         {% block content %}{% endblock %}
     </main>
 
-<!-- Floating Chatbot Widget -->
-{% if session.user_id %}
-<div class="chatbot-widget">
-    <!-- Chatbot Toggle Button -->
-    <button class="chatbot-toggle btn btn-primary rounded-pill shadow">
-        <i class="fas fa-robot me-2"></i>AI Assistant
-    </button>
+    <!-- Floating Chatbot Widget -->
+    {% if session.user_id %}
+    <div class="chatbot-widget">
+        <!-- Chatbot Toggle Button -->
+        <button class="chatbot-toggle btn btn-dark rounded-pill shadow">
+            <i class="fas fa-robot me-2"></i>AI Assistant
+        </button>
 
-    <!-- Chatbot Container -->
-    <div class="chatbot-container shadow">
-        <div class="chatbot-header bg-primary text-white">
-            <h6 class="mb-0"><i class="fas fa-robot me-2"></i>Admission Assistant</h6>
-            <div>
-                <button class="btn btn-sm btn-outline-light me-2" onclick="resetChatHistory()" title="Reset Chat">
-                    <i class="fas fa-redo"></i>
-                </button>
-                <button class="btn-close btn-close-white" onclick="closeChatbot()"></button>
+        <!-- Chatbot Container -->
+        <div class="chatbot-container shadow">
+            <div class="chatbot-header bg-dark text-white">
+                <h6 class="mb-0"><i class="fas fa-robot me-2"></i>Admission Assistant</h6>
+                <div>
+                    <button class="btn btn-sm btn-outline-light me-2" onclick="resetChatHistory()" title="Reset Chat">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="btn-close btn-close-white" onclick="closeChatbot()"></button>
+                </div>
             </div>
-        </div>
 
-        <div class="chatbot-messages" id="chatbotMessages">
-            <!-- Messages will be loaded from localStorage -->
-        </div>
-
-        <div class="chatbot-input">
-            <div class="input-group">
-                <input type="text" id="chatbotInput" class="form-control" placeholder="Type your question...">
-                <button class="btn btn-primary" onclick="sendChatbotMessage()">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <!-- Messages will be loaded from localStorage -->
             </div>
-            <div class="quick-options mt-2" id="quickOptions">
-                <button class="btn btn-sm btn-outline-primary me-1 mb-1" onclick="quickOption('engineering prediction')">Engineering</button>
-                <button class="btn btn-sm btn-outline-success me-1 mb-1" onclick="quickOption('medical prediction')">Medical</button>
-                <button class="btn btn-sm btn-outline-info me-1 mb-1" onclick="quickOption('JEE Main cutoffs')">JEE Info</button>
-                <button class="btn btn-sm btn-outline-warning me-1 mb-1" onclick="quickOption('NEET cutoffs')">NEET Info</button>
+
+            <div class="chatbot-input">
+                <div class="input-group">
+                    <input type="text" id="chatbotInput" class="form-control" placeholder="Ask about admissions...">
+                    <button class="btn btn-dark" onclick="sendChatbotMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="quick-options mt-2" id="quickOptions">
+                    <button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('engineering prediction')">Engineering</button>
+                    <button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('medical prediction')">Medical</button>
+                    <button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('JEE Main cutoffs')">JEE Info</button>
+                    <button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('NEET cutoffs')">NEET Info</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% endif %}
+    {% endif %}
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4">
+    <footer class="bg-dark text-white text-center py-4 mt-5">
         <div class="container">
-            <p>&copy; 2024 College Admission Predictor. All rights reserved.</p>
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h6 class="fw-bold mb-2">College Predictor</h6>
+                    <p class="mb-0 small">Your trusted partner in college admissions</p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h6 class="fw-bold mb-2">Quick Links</h6>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="{{ url_for('engineering') }}" class="text-white-50 text-decoration-none small">Engineering</a>
+                        <a href="{{ url_for('medical') }}" class="text-white-50 text-decoration-none small">Medical</a>
+                        <a href="{{ url_for('login') }}" class="text-white-50 text-decoration-none small">Login</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-2">Contact</h6>
+                    <p class="mb-0 small text-white-50">support@collegepredictor.com</p>
+                </div>
+            </div>
+            <hr class="my-3 bg-white-50">
+            <p class="mb-0 small">&copy; 2024 College Admission Predictor. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <!-- Loader Script -->
+    <script>
+        function showLoader(message = 'Loading...') {
+            const loader = document.createElement('div');
+            loader.className = 'loader-overlay';
+            loader.innerHTML = `
+                <div class="loader-content">
+                    <div class="loader-spinner"></div>
+                    <div class="loader-text">${message}</div>
+                </div>
+            `;
+            document.body.appendChild(loader);
+            return loader;
+        }
+
+        function hideLoader(loader) {
+            if (loader && loader.parentNode) {
+                loader.parentNode.removeChild(loader);
+            }
+        }
+
+        // Form submission loaders
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function() {
+                    const loader = showLoader('Processing...');
+                    setTimeout(() => hideLoader(loader), 3000); // Fallback
+                });
+            });
+
+            // Prediction page loader
+            if (window.location.pathname.includes('engineering') || window.location.pathname.includes('medical')) {
+                const predictionForms = document.querySelectorAll('form[method="POST"]');
+                predictionForms.forEach(form => {
+                    form.addEventListener('submit', function() {
+                        showLoader('Analyzing your data and predicting colleges...');
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-lg-6">
-        <div class="card border-0 shadow fade-in">
-            <div class="card-header bg-primary text-white py-3">
+    <div class="col-lg-5 col-md-7">
+        <div class="card border-0 shadow-sm fade-in">
+            <div class="card-header bg-dark text-white py-3">
                 <h4 class="mb-0 text-center"><i class="fas fa-envelope me-2"></i>Verify Your Email</h4>
             </div>
             <div class="card-body p-4">
@@ -12,6 +12,7 @@
                     {% if messages %}
                         {% for category, message in messages %}
                             <div class="alert alert-{{ 'danger' if category == 'error' else 'warning' if category == 'warning' else 'success' }} alert-dismissible fade show">
+                                <i class="fas fa-{{ 'exclamation-triangle' if category == 'error' else 'bell' if category == 'warning' else 'check-circle' }} me-2"></i>
                                 {{ message }}
                                 {% if session.get('last_otp') and category == 'warning' %}
                                     <br><strong>OTP: {{ session.get('last_otp') }}</strong>
@@ -29,6 +30,7 @@
 
                     {% if session.get('last_otp') %}
                     <div class="alert alert-info">
+                        <i class="fas fa-key me-2"></i>
                         <strong>Manual OTP:</strong> {{ session.get('last_otp') }}
                     </div>
                     {% endif %}
@@ -37,18 +39,21 @@
                 <form method="POST" id="verifyForm">
                     <div class="mb-4">
                         <label for="otp" class="form-label">Verification Code</label>
-                        <input type="text" class="form-control text-center" id="otp" name="otp" required
-                               placeholder="Enter 6-digit code" maxlength="6" pattern="[0-9]{6}"
-                               style="font-size: 1.2rem; letter-spacing: 0.5rem; font-weight: bold;">
-                        <div class="form-text">Enter the 6-digit code sent to your email.</div>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-shield-alt"></i></span>
+                            <input type="text" class="form-control text-center" id="otp" name="otp" required
+                                   placeholder="Enter 6-digit code" maxlength="6" pattern="[0-9]{6}"
+                                   style="font-size: 1.1rem; letter-spacing: 0.3rem; font-weight: bold;">
+                        </div>
+                        <div class="form-text text-center">Enter the 6-digit code sent to your email.</div>
                     </div>
 
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">
+                        <button type="submit" class="btn btn-dark btn-lg">
                             <i class="fas fa-check-circle me-2"></i>Verify Email
                         </button>
 
-                        <a href="{{ url_for('resend_otp') }}" class="btn btn-outline-secondary">
+                        <a href="{{ url_for('resend_otp') }}" class="btn btn-outline-dark">
                             <i class="fas fa-redo me-2"></i>Resend Code
                         </a>
                     </div>

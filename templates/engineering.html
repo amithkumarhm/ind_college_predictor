@@ -3,8 +3,8 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <div class="card border-0 shadow fade-in">
-            <div class="card-header bg-primary text-white py-3">
+        <div class="card border-0 shadow-sm fade-in">
+            <div class="card-header bg-dark text-white py-3">
                 <h4 class="mb-0"><i class="fas fa-cogs me-2"></i>Engineering College Prediction</h4>
             </div>
             <div class="card-body p-4">
@@ -13,7 +13,7 @@
                         {% for category, message in messages %}
                             {% if category == 'error' %}
                                 <div class="alert alert-danger alert-dismissible fade show">
-                                    {{ message }}
+                                    <i class="fas fa-exclamation-triangle me-2"></i>{{ message }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                 </div>
                             {% endif %}
@@ -25,55 +25,70 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="exam_type" class="form-label">Exam Type:</label>
-                            <select id="exam_type" name="exam_type" class="form-select" required>
-                                <option value="">Select Exam</option>
-                                <option value="JEE Main">JEE Main</option>
-                                <option value="JEE Advanced">JEE Advanced</option>
-                                <option value="CET">State CET</option>
-                                <option value="COMEDK">COMEDK</option>
-                                <option value="VITEEE">VITEEE</option>
-                                <option value="BITSAT">BITSAT</option>
-                                <option value="SRMJEEE">SRMJEEE</option>
-                            </select>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
+                                <select id="exam_type" name="exam_type" class="form-select" required>
+                                    <option value="">Select Exam</option>
+                                    <option value="JEE Main">JEE Main</option>
+                                    <option value="JEE Advanced">JEE Advanced</option>
+                                    <option value="CET">State CET</option>
+                                    <option value="COMEDK">COMEDK</option>
+                                    <option value="VITEEE">VITEEE</option>
+                                    <option value="BITSAT">BITSAT</option>
+                                    <option value="SRMJEEE">SRMJEEE</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="col-md-6">
                             <label for="rank" class="form-label">Exam Rank:</label>
-                            <input type="number" id="rank" name="rank" class="form-control" required min="1" placeholder="Enter your rank">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-trophy"></i></span>
+                                <input type="number" id="rank" name="rank" class="form-control" required min="1" placeholder="Enter your rank">
+                            </div>
                         </div>
 
                         <div class="col-md-6">
                             <label for="marks_12th" class="form-label">12th Percentage:</label>
-                            <input type="number" id="marks_12th" name="marks_12th" class="form-control" step="0.01" required min="0" max="100" placeholder="Enter percentage">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                <input type="number" id="marks_12th" name="marks_12th" class="form-control" step="0.01" required min="0" max="100" placeholder="Enter percentage">
+                            </div>
                         </div>
 
                         <div class="col-md-6">
                             <label for="category" class="form-label">Category:</label>
-                            <select id="category" name="category" class="form-select" required>
-                                <option value="General">General</option>
-                                <option value="OBC">OBC</option>
-                                <option value="SC">SC</option>
-                                <option value="ST">ST</option>
-                            </select>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-users"></i></span>
+                                <select id="category" name="category" class="form-select" required>
+                                    <option value="General">General</option>
+                                    <option value="OBC">OBC</option>
+                                    <option value="SC">SC</option>
+                                    <option value="ST">ST</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="col-12">
                             <label for="state" class="form-label">Preferred State:</label>
-                            <select id="state" name="state" class="form-select" required>
-                                <option value="All India">All India</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Telangana">Telangana</option>
-                                <option value="West Bengal">West Bengal</option>
-                            </select>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                <select id="state" name="state" class="form-select" required>
+                                    <option value="All India">All India</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="col-12 text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <button type="submit" class="btn btn-dark btn-lg px-5">
                                 <i class="fas fa-chart-line me-2"></i>Predict Colleges
                             </button>
                         </div>
@@ -83,13 +98,43 @@
         </div>
 
         <!-- Info Card -->
-        <div class="card border-0 shadow fade-in mt-4">
+        <div class="card border-0 shadow-sm fade-in mt-4">
             <div class="card-body">
-                <h5><i class="fas fa-info-circle text-primary me-2"></i>About Engineering Admissions</h5>
-                <p class="mb-2">• JEE Main: For NITs, IIITs, GFTIs, and other engineering colleges</p>
-                <p class="mb-2">• JEE Advanced: For IITs only (requires JEE Main qualification)</p>
-                <p class="mb-2">• State CETs: For state government engineering colleges</p>
-                <p class="mb-0">• Private Exams: College-specific entrance tests</p>
+                <h5 class="mb-3"><i class="fas fa-info-circle text-primary me-2"></i>About Engineering Admissions</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check text-success me-2 mt-1"></i>
+                            <div>
+                                <strong>JEE Main:</strong> For NITs, IIITs, GFTIs, and other engineering colleges
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check text-success me-2 mt-1"></i>
+                            <div>
+                                <strong>JEE Advanced:</strong> For IITs only (requires JEE Main qualification)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check text-success me-2 mt-1"></i>
+                            <div>
+                                <strong>State CETs:</strong> For state government engineering colleges
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check text-success me-2 mt-1"></i>
+                            <div>
+                                <strong>Private Exams:</strong> College-specific entrance tests
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
