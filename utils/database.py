@@ -12,7 +12,7 @@ _db = None
 
 
 def get_mongo_client():
-    """Get MongoDB client with proper SSL configuration"""
+    """Get MongoDB client with proper SSL configuration for Python 3.8.18"""
     try:
         mongo_uri = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
 
@@ -20,17 +20,19 @@ def get_mongo_client():
         is_production = os.getenv('RENDER', False) or 'mongodb+srv' in mongo_uri
 
         if is_production:
-            # Production configuration with SSL
+            # Production configuration with SSL for Python 3.8.18 compatibility
             client = MongoClient(
                 mongo_uri,
                 tls=True,
-                tlsAllowInvalidCertificates=False,
+                tlsAllowInvalidCertificates=True,  # More permissive for compatibility
                 tlsCAFile=certifi.where(),
                 connectTimeoutMS=30000,
                 socketTimeoutMS=30000,
                 serverSelectionTimeoutMS=30000,
                 retryWrites=True,
-                w='majority'
+                w='majority',
+                maxPoolSize=50,
+                minPoolSize=10
             )
             print("✅ MongoDB connected with SSL in production mode")
         else:

@@ -19,6 +19,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import secrets
 import certifi
+import ssl
 
 load_dotenv()
 
@@ -27,26 +28,28 @@ app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.permanent_session_lifetime = timedelta(days=1)
 
 
-# Enhanced MongoDB setup with better error handling
+# Enhanced MongoDB setup with better SSL handling for Python 3.8.18
 def get_mongo_client():
-    """Get MongoDB client with robust configuration"""
+    """Get MongoDB client with robust configuration for Python 3.8.18"""
     try:
         mongo_uri = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
 
-        # For Render deployment, use simpler connection without SSL verification issues
+        # For Render deployment with Python 3.8.18, use simpler SSL configuration
         client_options = {
-            'connectTimeoutMS': 10000,
-            'socketTimeoutMS': 10000,
-            'serverSelectionTimeoutMS': 10000,
+            'connectTimeoutMS': 30000,
+            'socketTimeoutMS': 30000,
+            'serverSelectionTimeoutMS': 30000,
             'retryWrites': True,
-            'w': 'majority'
+            'w': 'majority',
+            'maxPoolSize': 50,
+            'minPoolSize': 10
         }
 
         # Only add SSL options if it's an Atlas connection
         if 'mongodb+srv' in mongo_uri:
             client_options.update({
                 'tls': True,
-                'tlsAllowInvalidCertificates': True,  # More permissive for Render
+                'tlsAllowInvalidCertificates': True,  # More permissive for compatibility
                 'tlsCAFile': certifi.where(),
             })
             print("🔧 Connecting to MongoDB Atlas with SSL...")
@@ -75,7 +78,6 @@ else:
     # Fallback to in-memory database
     print("⚠️  Using in-memory database - data will not persist")
     from utils.database_fallback import DummyDB
-
     db = DummyDB()
 
 
