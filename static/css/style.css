@@ -844,3 +844,175 @@ footer {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
+/* Improved Chatbot Mobile Responsiveness */
+@media (max-width: 768px) {
+    .chatbot-widget {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+    }
+
+    .chatbot-toggle {
+        width: auto;
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .chatbot-container {
+        width: calc(100vw - 2rem);
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        height: 70vh;
+        max-height: 500px;
+    }
+
+    .chatbot-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .chatbot-header h6 {
+        font-size: 0.9rem;
+    }
+
+    .chatbot-header .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .chatbot-messages {
+        padding: 1rem;
+        height: calc(100% - 120px);
+    }
+
+    .message {
+        max-width: 90%;
+        font-size: 0.8rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .chatbot-input {
+        padding: 0.75rem;
+    }
+
+    .quick-options {
+        gap: 0.2rem;
+    }
+
+    .quick-options .btn {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.4rem;
+        margin: 0.1rem;
+    }
+
+    .chatbot-input .input-group {
+        flex-wrap: nowrap;
+    }
+
+    .chatbot-input .form-control {
+        font-size: 0.8rem;
+        min-height: 38px;
+    }
+
+    .chatbot-input .btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot-container {
+        height: 65vh;
+    }
+
+    .chatbot-messages {
+        padding: 0.75rem;
+    }
+
+    .message {
+        max-width: 95%;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.7rem;
+    }
+
+    .quick-options .btn {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.3rem;
+    }
+}
+
+/* BCA/MCA Feature Card Background */
+.feature-card.bca-mca {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.26)),
+        url('/static/images/bca-mca-bg.jpg') center/cover,
+        linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+}
+
+/* Ensure chatbot messages are always visible */
+.chatbot-messages {
+    flex: 1;
+    padding: 1.25rem;
+    overflow-y: auto;
+    background: var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    height: 100%;
+}
+
+/* Improve message visibility */
+.message {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* Better scrolling behavior */
+.chatbot-container {
+    display: none;
+    flex-direction: column;
+    height: 450px;
+}
+
+.chatbot-container.show {
+    display: flex;
+    animation: slideUp 0.3s ease-out;
+}
+
+/* Loading states */
+.chatbot-input .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Focus states for accessibility */
+.chatbot-input .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth transitions for all interactive elements */
+.chatbot-toggle,
+.chatbot-input .btn,
+.quick-options .btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.chatbot-toggle:active,
+.chatbot-input .btn:active,
+.quick-options .btn:active {
+    transform: scale(0.98);
+}
+
+/* Step indicator styling */
+.step-indicator {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    display: inline-block;
+    border-left: 3px solid var(--primary-color);
+}

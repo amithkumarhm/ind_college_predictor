@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm fade-in">
+            <div class="card-header bg-dark text-white py-3">
+                <h4 class="mb-0"><i class="fas fa-laptop-code me-2"></i>BCA & MCA College Prediction</h4>
+            </div>
+            <div class="card-body p-4">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            {% if category == 'error' %}
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>{{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" id="bcaMcaForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="course_type" class="form-label">Course Type:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
+                                <select id="course_type" name="course_type" class="form-select" required>
+                                    <option value="">Select Course</option>
+                                    <option value="BCA">BCA (Bachelor of Computer Applications)</option>
+                                    <option value="MCA">MCA (Master of Computer Applications)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="exam_type" class="form-label">Exam Type:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+                                <select id="exam_type" name="exam_type" class="form-select" required>
+                                    <option value="">Select Exam</option>
+                                    <!-- Options will be populated by JavaScript based on course selection -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="rank" class="form-label">Exam Rank:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-trophy"></i></span>
+                                <input type="number" id="rank" name="rank" class="form-control" required min="1" placeholder="Enter your rank">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="marks_12th" class="form-label">Percentage:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                <input type="number" id="marks_12th" name="marks_12th" class="form-control" step="0.01" required min="0" max="100" placeholder="Enter percentage">
+                            </div>
+                            <div class="form-text" id="marksHelp">12th Percentage for BCA, Graduation Percentage for MCA</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="category" class="form-label">Category:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-users"></i></span>
+                                <select id="category" name="category" class="form-select" required>
+                                    <option value="General">General</option>
+                                    <option value="OBC">OBC</option>
+                                    <option value="SC">SC</option>
+                                    <option value="ST">ST</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="state" class="form-label">Preferred State:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                <select id="state" name="state" class="form-select" required>
+                                    <option value="All India">All India</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-dark btn-lg px-5">
+                                <i class="fas fa-chart-line me-2"></i>Predict Colleges
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Info Card -->
+        <div class="card border-0 shadow-sm fade-in mt-4">
+            <div class="card-body">
+                <h5 class="mb-3"><i class="fas fa-info-circle text-primary me-2"></i>About BCA & MCA Admissions</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check text-success me-2 mt-1"></i>
+                            <div>
+                                <strong>BCA:</strong> 3-year undergraduate program in Computer Applications
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check text-success me-2 mt-1"></i>
+                            <div>
+                                <strong>MCA:</strong> 2-year postgraduate program in Computer Applications
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check text-success me-2 mt-1"></i>
+                            <div>
+                                <strong>Entrance Exams:</strong> University and state-level entrance tests
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check text-success me-2 mt-1"></i>
+                            <div>
+                                <strong>Career Opportunities:</strong> Software Developer, Web Developer, System Analyst
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('bcaMcaForm');
+    const courseType = document.getElementById('course_type');
+    const examType = document.getElementById('exam_type');
+    const marksHelp = document.getElementById('marksHelp');
+
+    // Update exam options based on course selection - FIXED to match dataset
+    function updateExamOptions() {
+        const course = courseType.value;
+        examType.innerHTML = '<option value="">Select Exam</option>';
+
+        if (course === 'BCA') {
+            // Exact exam types from BCA dataset
+            const bcaExams = [
+                'UGCET', 'IPU CET', 'MHT CET', 'TANCET', 'BCA Entrance'
+            ];
+            bcaExams.forEach(exam => {
+                examType.innerHTML += `<option value="${exam}">${exam}</option>`;
+            });
+            marksHelp.textContent = '12th Percentage for BCA';
+        } else if (course === 'MCA') {
+            // Exact exam types from MCA dataset
+            const mcaExams = [
+                'PGCET', 'IPU CET', 'MHT CET', 'TANCET', 'MCA Entrance'
+            ];
+            mcaExams.forEach(exam => {
+                examType.innerHTML += `<option value="${exam}">${exam}</option>`;
+            });
+            marksHelp.textContent = 'Graduation Percentage for MCA';
+        }
+    }
+
+    courseType.addEventListener('change', updateExamOptions);
+
+    // Initialize exam options
+    updateExamOptions();
+
+    form.addEventListener('submit', function(e) {
+        const course = document.getElementById('course_type').value;
+        const exam = document.getElementById('exam_type').value;
+        const rank = document.getElementById('rank').value;
+        const marks = document.getElementById('marks_12th').value;
+
+        if (!course) {
+            e.preventDefault();
+            alert('Please select a course type');
+            return;
+        }
+
+        if (!exam) {
+            e.preventDefault();
+            alert('Please select an exam type');
+            return;
+        }
+
+        if (!rank || rank <= 0) {
+            e.preventDefault();
+            alert('Please enter a valid rank (greater than 0)');
+            return;
+        }
+
+        if (!marks || marks < 0 || marks > 100) {
+            e.preventDefault();
+            alert('Please enter a valid percentage (0-100)');
+            return;
+        }
+    });
+});
+</script>
+{% endblock %}

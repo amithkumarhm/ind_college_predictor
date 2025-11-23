@@ -29,7 +29,7 @@ def load_model():
 
 
 def predict_colleges(field, exam_type, rank, marks_12th, category, state, db=None):
-    """Enhanced college prediction with better ranking logic"""
+    """Enhanced college prediction with better ranking logic for BCA/MCA"""
     print(
         f"DEBUG: Predicting colleges - Field: {field}, Exam: {exam_type}, Rank: {rank}, Marks: {marks_12th}, Category: {category}, State: {state}")
 
@@ -40,9 +40,24 @@ def predict_colleges(field, exam_type, rank, marks_12th, category, state, db=Non
         print("❌ Database connection not available")
         return []
 
+    # Map exam types to match training data
+    exam_mapping = {
+        'UGCET': 'UGCET',
+        'IPU CET': 'IPU CET',
+        'MHT CET': 'MHT CET',
+        'TANCET': 'TANCET',
+        'TS EAMCET': 'TS EAMCET',
+        'BCA Entrance': 'BCA Entrance',
+        'PGCET': 'PGCET',
+        'TS PGCET': 'TS PGCET',
+        'MCA Entrance': 'MCA Entrance'
+    }
+
+    mapped_exam_type = exam_mapping.get(exam_type, exam_type)
+
     # Build query based on inputs
     query = {
-        'type': field.capitalize()
+        'type': field
     }
 
     # Add category to query
@@ -50,8 +65,8 @@ def predict_colleges(field, exam_type, rank, marks_12th, category, state, db=Non
         query['category'] = category
 
     # Add exam_type to query if not "All India"
-    if exam_type != 'All India':
-        query['exam_type'] = exam_type
+    if mapped_exam_type != 'All India':
+        query['exam_type'] = mapped_exam_type
 
     print(f"DEBUG: Database query: {query}")
 

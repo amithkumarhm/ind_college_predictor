@@ -1,0 +1,161 @@
+college_id,name,state,exam_type,category,cutoff_rank,marks_cutoff,website,type
+201,Christ University,Karnataka,UGCET,General,14000,67,https://www.christuniversity.in,BCA
+201,Christ University,Karnataka,UGCET,OBC,19000,62,https://www.christuniversity.in,BCA
+201,Christ University,Karnataka,UGCET,SC,29000,57,https://www.christuniversity.in,BCA
+201,Christ University,Karnataka,UGCET,ST,34000,54,https://www.christuniversity.in,BCA
+202,Christ University,Karnataka,PGCET,General,7000,74,https://www.christuniversity.in,MCA
+202,Christ University,Karnataka,PGCET,OBC,11000,69,https://www.christuniversity.in,MCA
+202,Christ University,Karnataka,PGCET,SC,17000,64,https://www.christuniversity.in,MCA
+202,Christ University,Karnataka,PGCET,ST,20000,61,https://www.christuniversity.in,MCA
+203,Indraprastha University,Delhi,IPU CET,General,11000,70,https://www.ipu.ac.in,BCA
+203,Indraprastha University,Delhi,IPU CET,OBC,16000,65,https://www.ipu.ac.in,BCA
+203,Indraprastha University,Delhi,IPU CET,SC,24000,60,https://www.ipu.ac.in,BCA
+203,Indraprastha University,Delhi,IPU CET,ST,28000,57,https://www.ipu.ac.in,BCA
+204,Symbiosis Institute of Computer Studies,Maharashtra,MHT CET,General,17000,64,https://www.siu.edu.in,BCA
+204,Symbiosis Institute of Computer Studies,Maharashtra,MHT CET,OBC,22000,59,https://www.siu.edu.in,BCA
+204,Symbiosis Institute of Computer Studies,Maharashtra,MHT CET,SC,31000,54,https://www.siu.edu.in,BCA
+204,Symbiosis Institute of Computer Studies,Maharashtra,MHT CET,ST,36000,51,https://www.siu.edu.in,BCA
+205,Madras Christian College,Tamil Nadu,TANCET,General,8000,73,https://www.mcc.edu.in,BCA
+205,Madras Christian College,Tamil Nadu,TANCET,OBC,13000,68,https://www.mcc.edu.in,BCA
+205,Madras Christian College,Tamil Nadu,TANCET,SC,19000,63,https://www.mcc.edu.in,BCA
+205,Madras Christian College,Tamil Nadu,TANCET,ST,23000,60,https://www.mcc.edu.in,BCA
+206,St. Xavier's College,West Bengal,UGCET,General,21000,60,https://www.sxccal.edu,BCA
+206,St. Xavier's College,West Bengal,UGCET,OBC,26000,55,https://www.sxccal.edu,BCA
+206,St. Xavier's College,West Bengal,UGCET,SC,36000,50,https://www.sxccal.edu,BCA
+206,St. Xavier's College,West Bengal,UGCET,ST,41000,47,https://www.sxccal.edu,BCA
+207,VIT University,Tamil Nadu,PGCET,General,5500,76,https://www.vit.ac.in,MCA
+207,VIT University,Tamil Nadu,PGCET,OBC,9500,71,https://www.vit.ac.in,MCA
+207,VIT University,Tamil Nadu,PGCET,SC,14500,66,https://www.vit.ac.in,MCA
+207,VIT University,Tamil Nadu,PGCET,ST,17500,63,https://www.vit.ac.in,MCA
+208,Loyola College,Tamil Nadu,BCA Entrance,General,24000,57,https://www.loyolacollege.edu,BCA
+208,Loyola College,Tamil Nadu,BCA Entrance,OBC,29000,52,https://www.loyolacollege.edu,BCA
+208,Loyola College,Tamil Nadu,BCA Entrance,SC,39000,47,https://www.loyolacollege.edu,BCA
+208,Loyola College,Tamil Nadu,BCA Entrance,ST,44000,44,https://www.loyolacollege.edu,BCA
+209,Amrita Vishwa Vidyapeetham,Tamil Nadu,MCA Entrance,General,10000,69,https://www.amrita.edu,MCA
+209,Amrita Vishwa Vidyapeetham,Tamil Nadu,MCA Entrance,OBC,15000,64,https://www.amrita.edu,MCA
+209,Amrita Vishwa Vidyapeetham,Tamil Nadu,MCA Entrance,SC,22000,59,https://www.amrita.edu,MCA
+209,Amrita Vishwa Vidyapeetham,Tamil Nadu,MCA Entrance,ST,26000,56,https://www.amrita.edu,MCA
+210,Mount Carmel College,Karnataka,UGCET,General,18000,62,https://www.mountcarmelcollege.in,BCA
+210,Mount Carmel College,Karnataka,UGCET,OBC,23000,57,https://www.mountcarmelcollege.in,BCA
+210,Mount Carmel College,Karnataka,UGCET,SC,33000,52,https://www.mountcarmelcollege.in,BCA
+210,Mount Carmel College,Karnataka,UGCET,ST,38000,49,https://www.mountcarmelcollege.in,BCA
+211,Manipal University,Karnataka,PGCET,General,6500,75,https://www.manipal.edu,MCA
+211,Manipal University,Karnataka,PGCET,OBC,10500,70,https://www.manipal.edu,MCA
+211,Manipal University,Karnataka,PGCET,SC,15500,65,https://www.manipal.edu,MCA
+211,Manipal University,Karnataka,PGCET,ST,18500,62,https://www.manipal.edu,MCA
+212,Guru Gobind Singh Indraprastha University,Delhi,IPU CET,General,13000,66,https://www.ipu.ac.in,MCA
+212,Guru Gobind Singh Indraprastha University,Delhi,IPU CET,OBC,18000,61,https://www.ipu.ac.in,MCA
+212,Guru Gobind Singh Indraprastha University,Delhi,IPU CET,SC,26000,56,https://www.ipu.ac.in,MCA
+212,Guru Gobind Singh Indraprastha University,Delhi,IPU CET,ST,30000,53,https://www.ipu.ac.in,MCA
+213,Pune University,Maharashtra,MHT CET,General,19000,60,https://www.unipune.ac.in,BCA
+213,Pune University,Maharashtra,MHT CET,OBC,24000,55,https://www.unipune.ac.in,BCA
+213,Pune University,Maharashtra,MHT CET,SC,34000,50,https://www.unipune.ac.in,BCA
+213,Pune University,Maharashtra,MHT CET,ST,39000,47,https://www.unipune.ac.in,BCA
+214,Anna University,Tamil Nadu,TANCET,General,9000,72,https://www.annauniv.edu,MCA
+214,Anna University,Tamil Nadu,TANCET,OBC,14000,67,https://www.annauniv.edu,MCA
+214,Anna University,Tamil Nadu,TANCET,SC,20000,62,https://www.annauniv.edu,MCA
+214,Anna University,Tamil Nadu,TANCET,ST,24000,59,https://www.annauniv.edu,MCA
+215,Presidency College,Tamil Nadu,UGCET,General,22000,59,https://www.presidencychennai.com,BCA
+215,Presidency College,Tamil Nadu,UGCET,OBC,27000,54,https://www.presidencychennai.com,BCA
+215,Presidency College,Tamil Nadu,UGCET,SC,37000,49,https://www.presidencychennai.com,BCA
+215,Presidency College,Tamil Nadu,UGCET,ST,42000,46,https://www.presidencychennai.com,BCA
+216,Birla Institute of Technology,Ranchi,PGCET,General,7000,74,https://www.bitmesra.ac.in,MCA
+216,Birla Institute of Technology,Ranchi,PGCET,OBC,11000,69,https://www.bitmesra.ac.in,MCA
+216,Birla Institute of Technology,Ranchi,PGCET,SC,16000,64,https://www.bitmesra.ac.in,MCA
+216,Birla Institute of Technology,Ranchi,PGCET,ST,19000,61,https://www.bitmesra.ac.in,MCA
+217,St. Joseph's College,Karnataka,BCA Entrance,General,26000,55,https://www.sjc.ac.in,BCA
+217,St. Joseph's College,Karnataka,BCA Entrance,OBC,31000,50,https://www.sjc.ac.in,BCA
+217,St. Joseph's College,Karnataka,BCA Entrance,SC,41000,45,https://www.sjc.ac.in,BCA
+217,St. Joseph's College,Karnataka,BCA Entrance,ST,46000,42,https://www.sjc.ac.in,BCA
+218,Jain University,Karnataka,MCA Entrance,General,11000,68,https://www.jainuniversity.ac.in,MCA
+218,Jain University,Karnataka,MCA Entrance,OBC,16000,63,https://www.jainuniversity.ac.in,MCA
+218,Jain University,Karnataka,MCA Entrance,SC,23000,58,https://www.jainuniversity.ac.in,MCA
+218,Jain University,Karnataka,MCA Entrance,ST,27000,55,https://www.jainuniversity.ac.in,MCA
+219,Kristu Jayanti College,Karnataka,UGCET,General,20000,61,https://www.kristujayanti.edu.in,BCA
+219,Kristu Jayanti College,Karnataka,UGCET,OBC,25000,56,https://www.kristujayanti.edu.in,BCA
+219,Kristu Jayanti College,Karnataka,UGCET,SC,35000,51,https://www.kristujayanti.edu.in,BCA
+219,Kristu Jayanti College,Karnataka,UGCET,ST,40000,48,https://www.kristujayanti.edu.in,BCA
+220,SRM University,Tamil Nadu,PGCET,General,8000,73,https://www.srmist.edu.in,MCA
+220,SRM University,Tamil Nadu,PGCET,OBC,12000,68,https://www.srmist.edu.in,MCA
+220,SRM University,Tamil Nadu,PGCET,SC,17000,63,https://www.srmist.edu.in,MCA
+220,SRM University,Tamil Nadu,PGCET,ST,20000,60,https://www.srmist.edu.in,MCA
+221,Dayananda Sagar College,Karnataka,UGCET,General,16000,63,https://www.dsce.edu.in,BCA
+221,Dayananda Sagar College,Karnataka,UGCET,OBC,21000,58,https://www.dsce.edu.in,BCA
+221,Dayananda Sagar College,Karnataka,UGCET,SC,31000,53,https://www.dsce.edu.in,BCA
+221,Dayananda Sagar College,Karnataka,UGCET,ST,36000,50,https://www.dsce.edu.in,BCA
+222,MS Ramaiah University,Karnataka,PGCET,General,7500,72,https://www.msruas.ac.in,MCA
+222,MS Ramaiah University,Karnataka,PGCET,OBC,11500,67,https://www.msruas.ac.in,MCA
+222,MS Ramaiah University,Karnataka,PGCET,SC,16500,62,https://www.msruas.ac.in,MCA
+222,MS Ramaiah University,Karnataka,PGCET,ST,19500,59,https://www.msruas.ac.in,MCA
+223,St. Francis College,Telangana,TS EAMCET,General,14000,65,https://www.stfranciscollege.edu.in,BCA
+223,St. Francis College,Telangana,TS EAMCET,OBC,19000,60,https://www.stfranciscollege.edu.in,BCA
+223,St. Francis College,Telangana,TS EAMCET,SC,28000,55,https://www.stfranciscollege.edu.in,BCA
+223,St. Francis College,Telangana,TS EAMCET,ST,32000,52,https://www.stfranciscollege.edu.in,BCA
+224,Osmania University,Telangana,TS PGCET,General,8500,71,https://www.osmania.ac.in,MCA
+224,Osmania University,Telangana,TS PGCET,OBC,12500,66,https://www.osmania.ac.in,MCA
+224,Osmania University,Telangana,TS PGCET,SC,17500,61,https://www.osmania.ac.in,MCA
+224,Osmania University,Telangana,TS PGCET,ST,20500,58,https://www.osmania.ac.in,MCA
+225,Fergusson College,Maharashtra,MHT CET,General,15000,64,https://www.fergusson.edu,BCA
+225,Fergusson College,Maharashtra,MHT CET,OBC,20000,59,https://www.fergusson.edu,BCA
+225,Fergusson College,Maharashtra,MHT CET,SC,29000,54,https://www.fergusson.edu,BCA
+225,Fergusson College,Maharashtra,MHT CET,ST,34000,51,https://www.fergusson.edu,BCA
+226,Savitribai Phule Pune University,Maharashtra,MHT CET,General,12000,67,https://www.unipune.ac.in,MCA
+226,Savitribai Phule Pune University,Maharashtra,MHT CET,OBC,17000,62,https://www.unipune.ac.in,MCA
+226,Savitribai Phule Pune University,Maharashtra,MHT CET,SC,24000,57,https://www.unipune.ac.in,MCA
+226,Savitribai Phule Pune University,Maharashtra,MHT CET,ST,28000,54,https://www.unipune.ac.in,MCA
+227,St. Xavier's College,Maharashtra,MHT CET,General,13000,66,https://www.xaviers.edu,BCA
+227,St. Xavier's College,Maharashtra,MHT CET,OBC,18000,61,https://www.xaviers.edu,BCA
+227,St. Xavier's College,Maharashtra,MHT CET,SC,26000,56,https://www.xaviers.edu,BCA
+227,St. Xavier's College,Maharashtra,MHT CET,ST,30000,53,https://www.xaviers.edu,BCA
+228,Narsee Monjee College,Maharashtra,MHT CET,General,11000,68,https://www.nmcollege.in,BCA
+228,Narsee Monjee College,Maharashtra,MHT CET,OBC,16000,63,https://www.nmcollege.in,BCA
+228,Narsee Monjee College,Maharashtra,MHT CET,SC,23000,58,https://www.nmcollege.in,BCA
+228,Narsee Monjee College,Maharashtra,MHT CET,ST,27000,55,https://www.nmcollege.in,BCA
+229,Wilson College,Maharashtra,MHT CET,General,17000,62,https://www.wilsoncollege.edu,BCA
+229,Wilson College,Maharashtra,MHT CET,OBC,22000,57,https://www.wilsoncollege.edu,BCA
+229,Wilson College,Maharashtra,MHT CET,SC,31000,52,https://www.wilsoncollege.edu,BCA
+229,Wilson College,Maharashtra,MHT CET,ST,36000,49,https://www.wilsoncollege.edu,BCA
+230,KJ Somaiya College,Maharashtra,MHT CET,General,9000,70,https://www.somaiya.edu,BCA
+230,KJ Somaiya College,Maharashtra,MHT CET,OBC,14000,65,https://www.somaiya.edu,BCA
+230,KJ Somaiya College,Maharashtra,MHT CET,SC,20000,60,https://www.somaiya.edu,BCA
+230,KJ Somaiya College,Maharashtra,MHT CET,ST,24000,57,https://www.somaiya.edu,BCA
+231,St. Mira's College,Maharashtra,MHT CET,General,19000,60,https://www.stmirascollege.edu.in,BCA
+231,St. Mira's College,Maharashtra,MHT CET,OBC,24000,55,https://www.stmirascollege.edu.in,BCA
+231,St. Mira's College,Maharashtra,MHT CET,SC,33000,50,https://www.stmirascollege.edu.in,BCA
+231,St. Mira's College,Maharashtra,MHT CET,ST,38000,47,https://www.stmirascollege.edu.in,BCA
+232,Nowrosjee Wadia College,Maharashtra,MHT CET,General,20000,58,https://www.wadiacollege.edu.in,BCA
+232,Nowrosjee Wadia College,Maharashtra,MHT CET,OBC,25000,53,https://www.wadiacollege.edu.in,BCA
+232,Nowrosjee Wadia College,Maharashtra,MHT CET,SC,35000,48,https://www.wadiacollege.edu.in,BCA
+232,Nowrosjee Wadia College,Maharashtra,MHT CET,ST,40000,45,https://www.wadiacollege.edu.in,BCA
+233,Brihan Maharashtra College,Maharashtra,MHT CET,General,18000,61,https://www.bmccollege.edu.in,BCA
+233,Brihan Maharashtra College,Maharashtra,MHT CET,OBC,23000,56,https://www.bmccollege.edu.in,BCA
+233,Brihan Maharashtra College,Maharashtra,MHT CET,SC,32000,51,https://www.bmccollege.edu.in,BCA
+233,Brihan Maharashtra College,Maharashtra,MHT CET,ST,37000,48,https://www.bmccollege.edu.in,BCA
+234,Deccan College,Maharashtra,MHT CET,General,16000,63,https://www.deccancollege.edu.in,BCA
+234,Deccan College,Maharashtra,MHT CET,OBC,21000,58,https://www.deccancollege.edu.in,BCA
+234,Deccan College,Maharashtra,MHT CET,SC,30000,53,https://www.deccancollege.edu.in,BCA
+234,Deccan College,Maharashtra,MHT CET,ST,35000,50,https://www.deccancollege.edu.in,BCA
+235,Modern College,Maharashtra,MHT CET,General,14000,65,https://www.moderncollege.edu.in,BCA
+235,Modern College,Maharashtra,MHT CET,OBC,19000,60,https://www.moderncollege.edu.in,BCA
+235,Modern College,Maharashtra,MHT CET,SC,28000,55,https://www.moderncollege.edu.in,BCA
+235,Modern College,Maharashtra,MHT CET,ST,32000,52,https://www.moderncollege.edu.in,BCA
+236,SIES College,Maharashtra,MHT CET,General,12000,67,https://www.sies.edu.in,BCA
+236,SIES College,Maharashtra,MHT CET,OBC,17000,62,https://www.sies.edu.in,BCA
+236,SIES College,Maharashtra,MHT CET,SC,25000,57,https://www.sies.edu.in,BCA
+236,SIES College,Maharashtra,MHT CET,ST,29000,54,https://www.sies.edu.in,BCA
+237,Ruia College,Maharashtra,MHT CET,General,10000,69,https://www.ruiacollege.edu,BCA
+237,Ruia College,Maharashtra,MHT CET,OBC,15000,64,https://www.ruiacollege.edu,BCA
+237,Ruia College,Maharashtra,MHT CET,SC,22000,59,https://www.ruiacollege.edu,BCA
+237,Ruia College,Maharashtra,MHT CET,ST,26000,56,https://www.ruiacollege.edu,BCA
+238,Elphinstone College,Maharashtra,MHT CET,General,8000,71,https://www.elphinstonecollege.edu.in,BCA
+238,Elphinstone College,Maharashtra,MHT CET,OBC,13000,66,https://www.elphinstonecollege.edu.in,BCA
+238,Elphinstone College,Maharashtra,MHT CET,SC,19000,61,https://www.elphinstonecollege.edu.in,BCA
+238,Elphinstone College,Maharashtra,MHT CET,ST,23000,58,https://www.elphinstonecollege.edu.in,BCA
+239,Jai Hind College,Maharashtra,MHT CET,General,7000,73,https://www.jaihindcollege.edu,BCA
+239,Jai Hind College,Maharashtra,MHT CET,OBC,12000,68,https://www.jaihindcollege.edu,BCA
+239,Jai Hind College,Maharashtra,MHT CET,SC,18000,63,https://www.jaihindcollege.edu,BCA
+239,Jai Hind College,Maharashtra,MHT CET,ST,22000,60,https://www.jaihindcollege.edu,BCA
+240,HR College,Maharashtra,MHT CET,General,6000,74,https://www.hrcollege.edu,BCA
+240,HR College,Maharashtra,MHT CET,OBC,11000,69,https://www.hrcollege.edu,BCA
+240,HR College,Maharashtra,MHT CET,SC,17000,64,https://www.hrcollege.edu,BCA
+240,HR College,Maharashtra,MHT CET,ST,21000,61,https://www.hrcollege.edu,BCA

@@ -10,7 +10,7 @@ import time
 
 
 def generate_enhanced_sample_data():
-    """Generate enhanced sample dataset with realistic patterns"""
+    """Generate enhanced sample dataset with realistic patterns including BCA/MCA"""
 
     # Engineering colleges with realistic patterns
     engineering_colleges = []
@@ -116,20 +116,74 @@ def generate_enhanced_sample_data():
             })
             college_id += 1
 
-    return pd.DataFrame(engineering_colleges), pd.DataFrame(medical_colleges)
+    # BCA/MCA colleges - FIXED: Use proper type names and exam types that match actual dataset
+    bca_mca_colleges = []
+
+    # BCA Colleges - Using exact exam types from your dataset
+    bca_colleges = [
+        ('Christ University', 'Karnataka', 'UGCET', 14000, 67),
+        ('Indraprastha University', 'Delhi', 'IPU CET', 11000, 70),
+        ('Symbiosis Institute of Computer Studies', 'Maharashtra', 'MHT CET', 17000, 64),
+        ('Madras Christian College', 'Tamil Nadu', 'TANCET', 8000, 73),
+        ('St. Xavier\'s College', 'West Bengal', 'UGCET', 21000, 60),
+        ('Loyola College', 'Tamil Nadu', 'BCA Entrance', 24000, 57),
+    ]
+
+    for name, state, exam, base_rank, base_marks in bca_colleges:
+        for category, rank_multiplier, marks_deduction in [('General', 1, 0), ('OBC', 1.3, -3), ('SC', 1.8, -6),
+                                                           ('ST', 2.1, -8)]:
+            bca_mca_colleges.append({
+                'college_id': college_id,
+                'name': name,
+                'state': state,
+                'exam_type': exam,
+                'category': category,
+                'cutoff_rank': int(base_rank * rank_multiplier),
+                'marks_cutoff': base_marks + marks_deduction,
+                'website': f'https://www.{name.lower().replace(" ", "")}.edu.in',
+                'type': 'BCA'  # Fixed: Use 'BCA' as type
+            })
+            college_id += 1
+
+    # MCA Colleges - Using exact exam types from your dataset
+    mca_colleges = [
+        ('Christ University', 'Karnataka', 'PGCET', 7000, 74),
+        ('VIT University', 'Tamil Nadu', 'PGCET', 5500, 76),
+        ('Amrita Vishwa Vidyapeetham', 'Tamil Nadu', 'MCA Entrance', 10000, 69),
+        ('Manipal University', 'Karnataka', 'PGCET', 6500, 75),
+        ('Guru Gobind Singh Indraprastha University', 'Delhi', 'IPU CET', 13000, 66),
+    ]
+
+    for name, state, exam, base_rank, base_marks in mca_colleges:
+        for category, rank_multiplier, marks_deduction in [('General', 1, 0), ('OBC', 1.2, -2), ('SC', 1.6, -5),
+                                                           ('ST', 1.9, -7)]:
+            bca_mca_colleges.append({
+                'college_id': college_id,
+                'name': name,
+                'state': state,
+                'exam_type': exam,
+                'category': category,
+                'cutoff_rank': int(base_rank * rank_multiplier),
+                'marks_cutoff': base_marks + marks_deduction,
+                'website': f'https://www.{name.lower().replace(" ", "")}.edu.in',
+                'type': 'MCA'  # Fixed: Use 'MCA' as type
+            })
+            college_id += 1
+
+    return pd.DataFrame(engineering_colleges), pd.DataFrame(medical_colleges), pd.DataFrame(bca_mca_colleges)
 
 
 def train_enhanced_model():
-    """Train enhanced prediction model with better features and 500+ epochs equivalent"""
+    """Train enhanced prediction model with better features and 500+ epochs equivalent including BCA/MCA"""
 
     print("🔄 Starting enhanced model training...")
     start_time = time.time()
 
     # Generate enhanced sample data
-    eng_df, med_df = generate_enhanced_sample_data()
+    eng_df, med_df, bca_mca_df = generate_enhanced_sample_data()
 
     # Combine datasets
-    df = pd.concat([eng_df, med_df], ignore_index=True)
+    df = pd.concat([eng_df, med_df, bca_mca_df], ignore_index=True)
 
     # Feature engineering
     df['tier'] = df['cutoff_rank'].apply(lambda x: 1 if x <= 1000 else (2 if x <= 10000 else 3))
@@ -162,6 +216,9 @@ def train_enhanced_model():
     print(f"📊 Dataset size: {len(df)} records")
     print(f"🎯 Training set: {len(X_train)} records")
     print(f"🧪 Test set: {len(X_test)} records")
+    print(f"📋 College types: {df['type'].unique()}")
+    print(f"📝 Exam types: {df['exam_type'].unique()}")
+    print(f"🗺️ States: {df['state'].unique()}")
 
     # Train enhanced model with more estimators (equivalent to 500 epochs for ensemble)
     model = RandomForestRegressor(
@@ -219,6 +276,13 @@ def train_enhanced_model():
     print(f"   - Min Samples Split: {model.min_samples_split}")
     print(f"   - Min Samples Leaf: {model.min_samples_leaf}")
     print(f"   - Number of Features: {model.n_features_in_}")
+
+    # Print encoded values for debugging
+    print(f"\n🔤 Encoded Values:")
+    print(f"   - States: {list(le_state.classes_)}")
+    print(f"   - Exams: {list(le_exam.classes_)}")
+    print(f"   - Categories: {list(le_category.classes_)}")
+    print(f"   - Types: {list(le_type.classes_)}")
 
 
 if __name__ == '__main__':

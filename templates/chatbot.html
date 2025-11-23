@@ -8,7 +8,8 @@
                 <div class="row align-items-center">
                     <div class="col">
                         <h4 class="mb-0"><i class="fas fa-robot me-2"></i>AI Admission Assistant</h4>
-                        <p class="mb-0 small">Ask me anything about college admissions, exams, cutoffs, or procedures!</p>
+                        <p class="mb-0 small">Ask me anything about college admissions, exams, cutoffs, or
+                            procedures!</p>
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-sm btn-outline-light" onclick="resetChatHistory()">
@@ -26,6 +27,7 @@
                         <ul class="mb-0 mt-2 small">
                             <li>Engineering admissions (JEE, CET exams)</li>
                             <li>Medical admissions (NEET)</li>
+                            <li>BCA & MCA admissions</li>
                             <li>College predictions and cutoffs</li>
                             <li>Admission procedures and counseling</li>
                         </ul>
@@ -44,17 +46,17 @@
                             </button>
                         </div>
                         <div class="quick-options mt-2 text-center">
-                            <button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('engineering prediction')">
+                            <button class="btn btn-sm btn-outline-dark me-1 mb-1"
+                                    onclick="quickOption('engineering prediction')">
                                 <i class="fas fa-cogs me-1"></i>Engineering
                             </button>
-                            <button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('medical prediction')">
+                            <button class="btn btn-sm btn-outline-dark me-1 mb-1"
+                                    onclick="quickOption('medical prediction')">
                                 <i class="fas fa-stethoscope me-1"></i>Medical
                             </button>
-                            <button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('JEE Main cutoffs')">
-                                <i class="fas fa-graduation-cap me-1"></i>JEE Info
-                            </button>
-                            <button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('NEET cutoffs')">
-                                <i class="fas fa-hospital me-1"></i>NEET Info
+                            <button class="btn btn-sm btn-outline-dark me-1 mb-1"
+                                    onclick="quickOption('bca/mca prediction')">
+                                <i class="fas fa-laptop-code me-1"></i>BCA/MCA
                             </button>
                         </div>
                     </div>
@@ -65,181 +67,182 @@
 </div>
 
 <style>
-.chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 500px;
-}
+    .chat-container {
+        display: flex;
+        flex-direction: column;
+        height: 500px;
+    }
 
-.chat-messages {
-    flex: 1;
-    padding: 1.25rem;
-    overflow-y: auto;
-    background: var(--gray-light);
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
+    .chat-messages {
+        flex: 1;
+        padding: 1.25rem;
+        overflow-y: auto;
+        background: var(--gray-light);
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
 
-.chat-input {
-    border-top: 1px solid var(--gray-medium);
-    background: var(--light-color);
-}
+    .chat-input {
+        border-top: 1px solid var(--gray-medium);
+        background: var(--light-color);
+    }
 
-.message {
-    padding: 0.8rem 1rem;
-    border-radius: 18px;
-    font-size: 0.85rem;
-    max-width: 85%;
-    word-wrap: break-word;
-    line-height: 1.4;
-    animation: messageSlide 0.2s ease-out;
-}
+    .message {
+        padding: 0.8rem 1rem;
+        border-radius: 18px;
+        font-size: 0.85rem;
+        max-width: 85%;
+        word-wrap: break-word;
+        line-height: 1.4;
+        animation: messageSlide 0.2s ease-out;
+    }
 
-.message.user {
-    background: var(--primary-color);
-    color: var(--light-color);
-    margin-left: auto;
-    border-bottom-right-radius: 5px;
-}
+    .message.user {
+        background: var(--primary-color);
+        color: var(--light-color);
+        margin-left: auto;
+        border-bottom-right-radius: 5px;
+    }
 
-.message.bot {
-    background: var(--light-color);
-    border: 1px solid var(--gray-medium);
-    margin-right: auto;
-    border-bottom-left-radius: 5px;
-}
+    .message.bot {
+        background: var(--light-color);
+        border: 1px solid var(--gray-medium);
+        margin-right: auto;
+        border-bottom-left-radius: 5px;
+    }
 </style>
 
 <script>
-// Global variable to store chat context
-let chatContext = null;
+    // Global variable to store chat context
+    let chatContext = null;
 
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    function quickOption(option) {
+        document.getElementById('userInput').value = option;
         sendMessage();
     }
-}
 
-function quickOption(option) {
-    document.getElementById('userInput').value = option;
-    sendMessage();
-}
+    function sendMessage() {
+        const userInput = document.getElementById('userInput');
+        const message = userInput.value.trim();
+        const sendBtn = document.getElementById('sendBtn');
 
-function sendMessage() {
-    const userInput = document.getElementById('userInput');
-    const message = userInput.value.trim();
-    const sendBtn = document.getElementById('sendBtn');
+        if (message === '') return;
 
-    if (message === '') return;
+        // Add user message to chat
+        const chatMessages = document.getElementById('chatMessages');
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.className = 'message user fade-in';
+        userMessageDiv.innerHTML = `<strong><i class="fas fa-user me-1"></i>You:</strong><br>${message}`;
+        chatMessages.appendChild(userMessageDiv);
 
-    // Add user message to chat
-    const chatMessages = document.getElementById('chatMessages');
-    const userMessageDiv = document.createElement('div');
-    userMessageDiv.className = 'message user fade-in';
-    userMessageDiv.innerHTML = `<strong><i class="fas fa-user me-1"></i>You:</strong><br>${message}`;
-    chatMessages.appendChild(userMessageDiv);
+        // Clear input and disable button
+        userInput.value = '';
+        sendBtn.disabled = true;
+        sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Sending...';
 
-    // Clear input and disable button
-    userInput.value = '';
-    sendBtn.disabled = true;
-    sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Sending...';
+        // Show typing indicator
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot fade-in';
+        typingDiv.innerHTML = '<strong><i class="fas fa-robot me-1"></i>Assistant:</strong><br><i class="fas fa-ellipsis-h"></i> Thinking...';
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // Show typing indicator
-    const typingDiv = document.createElement('div');
-    typingDiv.className = 'message bot fade-in';
-    typingDiv.innerHTML = '<strong><i class="fas fa-robot me-1"></i>Assistant:</strong><br><i class="fas fa-ellipsis-h"></i> Thinking...';
-    chatMessages.appendChild(typingDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    // Send message to server with context
-    fetch('/chatbot', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            message: message,
-            context: chatContext
+        // Send message to server with context
+        fetch('/chatbot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+                context: chatContext
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Remove typing indicator
-        chatMessages.removeChild(typingDiv);
+            .then(response => response.json())
+            .then(data => {
+                // Remove typing indicator
+                chatMessages.removeChild(typingDiv);
 
-        // Add bot response
-        const botMessageDiv = document.createElement('div');
-        botMessageDiv.className = 'message bot fade-in';
+                // Add bot response
+                const botMessageDiv = document.createElement('div');
+                botMessageDiv.className = 'message bot fade-in';
 
-        let responseHTML = `<strong><i class="fas fa-robot me-1"></i>Assistant:</strong><br>${data.response}`;
+                let responseHTML = `<strong><i class="fas fa-robot me-1"></i>Assistant:</strong><br>${data.response}`;
 
-        // Add options if available
-        if (data.options && data.options.length > 0) {
-            responseHTML += `<br><div class="mt-2">`;
-            data.options.forEach(option => {
-                responseHTML += `<button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('${option}')">${option}</button>`;
+                // Add options if available
+                if (data.options && data.options.length > 0) {
+                    responseHTML += `<br><div class="mt-2">`;
+                    data.options.forEach(option => {
+                        responseHTML += `<button class="btn btn-sm btn-outline-dark me-1 mb-1" onclick="quickOption('${option}')">${option}</button>`;
+                    });
+                    responseHTML += `</div>`;
+                }
+
+                botMessageDiv.innerHTML = responseHTML;
+                chatMessages.appendChild(botMessageDiv);
+
+                // Update context for next message
+                if (data.context) {
+                    chatContext = data.context;
+                } else {
+                    chatContext = null;
+                }
+
+                // Re-enable button and scroll to bottom
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<i class="fas fa-paper-plane me-1"></i>Send';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Chatbot error:', error);
+                chatMessages.removeChild(typingDiv);
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'message bot fade-in';
+                errorDiv.innerHTML = '<strong><i class="fas fa-robot me-1"></i>Assistant:</strong><br>Sorry, I encountered an error. Please try again.';
+                chatMessages.appendChild(errorDiv);
+
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<i class="fas fa-paper-plane me-1"></i>Send';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatContext = null; // Reset context on error
             });
-            responseHTML += `</div>`;
-        }
+    }
 
-        botMessageDiv.innerHTML = responseHTML;
-        chatMessages.appendChild(botMessageDiv);
+    function resetChatHistory() {
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.innerHTML = '';
 
-        // Update context for next message
-        if (data.context) {
-            chatContext = data.context;
-        } else {
-            chatContext = null;
-        }
-
-        // Re-enable button and scroll to bottom
-        sendBtn.disabled = false;
-        sendBtn.innerHTML = '<i class="fas fa-paper-plane me-1"></i>Send';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    })
-    .catch(error => {
-        console.error('Chatbot error:', error);
-        chatMessages.removeChild(typingDiv);
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'message bot fade-in';
-        errorDiv.innerHTML = '<strong><i class="fas fa-robot me-1"></i>Assistant:</strong><br>Sorry, I encountered an error. Please try again.';
-        chatMessages.appendChild(errorDiv);
-
-        sendBtn.disabled = false;
-        sendBtn.innerHTML = '<i class="fas fa-paper-plane me-1"></i>Send';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        chatContext = null; // Reset context on error
-    });
-}
-
-function resetChatHistory() {
-    const chatMessages = document.getElementById('chatMessages');
-    chatMessages.innerHTML = '';
-
-    const welcomeDiv = document.createElement('div');
-    welcomeDiv.className = 'message bot fade-in';
-    welcomeDiv.innerHTML = `
+        const welcomeDiv = document.createElement('div');
+        welcomeDiv.className = 'message bot fade-in';
+        welcomeDiv.innerHTML = `
         <strong><i class="fas fa-robot me-1"></i>Assistant:</strong><br>
         Hello! I'm your AI admission assistant. I can help you with:
         <ul class="mb-0 mt-2 small">
             <li>Engineering admissions (JEE, CET exams)</li>
             <li>Medical admissions (NEET)</li>
+            <li>BCA & MCA admissions</li>
             <li>College predictions and cutoffs</li>
             <li>Admission procedures and counseling</li>
         </ul>
         How can I assist you today?
     `;
-    chatMessages.appendChild(welcomeDiv);
-    chatContext = null;
-}
+        chatMessages.appendChild(welcomeDiv);
+        chatContext = null;
+    }
 
-// Initialize chat when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Chatbot initialized');
-    // Scroll to bottom on load
-    const chatMessages = document.getElementById('chatMessages');
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-});
+    // Initialize chat when page loads
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('Chatbot initialized');
+        // Scroll to bottom on load
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
 </script>
 {% endblock %}

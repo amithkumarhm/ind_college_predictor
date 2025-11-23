@@ -136,59 +136,74 @@ def init_db():
 
 
 def load_college_data_from_csv():
-    """Load college data from CSV files"""
+    """Load college data from CSV files including BCA/MCA"""
     try:
-        # Load engineering colleges data
-        eng_data = []
-        eng_file_path = 'data/engineering_colleges.csv'
+        all_colleges = []
 
+        # Load engineering colleges data
+        eng_file_path = 'data/engineering_colleges.csv'
         if os.path.exists(eng_file_path):
-            with open(eng_file_path, 'r', encoding='utf-8') as f:
-                lines = f.readlines()
-                for line in lines[1:]:  # Skip header
-                    parts = line.strip().split(',')
-                    if len(parts) >= 8:
-                        eng_data.append({
-                            'college_id': int(parts[0]),
-                            'name': parts[1],
-                            'state': parts[2],
-                            'exam_type': parts[3],
-                            'category': parts[4],
-                            'cutoff_rank': int(parts[5]),
-                            'marks_cutoff': int(parts[6]),
-                            'website': parts[7],
-                            'type': 'Engineering'
-                        })
+            eng_df = pd.read_csv(eng_file_path)
+            for _, row in eng_df.iterrows():
+                all_colleges.append({
+                    'college_id': int(row['college_id']),
+                    'name': row['name'],
+                    'state': row['state'],
+                    'exam_type': row['exam_type'],
+                    'category': row['category'],
+                    'cutoff_rank': int(row['cutoff_rank']),
+                    'marks_cutoff': int(row['marks_cutoff']),
+                    'website': row['website'],
+                    'type': 'Engineering'
+                })
 
         # Load medical colleges data
-        med_data = []
         med_file_path = 'data/medical_colleges.csv'
-
         if os.path.exists(med_file_path):
-            with open(med_file_path, 'r', encoding='utf-8') as f:
-                lines = f.readlines()
-                for line in lines[1:]:  # Skip header
-                    parts = line.strip().split(',')
-                    if len(parts) >= 8:
-                        med_data.append({
-                            'college_id': int(parts[0]),
-                            'name': parts[1],
-                            'state': parts[2],
-                            'exam_type': parts[3],
-                            'category': parts[4],
-                            'cutoff_rank': int(parts[5]),
-                            'marks_cutoff': int(parts[6]),
-                            'website': parts[7],
-                            'type': 'Medical'
-                        })
+            med_df = pd.read_csv(med_file_path)
+            for _, row in med_df.iterrows():
+                all_colleges.append({
+                    'college_id': int(row['college_id']),
+                    'name': row['name'],
+                    'state': row['state'],
+                    'exam_type': row['exam_type'],
+                    'category': row['category'],
+                    'cutoff_rank': int(row['cutoff_rank']),
+                    'marks_cutoff': int(row['marks_cutoff']),
+                    'website': row['website'],
+                    'type': 'Medical'
+                })
+
+        # Load BCA/MCA colleges data - FIXED: Properly handle the 9th column
+        bca_mca_file_path = 'data/bca_mca_colleges.csv'
+        if os.path.exists(bca_mca_file_path):
+            bca_mca_df = pd.read_csv(bca_mca_file_path)
+            for _, row in bca_mca_df.iterrows():
+                # Handle the type column properly (it's the 9th column in your CSV)
+                college_type = row['type'] if 'type' in row else 'BCA'
+                all_colleges.append({
+                    'college_id': int(row['college_id']),
+                    'name': row['name'],
+                    'state': row['state'],
+                    'exam_type': row['exam_type'],
+                    'category': row['category'],
+                    'cutoff_rank': int(row['cutoff_rank']),
+                    'marks_cutoff': int(row['marks_cutoff']),
+                    'website': row['website'],
+                    'type': college_type
+                })
 
         # Insert all data
-        all_colleges = eng_data + med_data
         if all_colleges:
             # Clear existing data first
             db.colleges.delete_many({})
             db.colleges.insert_many(all_colleges)
             print(f"✅ Inserted {len(all_colleges)} colleges from CSV files")
+
+            # Debug: Print BCA/MCA colleges count
+            bca_count = db.colleges.count_documents({'type': 'BCA'})
+            mca_count = db.colleges.count_documents({'type': 'MCA'})
+            print(f"📊 BCA Colleges: {bca_count}, MCA Colleges: {mca_count}")
         else:
             print("⚠️  No college data found in CSV files")
 
@@ -318,6 +333,7 @@ def get_gemini_response(user_message):
         prompt = f"""You are an expert AI assistant for Indian college admissions. Specialize in:
         - Engineering admissions: JEE Main, JEE Advanced, state CET exams (KCET, MHT CET, etc.)
         - Medical admissions: NEET exam
+        - Computer Applications: BCA, MCA programs
         - College predictions, cutoff ranks, admission procedures
         - Reservation categories: General, OBC, SC, ST
 
@@ -370,7 +386,9 @@ def get_chatbot_response(user_message, context=None):
     # Quick options for predictions
     prediction_keywords = {
         'engineering': ['engineering', 'jee', 'iit', 'nit', 'btech', 'predict engineering', 'engineering prediction'],
-        'medical': ['medical', 'neet', 'mbbs', 'doctor', 'predict medical', 'medical prediction']
+        'medical': ['medical', 'neet', 'mbbs', 'doctor', 'predict medical', 'medical prediction'],
+        'bca_mca': ['bca', 'mca', 'computer applications', 'predict bca', 'predict mca', 'bca prediction',
+                    'mca prediction', 'bca/mca']
     }
 
     for field, keywords in prediction_keywords.items():
@@ -380,8 +398,9 @@ def get_chatbot_response(user_message, context=None):
     # Greetings and basic queries
     if any(word in user_message for word in ['hello', 'hi', 'hey', 'namaste']):
         return {
-            'response': "Hello! I'm your college admission assistant. I can help with:\n• Engineering (JEE, CET) predictions\n• Medical (NEET) predictions\n• Cutoffs and admission procedures\n\nWhat would you like to explore?",
-            'options': ['Engineering Prediction', 'Medical Prediction', 'JEE Main Info', 'NEET Info']
+            'response': "Hello! I'm your college admission assistant. I can help with:\n• Engineering (JEE, CET) predictions\n• Medical (NEET) predictions\n• BCA/MCA predictions\n• Cutoffs and admission procedures\n\nWhat would you like to explore?",
+            'options': ['Engineering Prediction', 'Medical Prediction', 'BCA/MCA Prediction',
+                        'JEE Main Info', 'NEET Info']
         }
 
     if any(word in user_message for word in ['thank', 'thanks']):
@@ -393,8 +412,8 @@ def get_chatbot_response(user_message, context=None):
 
     # Default responses for unknown queries
     default_responses = [
-        "I specialize in Indian college admissions. Ask me about Engineering (JEE, CET) or Medical (NEET) predictions!",
-        "I can help you with college predictions based on your rank and marks. Try 'engineering prediction' or 'medical prediction'!",
+        "I specialize in Indian college admissions. Ask me about Engineering (JEE, CET), Medical (NEET), or BCA/MCA predictions!",
+        "I can help you with college predictions based on your rank and marks. Try 'engineering prediction', 'medical prediction', or 'bca/mca prediction'!",
         "For personalized college recommendations, use the prediction forms or ask me to start a prediction!"
     ]
 
@@ -402,112 +421,295 @@ def get_chatbot_response(user_message, context=None):
 
 
 def start_prediction_flow(field):
-    """Start interactive prediction flow"""
+    """Start interactive prediction flow with proper step-by-step instructions"""
     if field == 'engineering':
         return {
-            'response': "🚀 Great! Let's predict engineering colleges. I'll need some details:\n\n1. 📝 Exam Type (JEE Main, CET, etc.)\n2. 🏆 Your Rank\n3. 📊 12th Percentage\n4. 👥 Category\n5. 🗺️ Preferred State\n\nPlease provide your exam type:",
-            'context': {'field': 'engineering', 'step': 'exam_type', 'awaiting_prediction': True},
-            'options': ['JEE Main', 'CET', 'COMEDK', 'VITEEE']
+            'response': "🚀 **Engineering College Prediction**\n\nI'll guide you through a step-by-step process to predict your engineering college options. Here's what I need:\n\n📋 **Information Required:**\n1. 📝 **Exam Type** (JEE Main, CET, COMEDK, etc.)\n2. 🏆 **Your Rank** in the exam\n3. 📊 **12th Percentage**\n4. 👥 **Category** (General/OBC/SC/ST)\n5. 🗺️ **Preferred State**\n\nLet's start! Please provide your **Exam Type**:",
+            'context': {'field': 'Engineering', 'step': 'exam_type', 'awaiting_prediction': True},
+            'options': ['JEE Main', 'CET', 'COMEDK', 'VITEEE', 'BITSAT']
         }
-    else:  # medical
+    elif field == 'medical':
         return {
-            'response': "🚀 Great! Let's predict medical colleges. I'll need some details:\n\n1. 🏆 Your NEET Rank\n2. 📊 12th PCB Percentage\n3. 👥 Category\n4. 🗺️ Preferred State\n\nPlease provide your NEET rank:",
-            'context': {'field': 'medical', 'step': 'rank', 'awaiting_prediction': True}
+            'response': "🚀 **Medical College Prediction**\n\nI'll guide you through a step-by-step process to predict your medical college options. Here's what I need:\n\n📋 **Information Required:**\n1. 🏆 **Your NEET Rank**\n2. 📊 **12th PCB Percentage**\n3. 👥 **Category** (General/OBC/SC/ST)\n4. 🗺️ **Preferred State**\n\nLet's start! Please provide your **NEET Rank**:",
+            'context': {'field': 'Medical', 'step': 'rank', 'awaiting_prediction': True}
+        }
+    elif field == 'bca_mca':
+        return {
+            'response': "🚀 **BCA/MCA College Prediction**\n\nI'll guide you through a step-by-step process to predict your BCA or MCA college options. First, let's determine your course:\n\n📋 **Step 1 of 6:** Please select your **Course Type**:",
+            'context': {'field': 'BCA_MCA', 'step': 'course_type', 'awaiting_prediction': True},
+            'options': ['BCA (Bachelor of Computer Applications)', 'MCA (Master of Computer Applications)']
         }
 
 
 def handle_prediction_input(user_message, context):
-    """Handle step-by-step prediction input using trained model"""
+    """Handle step-by-step prediction input using trained model with proper flow control"""
     field = context['field']
     step = context['step']
 
     try:
-        if step == 'exam_type' and field == 'engineering':
-            valid_exams = ['jee main', 'cet', 'comedk', 'viteee', 'bitsat']
-            exam_mapping = {
-                'jee main': 'JEE Main',
-                'cet': 'CET',
-                'comedk': 'COMEDK',
-                'viteee': 'VITEEE',
-                'bitsat': 'BITSAT'
-            }
-
-            if user_message.lower() not in valid_exams:
-                return {
-                    'response': "❌ Please choose a valid exam type: JEE Main, CET, COMEDK, VITEEE, or BITSAT",
-                    'context': context,
-                    'options': ['JEE Main', 'CET', 'COMEDK', 'VITEEE']
+        # ENGINEERING FLOW
+        if field == 'Engineering':
+            if step == 'exam_type':
+                valid_exams = ['jee main', 'cet', 'comedk', 'viteee', 'bitsat']
+                exam_mapping = {
+                    'jee main': 'JEE Main',
+                    'cet': 'CET',
+                    'comedk': 'COMEDK',
+                    'viteee': 'VITEEE',
+                    'bitsat': 'BITSAT'
                 }
 
-            context['exam_type'] = exam_mapping[user_message.lower()]
-            context['step'] = 'rank'
-            return {
-                'response': f"✅ Got it! Exam Type: {context['exam_type']}\n\nNow please provide your rank:",
-                'context': context
-            }
+                user_exam = user_message.lower()
+                if user_exam not in valid_exams:
+                    return {
+                        'response': "❌ Please choose a valid exam type from the options below:",
+                        'context': context,
+                        'options': ['JEE Main', 'CET', 'COMEDK', 'VITEEE', 'BITSAT']
+                    }
 
-        elif step == 'rank':
-            rank = int(user_message)
-            if rank <= 0:
+                context['exam_type'] = exam_mapping[user_exam]
+                context['step'] = 'rank'
                 return {
-                    'response': "❌ Please provide a valid positive rank:",
+                    'response': f"✅ **Exam Type:** {context['exam_type']}\n\n📋 **Step 2 of 5:** Please provide your **Rank** in {context['exam_type']}:",
                     'context': context
                 }
-            context['rank'] = rank
-            context['step'] = 'marks'
-            marks_label = "12th PCB Percentage" if field == 'medical' else "12th Percentage"
-            return {
-                'response': f"✅ Rank: {rank}\n\nNow please provide your {marks_label}:",
-                'context': context
-            }
 
-        elif step == 'marks':
-            marks = float(user_message)
-            if marks < 0 or marks > 100:
+            elif step == 'rank':
+                rank = int(user_message)
+                if rank <= 0:
+                    return {
+                        'response': "❌ Please provide a valid positive rank:",
+                        'context': context
+                    }
+                context['rank'] = rank
+                context['step'] = 'marks'
                 return {
-                    'response': "❌ Please provide a valid percentage (0-100):",
+                    'response': f"✅ **Rank:** {rank}\n\n📋 **Step 3 of 5:** Please provide your **12th Percentage**:",
                     'context': context
                 }
-            context['marks_12th'] = marks
-            context['step'] = 'category'
-            return {
-                'response': f"✅ Marks: {marks}%\n\nNow please provide your category:",
-                'context': context,
-                'options': ['General', 'OBC', 'SC', 'ST']
-            }
 
-        elif step == 'category':
-            valid_categories = ['general', 'obc', 'sc', 'st']
-            if user_message.lower() not in valid_categories:
+            elif step == 'marks':
+                marks = float(user_message)
+                if marks < 0 or marks > 100:
+                    return {
+                        'response': "❌ Please provide a valid percentage (0-100):",
+                        'context': context
+                    }
+                context['marks_12th'] = marks
+                context['step'] = 'category'
                 return {
-                    'response': "❌ Please choose a valid category: General, OBC, SC, or ST",
+                    'response': f"✅ **12th Percentage:** {marks}%\n\n📋 **Step 4 of 5:** Please provide your **Category**:",
                     'context': context,
                     'options': ['General', 'OBC', 'SC', 'ST']
                 }
-            context['category'] = user_message.title()
-            context['step'] = 'state'
-            return {
-                'response': f"✅ Category: {context['category']}\n\nNow please provide your preferred state:",
-                'context': context,
-                'options': ['All India', 'Karnataka', 'Maharashtra', 'Tamil Nadu', 'Delhi', 'Uttar Pradesh']
-            }
 
-        elif step == 'state':
+            elif step == 'category':
+                valid_categories = ['general', 'obc', 'sc', 'st']
+                if user_message.lower() not in valid_categories:
+                    return {
+                        'response': "❌ Please choose a valid category from the options below:",
+                        'context': context,
+                        'options': ['General', 'OBC', 'SC', 'ST']
+                    }
+                context['category'] = user_message.title()
+                context['step'] = 'state'
+                return {
+                    'response': f"✅ **Category:** {context['category']}\n\n📋 **Step 5 of 5:** Please provide your **Preferred State** (or 'All India' for nationwide search):",
+                    'context': context,
+                    'options': ['All India', 'Karnataka', 'Maharashtra', 'Tamil Nadu', 'Delhi', 'Uttar Pradesh']
+                }
+
+        # MEDICAL FLOW
+        elif field == 'Medical':
+            if step == 'rank':
+                rank = int(user_message)
+                if rank <= 0:
+                    return {
+                        'response': "❌ Please provide a valid positive NEET rank:",
+                        'context': context
+                    }
+                context['rank'] = rank
+                context['step'] = 'marks'
+                return {
+                    'response': f"✅ **NEET Rank:** {rank}\n\n📋 **Step 2 of 4:** Please provide your **12th PCB Percentage**:",
+                    'context': context
+                }
+
+            elif step == 'marks':
+                marks = float(user_message)
+                if marks < 0 or marks > 100:
+                    return {
+                        'response': "❌ Please provide a valid percentage (0-100):",
+                        'context': context
+                    }
+                context['marks_12th'] = marks
+                context['step'] = 'category'
+                return {
+                    'response': f"✅ **12th PCB Percentage:** {marks}%\n\n📋 **Step 3 of 4:** Please provide your **Category**:",
+                    'context': context,
+                    'options': ['General', 'OBC', 'SC', 'ST']
+                }
+
+            elif step == 'category':
+                valid_categories = ['general', 'obc', 'sc', 'st']
+                if user_message.lower() not in valid_categories:
+                    return {
+                        'response': "❌ Please choose a valid category from the options below:",
+                        'context': context,
+                        'options': ['General', 'OBC', 'SC', 'ST']
+                    }
+                context['category'] = user_message.title()
+                context['step'] = 'state'
+                return {
+                    'response': f"✅ **Category:** {context['category']}\n\n📋 **Step 4 of 4:** Please provide your **Preferred State** (or 'All India' for nationwide search):",
+                    'context': context,
+                    'options': ['All India', 'Karnataka', 'Maharashtra', 'Tamil Nadu', 'Delhi', 'Uttar Pradesh']
+                }
+
+        # BCA/MCA FLOW - CORRECTED ORDER: Course Type → Exam Type → Rank → Percentage → Category → State
+        elif field == 'BCA_MCA':
+            if step == 'course_type':
+                # Enhanced validation to handle both short forms and full option text
+                user_course = user_message.lower()
+
+                # Check for BCA options
+                if any(bca_keyword in user_course for bca_keyword in ['bca', 'bachelor of computer applications']):
+                    context['course_type'] = 'BCA'
+                    context['step'] = 'exam_type'
+                    return {
+                        'response': f"✅ **Course Type:** {context['course_type']}\n\n📋 **Step 2 of 6:** Please provide your **Exam Type** for BCA:",
+                        'context': context,
+                        'options': ['UGCET', 'IPU CET', 'MHT CET', 'TANCET', 'BCA Entrance']
+                    }
+
+                # Check for MCA options
+                elif any(mca_keyword in user_course for mca_keyword in ['mca', 'master of computer applications']):
+                    context['course_type'] = 'MCA'
+                    context['step'] = 'exam_type'
+                    return {
+                        'response': f"✅ **Course Type:** {context['course_type']}\n\n📋 **Step 2 of 6:** Please provide your **Exam Type** for MCA:",
+                        'context': context,
+                        'options': ['PGCET', 'IPU CET', 'MHT CET', 'TANCET', 'MCA Entrance']
+                    }
+                else:
+                    return {
+                        'response': "❌ Please choose a valid course type from the options below:",
+                        'context': context,
+                        'options': ['BCA (Bachelor of Computer Applications)', 'MCA (Master of Computer Applications)']
+                    }
+
+            elif step == 'exam_type':
+                if context['course_type'] == 'BCA':
+                    valid_exams = ['ugcet', 'ipu cet', 'mht cet', 'tancet', 'bca entrance']
+                    exam_mapping = {
+                        'ugcet': 'UGCET',
+                        'ipu cet': 'IPU CET',
+                        'mht cet': 'MHT CET',
+                        'tancet': 'TANCET',
+                        'bca entrance': 'BCA Entrance'
+                    }
+                    error_options = ['UGCET', 'IPU CET', 'MHT CET', 'TANCET', 'BCA Entrance']
+                else:  # MCA
+                    valid_exams = ['pgcet', 'ipu cet', 'mht cet', 'tancet', 'mca entrance']
+                    exam_mapping = {
+                        'pgcet': 'PGCET',
+                        'ipu cet': 'IPU CET',
+                        'mht cet': 'MHT CET',
+                        'tancet': 'TANCET',
+                        'mca entrance': 'MCA Entrance'
+                    }
+                    error_options = ['PGCET', 'IPU CET', 'MHT CET', 'TANCET', 'MCA Entrance']
+
+                user_exam = user_message.lower()
+                if user_exam not in valid_exams:
+                    return {
+                        'response': "❌ Please choose a valid exam type from the options below:",
+                        'context': context,
+                        'options': error_options
+                    }
+
+                context['exam_type'] = exam_mapping[user_exam]
+                context['step'] = 'rank'
+                return {
+                    'response': f"✅ **Exam Type:** {context['exam_type']}\n\n📋 **Step 3 of 6:** Please provide your **Rank** in {context['exam_type']}:",
+                    'context': context
+                }
+
+            elif step == 'rank':
+                rank = int(user_message)
+                if rank <= 0:
+                    return {
+                        'response': "❌ Please provide a valid positive rank:",
+                        'context': context
+                    }
+                context['rank'] = rank
+                context['step'] = 'marks'
+
+                if context['course_type'] == 'BCA':
+                    return {
+                        'response': f"✅ **Rank:** {rank}\n\n📋 **Step 4 of 6:** Please provide your **12th Percentage**:",
+                        'context': context
+                    }
+                else:  # MCA
+                    return {
+                        'response': f"✅ **Rank:** {rank}\n\n📋 **Step 4 of 6:** Please provide your **Graduation Percentage**:",
+                        'context': context
+                    }
+
+            elif step == 'marks':
+                marks = float(user_message)
+                if marks < 0 or marks > 100:
+                    return {
+                        'response': "❌ Please provide a valid percentage (0-100):",
+                        'context': context
+                    }
+                context['marks_12th'] = marks
+                context['step'] = 'category'
+                return {
+                    'response': f"✅ **Percentage:** {marks}%\n\n📋 **Step 5 of 6:** Please provide your **Category**:",
+                    'context': context,
+                    'options': ['General', 'OBC', 'SC', 'ST']
+                }
+
+            elif step == 'category':
+                valid_categories = ['general', 'obc', 'sc', 'st']
+                if user_message.lower() not in valid_categories:
+                    return {
+                        'response': "❌ Please choose a valid category from the options below:",
+                        'context': context,
+                        'options': ['General', 'OBC', 'SC', 'ST']
+                    }
+                context['category'] = user_message.title()
+                context['step'] = 'state'
+                return {
+                    'response': f"✅ **Category:** {context['category']}\n\n📋 **Step 6 of 6:** Please provide your **Preferred State** (or 'All India' for nationwide search):",
+                    'context': context,
+                    'options': ['All India', 'Karnataka', 'Maharashtra', 'Tamil Nadu', 'Delhi', 'Uttar Pradesh']
+                }
+
+        # FINAL STEP - STATE SELECTION (Common for all fields)
+        if step == 'state':
             context['state'] = user_message.title()
 
-            # Perform prediction using trained model
-            if field == 'engineering':
-                predictions = predict_colleges_with_model('engineering', context.get('exam_type', 'JEE Main'),
-                                                          context['rank'], context['marks_12th'],
-                                                          context['category'], context['state'])
+            # Determine the actual field for prediction
+            if field == 'BCA_MCA':
+                actual_field = context['course_type']
             else:
-                predictions = predict_colleges_with_model('medical', 'NEET', context['rank'],
-                                                          context['marks_12th'], context['category'],
-                                                          context['state'])
+                actual_field = field
+
+            # Perform prediction using trained model
+            predictions = predict_colleges_with_model(
+                actual_field,
+                context.get('exam_type', ''),
+                context['rank'],
+                context['marks_12th'],
+                context['category'],
+                context['state']
+            )
 
             # Format response
             if predictions:
-                response_text = f"🎓 **Here are your predicted {field.title()} colleges:**\n\n"
+                response_text = f"🎓 **Here are your predicted {actual_field} colleges:**\n\n"
                 for i, college in enumerate(predictions[:5], 1):
                     response_text += f"**{i}. {college['name']}**\n"
                     response_text += f"   📍 State: {college['state']}\n"
@@ -515,9 +717,10 @@ def handle_prediction_input(user_message, context):
                     response_text += f"   🏆 Cutoff Rank: {college['cutoff_rank']}\n"
                     response_text += f"   📝 Marks Cutoff: {college['marks_cutoff']}%\n\n"
 
-                response_text += "💡 **Tip:** Higher probability means better chances based on your rank and marks."
+                response_text += "💡 **Tip:** Higher probability means better chances based on your rank and marks.\n\n"
+                response_text += "🔍 **Want to explore more?** Try different criteria or ask about specific colleges!"
             else:
-                response_text = "❌ No suitable colleges found with your criteria. Try adjusting your rank, marks, or preferences."
+                response_text = "❌ No suitable colleges found with your criteria. Try adjusting your rank, marks, or preferences.\n\n💡 **Suggestions:**\n• Try a different state selection\n• Check if your marks meet minimum requirements\n• Consider All India option for more choices"
 
             return {
                 'response': response_text,
@@ -535,7 +738,7 @@ def handle_prediction_input(user_message, context):
 
 
 def predict_colleges_with_model(field, exam_type, rank, marks_12th, category, state):
-    """Predict colleges using trained ML model with improved accuracy"""
+    """Predict colleges using trained ML model with improved accuracy for BCA/MCA"""
     if model is None:
         return predict_colleges_fallback(field, exam_type, rank, marks_12th, category, state)
 
@@ -546,13 +749,17 @@ def predict_colleges_with_model(field, exam_type, rank, marks_12th, category, st
             return predict_colleges_fallback(field, exam_type, rank, marks_12th, category, state)
 
         # Get all colleges for the field
-        query = {'type': field.capitalize()}
+        query = {'type': field}
         if state != 'All India':
             query['state'] = state
         if category:
             query['category'] = category
+        if exam_type and exam_type != 'All India':
+            query['exam_type'] = exam_type
 
+        print(f"🔍 Database query for {field}: {query}")
         colleges = list(db.colleges.find(query))
+        print(f"📊 Found {len(colleges)} colleges for {field}")
 
         suitable_colleges = []
         for college in colleges:
@@ -585,7 +792,7 @@ def predict_colleges_with_model(field, exam_type, rank, marks_12th, category, st
         return suitable_colleges[:15]  # Return more colleges
 
     except Exception as e:
-        print(f"❌ Model prediction error: {e}")
+        print(f"❌ Model prediction error for {field}: {e}")
         return predict_colleges_fallback(field, exam_type, rank, marks_12th, category, state)
 
 
@@ -631,17 +838,50 @@ def calculate_improved_probability(student_rank, cutoff_rank, student_marks, cut
 
 
 def prepare_features(field, exam_type, rank, marks_12th, category, state):
-    """Prepare features for model prediction"""
+    """Prepare features for model prediction with enhanced value mapping"""
     try:
+        # Map exam types to match training data - FIXED for BCA/MCA
+        exam_mapping = {
+            'UGCET': 'UGCET',
+            'IPU CET': 'IPU CET',
+            'MHT CET': 'MHT CET',
+            'TANCET': 'TANCET',
+            'TS EAMCET': 'TS EAMCET',
+            'BCA Entrance': 'BCA Entrance',
+            'PGCET': 'PGCET',
+            'TS PGCET': 'TS PGCET',
+            'MCA Entrance': 'MCA Entrance'
+        }
+
+        # Use mapped exam type or original
+        mapped_exam_type = exam_mapping.get(exam_type, exam_type)
+
+        # Map state names to match training data
+        state_mapping = {
+            'All India': 'All India',
+            'Karnataka': 'Karnataka',
+            'Maharashtra': 'Maharashtra',
+            'Tamil Nadu': 'Tamil Nadu',
+            'Delhi': 'Delhi',
+            'Kerala': 'Kerala',
+            'Andhra Pradesh': 'Andhra Pradesh',
+            'Telangana': 'Telangana',
+            'West Bengal': 'West Bengal',
+            'Punjab': 'Punjab',
+            'Uttar Pradesh': 'Uttar Pradesh'
+        }
+
+        mapped_state = state_mapping.get(state, state)
+
         features = {
             'field': field,
-            'exam_type': exam_type,
+            'exam_type': mapped_exam_type,
             'rank': rank,
             'marks_12th': marks_12th,
             'category': category,
-            'state': state,
+            'state': mapped_state,
             'tier': 1 if rank <= 1000 else (2 if rank <= 10000 else 3),
-            'state_importance': 1 if state in ['Delhi', 'Maharashtra', 'Karnataka', 'Tamil Nadu'] else 0.7
+            'state_importance': 1 if mapped_state in ['Delhi', 'Maharashtra', 'Karnataka', 'Tamil Nadu'] else 0.7
         }
         return features
     except Exception as e:
@@ -650,14 +890,46 @@ def prepare_features(field, exam_type, rank, marks_12th, category, state):
 
 
 def create_feature_array(features):
-    """Create feature array for model prediction"""
+    """Create feature array for model prediction with fallback encoding"""
     try:
-        # Encode categorical features with fallback
-        state_encoded = le_state.transform([features['state']])[0] if features['state'] in le_state.classes_ else 0
-        exam_encoded = le_exam.transform([features['exam_type']])[0] if features['exam_type'] in le_exam.classes_ else 0
-        category_encoded = le_category.transform([features['category']])[0] if features[
-                                                                                   'category'] in le_category.classes_ else 0
-        type_encoded = le_type.transform([features['field']])[0] if features['field'] in le_type.classes_ else 0
+        # Encode categorical features with fallback for unknown values
+        state_encoded = 0
+        if features['state'] in le_state.classes_:
+            state_encoded = le_state.transform([features['state']])[0]
+        else:
+            # Find closest state match
+            for state in le_state.classes_:
+                if features['state'] in state or state in features['state']:
+                    state_encoded = le_state.transform([state])[0]
+                    break
+
+        exam_encoded = 0
+        if features['exam_type'] in le_exam.classes_:
+            exam_encoded = le_exam.transform([features['exam_type']])[0]
+        else:
+            # Find closest exam match
+            for exam in le_exam.classes_:
+                if features['exam_type'] in exam or exam in features['exam_type']:
+                    exam_encoded = le_exam.transform([exam])[0]
+                    break
+
+        category_encoded = 0
+        if features['category'] in le_category.classes_:
+            category_encoded = le_category.transform([features['category']])[0]
+        else:
+            # Default to General category
+            if 'General' in le_category.classes_:
+                category_encoded = le_category.transform(['General'])[0]
+
+        type_encoded = 0
+        if features['field'] in le_type.classes_:
+            type_encoded = le_type.transform([features['field']])[0]
+        else:
+            # Find closest type match
+            for field_type in le_type.classes_:
+                if features['field'] in field_type or field_type in features['field']:
+                    type_encoded = le_type.transform([field_type])[0]
+                    break
 
         feature_array = np.array([[
             state_encoded, exam_encoded, category_encoded, type_encoded,
@@ -673,14 +945,18 @@ def create_feature_array(features):
 def predict_colleges_fallback(field, exam_type, rank, marks_12th, category, state):
     """Improved fallback prediction when model is not available"""
     query = {
-        'type': field.capitalize(),
+        'type': field,
         'category': category
     }
 
     if state != 'All India':
         query['state'] = state
+    if exam_type and exam_type != 'All India':
+        query['exam_type'] = exam_type
 
+    print(f"🔍 Fallback query: {query}")
     colleges = list(db.colleges.find(query))
+    print(f"📊 Found {len(colleges)} colleges in fallback")
 
     suitable_colleges = []
     for college in colleges:
@@ -1004,7 +1280,7 @@ def engineering():
             return render_template('engineering.html')
 
         # Get predictions using trained model
-        predictions = predict_colleges_with_model('engineering', exam_type, int(rank), float(marks_12th), category,
+        predictions = predict_colleges_with_model('Engineering', exam_type, int(rank), float(marks_12th), category,
                                                   state)
 
         return render_template('results.html',
@@ -1037,7 +1313,7 @@ def medical():
             return render_template('medical.html')
 
         # Get predictions using trained model
-        predictions = predict_colleges_with_model('medical', 'NEET', int(rank), float(marks_12th), category, state)
+        predictions = predict_colleges_with_model('Medical', 'NEET', int(rank), float(marks_12th), category, state)
 
         return render_template('results.html',
                                predictions=predictions,
@@ -1047,6 +1323,51 @@ def medical():
                                marks=marks_12th)
 
     return render_template('medical.html')
+
+
+@app.route('/bca-mca', methods=['GET', 'POST'])
+@login_required
+@email_verified_required
+def bca_mca():
+    if request.method == 'POST':
+        course_type = request.form['course_type']
+        exam_type = request.form['exam_type']
+        rank = request.form['rank']
+        marks_12th = request.form['marks_12th']
+        category = request.form['category']
+        state = request.form['state']
+
+        # Validate inputs
+        if not validate_rank(rank):
+            flash('Invalid rank', 'error')
+            return render_template('bca_mca.html')
+
+        if not validate_marks(marks_12th):
+            flash('Invalid marks percentage', 'error')
+            return render_template('bca_mca.html')
+
+        # Debug information
+        print(f"🔍 BCA/MCA Prediction Request:")
+        print(f"   Course Type: {course_type}")
+        print(f"   Exam Type: {exam_type}")
+        print(f"   Rank: {rank}")
+        print(f"   Marks: {marks_12th}")
+        print(f"   Category: {category}")
+        print(f"   State: {state}")
+
+        # Get predictions using trained model
+        predictions = predict_colleges_with_model(course_type, exam_type, int(rank), float(marks_12th), category, state)
+
+        print(f"📊 Found {len(predictions)} predictions for {course_type}")
+
+        return render_template('results.html',
+                               predictions=predictions,
+                               field=course_type,
+                               exam_type=exam_type,
+                               rank=rank,
+                               marks=marks_12th)
+
+    return render_template('bca_mca.html')
 
 
 @app.route('/chatbot')

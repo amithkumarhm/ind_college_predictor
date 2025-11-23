@@ -1,4 +1,4 @@
-// Chatbot functionality with localStorage persistence
+// Chatbot functionality with localStorage persistence and improved mobile responsiveness
 let chatbotOpen = false;
 let chatContext = null;
 
@@ -59,6 +59,7 @@ function resetChatHistory() {
             Hello! I'm your college admission assistant. I can help with:<br>
             • Engineering (JEE, CET) predictions<br>
             • Medical (NEET) predictions<br>
+            • BCA/MCA predictions<br>
             • Cutoffs and admission procedures<br><br>
             How can I assist you today?
         `;
@@ -82,6 +83,12 @@ function toggleChatbot() {
         chatbotToggle.innerHTML = '<i class="fas fa-times me-2"></i>Close';
         loadChatHistory();
         scrollToBottom();
+
+        // Focus on input when opening
+        setTimeout(() => {
+            const input = document.getElementById('chatbotInput');
+            if (input) input.focus();
+        }, 300);
     }
 
     chatbotOpen = !chatbotOpen;
@@ -99,7 +106,19 @@ function closeChatbot() {
 
 function quickOption(option) {
     console.log('Quick option selected:', option);
-    document.getElementById('chatbotInput').value = option;
+
+    // Extract just the course type from the option text for BCA/MCA
+    let processedOption = option;
+    if (option.includes('BCA') || option.includes('MCA')) {
+        // For course selection, just send "BCA" or "MCA"
+        if (option.includes('BCA')) {
+            processedOption = 'BCA';
+        } else if (option.includes('MCA')) {
+            processedOption = 'MCA';
+        }
+    }
+
+    document.getElementById('chatbotInput').value = processedOption;
     sendChatbotMessage();
 }
 
@@ -205,6 +224,9 @@ function sendChatbotMessage() {
 
         // Scroll to bottom
         scrollToBottom();
+
+        // Refocus input
+        input.focus();
     })
     .catch(error => {
         console.error('Chatbot error:', error);
@@ -234,6 +256,9 @@ function sendChatbotMessage() {
         localStorage.removeItem(`chat_context_${userId}`);
 
         scrollToBottom();
+
+        // Refocus input
+        input.focus();
     });
 }
 
@@ -241,16 +266,20 @@ function formatResponse(response) {
     // Format the response with better readability
     if (!response) return 'No response received.';
 
-    // Replace newlines with HTML line breaks
+    // Replace newlines with HTML line breaks and format step indicators
     return response.replace(/\n/g, '<br>')
                   .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                  .replace(/\*(.*?)\*/g, '<em>$1</em>');
+                  .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                  .replace(/📋 Step (\d+) of (\d+):/g, '<div class="step-indicator">📋 Step $1 of $2:</div>');
 }
 
 function scrollToBottom() {
     const messages = document.getElementById('chatbotMessages');
     if (messages) {
-        messages.scrollTop = messages.scrollHeight;
+        // Small delay to ensure DOM is updated
+        setTimeout(() => {
+            messages.scrollTop = messages.scrollHeight;
+        }, 100);
     }
 }
 
@@ -283,6 +312,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 sendChatbotMessage();
             }
         });
+
+        // Auto-resize input for mobile
+        chatbotInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
     } else {
         console.log('Chatbot input not found');
     }
@@ -303,6 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Hello! I'm your college admission assistant. I can help with:<br>
                 • Engineering (JEE, CET) predictions<br>
                 • Medical (NEET) predictions<br>
+                • BCA/MCA predictions<br>
                 • Cutoffs and admission procedures<br><br>
                 How can I assist you today?
             `;
@@ -312,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
             history.push({
                 type: 'bot',
                 sender: 'Assistant',
-                message: "Hello! I'm your college admission assistant. I can help with:\n• Engineering (JEE, CET) predictions\n• Medical (NEET) predictions\n• Cutoffs and admission procedures\n\nHow can I assist you today?",
+                message: "Hello! I'm your college admission assistant. I can help with:\n• Engineering (JEE, CET) predictions\n• Medical (NEET) predictions\n• BCA/MCA predictions\n• Cutoffs and admission procedures\n\nHow can I assist you today?",
                 timestamp: new Date().toISOString()
             });
             saveChatHistory(history);
@@ -350,6 +386,13 @@ document.addEventListener('DOMContentLoaded', function() {
     cards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
         card.classList.add('fade-in');
+    });
+
+    // Handle window resize for chatbot
+    window.addEventListener('resize', function() {
+        if (chatbotOpen) {
+            scrollToBottom();
+        }
     });
 });
 
@@ -391,3 +434,5 @@ function debugChatbot() {
 // Make debug function available globally
 window.debugChatbot = debugChatbot;
 window.resetChatHistory = resetChatHistory;
+window.toggleChatbot = toggleChatbot;
+window.closeChatbot = closeChatbot;
