@@ -20,9 +20,3 @@ services:
       - key: SMTP_PORT
         value: 587
       # Replace these with your actual values:
-      - key: EMAIL_USER
-        value: testing.email.a.1001@gmail.com
-      - key: EMAIL_PASSWORD
-        value: izye doxo kjnc ozgg
-#      - key: GEMINI_API_KEY
-#        value: AIzaSyDd0FHvfM5dE0sci7CfT4pR1x_QEdH9kiY
